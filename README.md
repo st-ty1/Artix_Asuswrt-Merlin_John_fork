@@ -1,4 +1,4 @@
-# Artix_Asuswrt-[John's fork]
+# Artix_Asuswrt [John's fork]
 For building asuswrt-merlin under Artix, first clone asuswrt-Merlin (Johns fork) repo.
 
 Then follow these steps:
