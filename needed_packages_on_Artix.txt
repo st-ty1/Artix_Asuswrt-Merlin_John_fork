@@ -1,0 +1,34 @@
+Necessary packages for building Freshtomato on Artix:
+- Packages already pre-installed by "base"- group: (these were installed by initial installation of Artix) 
+  bzip2, gawk, gettext, texinfo, groff, autopoint (included in package gettext), libelf1 (as package libelf), libc6 (included in package glibc), ncurses (as dependency of base group package bash)
+
+- Packages already preinstalled by “base-devel” group: (these were installed by initial installation of Artix)
+  autoconf, automake (1.16), binutils, bison, flex, gcc, g++, libstdc++ (included in package gcc), libtool (2.4.6), m4, patch, pkg-config (included in package pkgconf)
+
+- Packages to be installed from Arch-repos, with same package name as in Debian 9: 
+  autogen, dos2unix, gconf-editor, git (includes gitk too), gperf, intltool, make, mc, mtd-tools, no-dejs, re2c, sqlite (needed by pacakge python2), unzip
+
+- Packages to be installed from Arch-repos, but with altering package name as in Debian 9: 
+
+	Debian package name 			Artix package name
+		
+	zlib1g-dev			->	Zlib (needed by sqlite)
+	shtool				->	shtool (AUR)
+	libssl-dev			->	openssl-1.0 or openssl (1.1, preinstalled by base group))
+	libxml2-dev			->	libxml2
+	libglib2.0-dev			->	glib2
+	xsltproc			->	libxslt 
+	libgtk2.0-dev			->	gtk2
+	libnotify-dev			->	libnotify
+	libevent-dev			->	libevent
+	texlive				->	texlive-core
+	linux-headers-$(uname -r)	->	linux-lts-headers or linux-headers
+	libelf1:i386, libelf-dev:i386	->	lib32-libelf
+	lib32stdc++			->	lib32-gcc-libs
+	lib32-zlib			->	lib32z1-dev
+
+- additional Packages to be installed: 
+  rpcsvc-proto (needed by nfs-utils, integrated in former glibcs, but deprecated in newer glibc)
+  lib32-glibc (required by lib32-gcc-libs)
+  automake-1.15 (due to wget)
+  automake 1.11 (due to libdaemon)

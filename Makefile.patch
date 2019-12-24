@@ -1,0 +1,86 @@
+--- Makefile_orig	2019-12-21 14:39:21.876511000 +0100
++++ Makefile	2019-12-21 17:56:47.409655546 +0100
+@@ -96,7 +96,7 @@
+ #
+ #
+ #
+-SEP=echo "\033[41;1m   $@   \033[0m"
++SEP=printf "\033[41;1m   $@   \033[0m"
+ 
+ #
+ # standard packages
+@@ -1532,7 +1532,7 @@
+ 
+ libnfnetlink/stamp-h1:
+ # tomatoraf.com, Victek
+-	cd $(TOP)/libnfnetlink && CC=$(CC) STRIP=$(STRIP) \
++	cd $(TOP)/libnfnetlink && CC=$(CC) STRIP=(CROSS_COMPILE)strip \
+ 		CFLAGS="-Os -Wall $(EXTRACFLAGS) -ffunction-sections -fdata-sections" \
+ 		LDFLAGS="-ffunction-sections -fdata-sections -Wl,--gc-sections" \
+ 		$(CONFIGURE) --prefix=/usr --enable-shared --enable-static
+@@ -2016,7 +2016,7 @@
+ 	$(MAKE) -C accel-pptpd server_install
+ 
+ pptpd/stamp-h1:
+-	cd $(TOP)/pptpd && $(CONFIGURE) --prefix=$(INSTALLDIR)/pptpd --enable-bcrelay CC=$(CC) STRIP=$(STRIP) AR=$(AR) LD=$(LD) NM=$(NM) RANLIB=$(RANLIB)
++	cd $(TOP)/pptpd && $(CONFIGURE) --prefix=$(INSTALLDIR)/pptpd --enable-bcrelay CC=$(CC) STRIP=$(CROSS_COMPILE)strip AR=$(AR) LD=$(LD) NM=$(NM) RANLIB=$(RANLIB)
+ 	touch $@
+ 
+ pptpd: pptpd/stamp-h1
+@@ -2828,7 +2828,7 @@
+ openpam/Makefile:
+ 	( cd openpam && ./autogen.sh && \
+ 		LDFLAGS=-ldl \
+-		$(CONFIGURE) --prefix=/usr --bindir=/usr/sbin --libdir=/usr/lib \
++		$(CONFIGURE) \
+ 		--without-doc --with-pam-unix \
+ 	)
+ 
+@@ -3471,7 +3471,7 @@
+ 	$(STRIP) $(INSTALLDIR)/ipset/usr/sbin/ipset
+ 
+ libmnl/stamp-h1:
+-	cd $(TOP)/libmnl && CC=$(CC) STRIP=$(STRIP) \
++	cd $(TOP)/libmnl && CC=$(CC) STRIP=$(CROSS_COMPILE)strip \
+ 	CFLAGS="-Os -Wall $(EXTRACFLAGS) -ffunction-sections -fdata-sections" \
+ 	LDFLAGS="-ffunction-sections -fdata-sections -Wl,--gc-sections" \
+ 	$(CONFIGURE) --prefix=/usr
+@@ -3480,6 +3480,7 @@
+ libmnl: libmnl/stamp-h1
+ 	$(MAKE) -C libmnl
+ 	$(MAKE) -C libmnl DESTDIR=$(TOP)/libmnl/staged install
++	@rm -f libmnl/staged/usr/lib/libmnl.la
+ 
+ libmnl-install: libmnl
+ 	install -d $(INSTALLDIR)/libmnl/usr/lib/
+@@ -3494,7 +3495,7 @@
+ 	-@rm -rf libmnl/staged
+ 
+ ipset_arm/stamp-h1: libmnl
+-	cd $(TOP)/ipset_arm && CC=$(CC) STRIP=$(STRIP) \
++	cd $(TOP)/ipset_arm && CC=$(CC) STRIP=$(CROSS_COMPILE)strip \
+ 	autoreconf -i -f && \
+ 	CFLAGS="-Os -Wall $(EXTRACFLAGS) -ffunction-sections -fdata-sections" \
+ 	LDFLAGS="-ffunction-sections -fdata-sections -Wl,--gc-sections" \
+@@ -3654,10 +3655,10 @@
+ 	rm -f $(INSTALLDIR)/diskdev_cmds-332.14/usr/sbin/mkfs.hfs 
+ 	rm -f $(INSTALLDIR)/diskdev_cmds-332.14/usr/sbin/fsck.hfs 
+ 	
+-wget/Makefile.in: wget/Makefile.am
++wget-Makefile.in: wget/Makefile.am
+ 	cd wget && autoreconf -fi
+ 
+-wget/Makefile: wget/Makefile.in
++wget-Makefile: wget-Makefile.in
+ 	cd wget && $(CONFIGURE) \
+ 		--with-ssl=openssl --with-libssl-prefix=$(TOP)/openssl \
+ 		--sysconfdir=/etc --disable-opie --disable-ntlm --disable-debug --disable-nls --disable-rpath \
+@@ -3666,7 +3667,7 @@
+ 		CFLAGS="-Os -Wall $(EXTRACFLAGS) -ffunction-sections -fdata-sections -I$(TOP)/openssl/include -I$(TOP)/zlib" \
+ 		LDFLAGS="$(EXTRALDFLAGS) -Wl,--gc-sections -L$(TOP)/openssl -lssl -lcrypto -L$(TOP)/zlib -lz"
+ 
+-wget: openssl zlib wget/Makefile
++wget: openssl zlib wget-Makefile
+ 	$(MAKE) -C $@
+ 
+ wget-clean:

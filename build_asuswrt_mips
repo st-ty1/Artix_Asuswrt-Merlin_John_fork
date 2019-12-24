@@ -1,0 +1,22 @@
+#! /bin/sh
+
+PATH="/home/<username>/freshtomato-mips/tools/brcm/hndtools-mipsel-linux/bin:$PATH"
+PATH="/home/<username>/freshtomato-mips/tools/brcm/hndtools-mipsel-uclibc/bin:$PATH"
+
+cd $HOME/asuswrt-merlin && git clean -dxf && git reset --hard
+
+## patch because of newer awk in Artix; Makefile.in need to be patched not Makefile.am (not used)!
+patch -p1 -d$HOME/asuswrt-merlin/release/src/router/libgpg-error-1.10 < $HOME/Dokumente/asuswrt/libgpg-error.patch 
+
+patch -i $HOME/Dokumente/asuswrt/Makefile.patch $HOME/asuswrt-merlin/release/src/router/Makefile
+
+cp -r $HOME/documents/asuswrt/wget/ $HOME/asuswrt-merlin/release/src/router
+
+rm $HOME/asuswrt-merlin/release/src/router/openssl/Makefile
+
+cp $HOME/documents/asuswrt/mksquashfs.c $HOME/asuswrt-merlin/release/src-rt-6.x/linux/linux-2.6/scripts/squashfs
+cp $HOME/documents/asuswrt/mksquashfs.c $HOME/asuswrt-merlin/release/src-rt/linux/linux-2.6/scripts/squashfs
+
+cd release/src-rt && make rt-n66u 
+#cd release/src-rt-6.x && make rt-ac66u
+
