@@ -2,6 +2,7 @@
 For building asuswrt-merlin under Artix, first clone asuswrt-Merlin (Johns fork) repo.
 
 Then follow these steps:
+
 1.) Install the Artix-packages as mentioned in needed_packages_on_Artix.txt
 
 2.) About 80 files are missing within wget-folder of auswrt-merlin (John fork) repo: 
