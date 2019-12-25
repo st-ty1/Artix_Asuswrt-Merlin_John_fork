@@ -23,7 +23,7 @@ Then follow these steps:
 	
 	
 
-   A adaquate patch is supplied (mksquashfs.c.patch)
+An adaquate patch is supplied (mksquashfs.c.patch)
 
 6.) A patch is supplied (Makefile.patch) for the amendments needed in release/src/router/Makefile. These amendments are listed in file needed_modifations.txt
 
