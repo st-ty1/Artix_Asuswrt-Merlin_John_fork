@@ -16,9 +16,15 @@ Then follow these steps:
      in Artix than in Debian9):
      
 	             #include <sys/sysmacros.h> 
-		     
-    A adaquate patch is supplied (mksquashfs.c.patch)
-    
+	
+	
+	
+	
+	
+	
+
+   A adaquate patch is supplied (mksquashfs.c.patch)
+
 6.) A patch is supplied (Makefile.patch) for the amendments needed in release/src/router/Makefile. These amendments are listed in file needed_modifations.txt
 
 7.) Source code of libgpg-error-1.10 has to be patched, as Artix uses newer awk 5.0. Source code of version 1.10 is still for awk 4.x. 
