@@ -1,0 +1,12 @@
+*** mksquashfs.c_a	2019-11-02 16:38:49.289935990 +0100
+--- mksquashfs.c_b	2019-02-24 12:50:40.000000000 +0100
+***************
+*** 31,36 ****
+--- 31,37 ----
+  #include <stdio.h>
+  #include <sys/types.h>
+  #include <sys/stat.h>
++ #include <sys/sysmacros.h>
+  #include <fcntl.h>
+  #include <errno.h>
+  #include <dirent.h>
