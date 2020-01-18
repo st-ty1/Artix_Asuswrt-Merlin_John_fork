@@ -1,0 +1,21 @@
+#! /bin/sh
+
+ASUSWRT_REPO_DIR=$HOME/asuswrt-merlin	## path to your local "Asuswrt-Merlin_John_fork" repo
+ASUSWRT_PATCHES_DIR=$HOME/documents/asuswrt  ## path to your local "Artix_Asuswrt-Merlin_John_fork" repo
+
+PATH="$PATH:$ASUSWRT_REPO_DIR/release/src-rt-6.x.4708/toolchains/hndtools-arm-linux-2.6.36-uclibc-4.5.3/bin"
+
+cd $ASUSWRT_REPO_DIR && git clean -dxf && git reset --hard
+
+## patch because of newer awk in Artix; Makefile.in need to be patched not Makefile.am (not used)!
+patch -p1 -d$ASUSWRT_REPO_DIR/release/src/router/libgpg-error-1.10 < $ASUSWRT_PATCHES_DIR/libgpg-error.patch 
+
+cp $ASUSWRT_PATCHES_DIR/wlconf $ASUSWRT_REPO_DIR/release/src/router/wlconf_arm/prebuilt
+
+patch -i $ASUSWRT_PATCHES_DIR/Makefile.patch $ASUSWRT_REPO_DIR/release/src/router/Makefile
+
+cp -r $ASUSWRT_PATCHES_DIR/wget/ $ASUSWRT_REPO_DIR/release/src/router
+
+rm $ASUSWRT_REPO_DIR/release/src/router/openssl/Makefile
+
+cd release/src-rt-6.x.4708 && make rt-ac56u   ## e.g. for ac56u 

@@ -1,0 +1,28 @@
+#! /bin/sh
+
+ASUSWRT_REPO_DIR=$HOME/asuswrt-merlin	## path to your local "Asuswrt-Merlin_John_fork" repo
+ASUSWRT_PATCHES_DIR=$HOME/documents/asuswrt  ## path to your local "Artix_Asuswrt-Merlin_John_fork" repo
+
+PATH="$ASUSWRT_REPO_DIR/tools/brcm/hndtools-mipsel-linux/bin:$PATH"
+PATH="$ASUSWRT_REPO_DIR/tools/brcm/hndtools-mipsel-uclibc/bin:$PATH"
+
+cd $ASUSWRT_REPO_DIR && git clean -dxf && git reset --hard
+
+## patch because of newer awk in Artix; Makefile.in need to be patched not Makefile.am (not used)!
+patch -p1 -d$ASUSWRT_REPO_DIR/src/router/libgpg-error-1.10 < $ASUSWRT_PATCHES_DIR/libgpg-error.patch 
+
+patch -i $ASUSWRT_PATCHES_DIR/Makefile.patch $ASUSWRT_REPO_DIR/release/src/router/Makefile
+
+cp -r $ASUSWRT_PATCHES_DIR/wget/ $ASUSWRT_REPO_DIR/release/src/router
+
+rm $ASUSWRT_REPO_DIR/release/src/router/openssl/Makefile
+
+cp $ASUSWRT_PATCHES_DIR/mksquashfs.c $ASUSWRT_REPO_DIR/release/src-rt-6.x/linux/linux-2.6/scripts/squashfs
+cp $ASUSWRT_PATCHES_DIR/mksquashfs.c $ASUSWRT_REPO_DIR/release/src-rt/linux/linux-2.6/scripts/squashfs
+
+
+cd release/src-rt && make rt-n66u      ## e.g. for rt-n66u
+
+#cd release/src-rt-6.x && make rt-ac66u		## e.g. for rt-ac66u
+
+
