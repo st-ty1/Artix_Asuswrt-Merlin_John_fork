@@ -1,7 +1,7 @@
 # Building Asuswrt-Merlin [John's fork] with Artix (Arch-Linux fork)
 For building asuswrt-merlin under Artix, first clone asuswrt-Merlin (Johns fork) repo.
 
-Then follow these steps:
+Following steps are needed to make build process successful:
 
 1.) Install the Artix-packages as mentioned in needed_packages_on_Artix.txt
 
@@ -16,25 +16,20 @@ Then follow these steps:
      in Artix than in Debian9):
      
 	             #include <sys/sysmacros.h> 
-	
-	
-	
-	
-	
-	
 
-An adaquate patch is supplied (mksquashfs.c.patch)
+An adaquate patch is supplied (mksquashfs.c.patch) in this repo.
 
-6.) A patch is supplied (Makefile.patch) for the amendments needed in release/src/router/Makefile. These amendments are listed in file needed_modifations.txt
+6.) A patch is supplied (Makefile.patch) in this repo for all amendments needed in release/src/router/Makefile. For further informationtThese amendments are listed in file needed_modifations.txt.
 
 7.) Source code of libgpg-error-1.10 has to be patched, as Artix uses newer awk 5.0. Source code of version 1.10 is still for awk 4.x. 
-    A patch is supplied (libgpg-error.patch) 
+    A patch is supplied (libgpg-error.patch) in this repo.
     
 
-Enclosed you will find two shell scripts (for mips and arm) for setting path variables, resetting and cleaning your local repo, inserting the needed mods of source code (2.-6.)
-If you will use them, don't forget to make them executable.
+Enclosed you will find two shell scripts (for mips and arm) for setting path variables, resetting and cleaning your local repo, inserting the needed mods of source code (2.-6.). 
+Easiest way is to clone this repo, put all files of wget source code (look at 2.)) in an subfolder of your local repo, put the wlconf file (look at 3.)) also in your local repo folder and start the script for MIPS- or ARM-builds.
+Don't forget to make it executable!
 
-If you dont want to use these shell scripts, please remember to clean sources only with "git clean -dxf". Cleaning with "make clean" leads to error at target openssl.
+If you dont want to use these shell scripts, please remember to clean sources only with "git clean -dxf". Cleaning with "make clean" leads most liekly to an error at Makefile-target openssl.
 
 
 BR
