@@ -1,11 +1,27 @@
+13/02/2020: # repo of john9527/asuswrt-merlin has been updated from 374.43_39E3j9527 to 374.43_41E8j9527!
+
+This repo here is still based on version 374.43_39E3j9527.
+ An updated version of this repo accoring to 374.43_41E8j9527 version of john9527/asuswrt-merlin repo will follow soon.
+ 
+ Preview:
+ 
+ 3.) is still needed
+ 
+ 4.) no longer needed
+ 
+ 2.), 6.) and 7.) has to checked.
+
+st-ty1/_st_ty/st_ty_
+
+
 # Building Asuswrt-Merlin [John's fork] with Artix (Arch-Linux fork)
-For building asuswrt-merlin under Artix, first clone asuswrt-Merlin (Johns fork) repo.
+For building asuswrt-merlin under Artix, first clone asuswrt-Merlin (Johns fork) repo (https://github.com/john9527/asuswrt-merlin)
 
 Following steps are needed to make build process successful:
 
-0.) Install the Artix-packages as mentioned in needed_packages_on_Artix.txt 
+0.) Install the Artix-packages as mentioned in file needed_packages_on_Artix.txt. 
 
-1.) Download this repo to a first folder of your user directiory.
+1.) Download this repo to a first folder of your user directory.
 
 2.) About 80 files are missing within wget-folder (/release/src/router/wget) of auswrt-merlin (John fork) repo: 
     Download wget-1.19.5 (https://ftp.gnu.org/gnu/wget) and extract it to a second folder in your user directory. 
