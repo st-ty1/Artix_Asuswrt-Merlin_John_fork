@@ -1,15 +1,15 @@
-13/02/2020: # repo of john9527/asuswrt-merlin has been updated from 374.43_39E3j9527 to 374.43_41E8j9527!
+**13/02/2020: repo of john9527/asuswrt-merlin has been updated from 374.43_39E3j9527 to 374.43_41E8j9527!**
 
 This repo here is still based on version 374.43_39E3j9527.
  An updated version of this repo accoring to 374.43_41E8j9527 version of john9527/asuswrt-merlin repo will follow soon.
  
  Preview:
  
- 3.) is still needed
+  3.) is still needed
  
- 4.) no longer needed
+  4.) no longer needed
  
- 2.), 6.) and 7.) has to checked.
+  2.), 6.) and 7.) has to checked, if they are still needed or have to be modified
 
 st-ty1/_st_ty/st_ty_
 
@@ -28,7 +28,7 @@ Following steps are needed to make build process successful:
     
 3.) only ARM-builds: wlconf is missing in release/src/router/wlconf_arm/prebuilt: Download wlconf from Asuswrt-merlin github repo of RMerlin (https://github.com/RMerl/asuswrt-merlin) and save it to the first folder (step 1). 
 
-4.) The Makefile of openssl in release/src/router/openssl has to be removed.
+~~4.) The Makefile of openssl in release/src/router/openssl has to be removed.~~
 
 5.) only MIPS-builds: Following line has to be inserted in release/src-rt-6.x/linux/linux-2.6/scripts/squashfs/mksquashfs.c (because of newer glib 
      in Artix than in Debian9):
