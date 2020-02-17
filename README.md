@@ -1,4 +1,4 @@
-**13/02/2020: repo of john9527/asuswrt-merlin has been updated from 374.43_39E3j9527 to 374.43_41E8j9527!**
+**16/02/2020: repo of john9527/asuswrt-merlin has been updated from 374.43_39E3j9527 to 374.43_41E8j9527!**
 
 This repo here is still based on version 374.43_39E3j9527.
  An updated version of this repo accoring to 374.43_41E8j9527 version of john9527/asuswrt-merlin repo will follow soon.
