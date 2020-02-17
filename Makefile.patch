@@ -14,7 +14,7 @@
  libnfnetlink/stamp-h1:
  # tomatoraf.com, Victek
 -	cd $(TOP)/libnfnetlink && CC=$(CC) STRIP=$(STRIP) \
-+	cd $(TOP)/libnfnetlink && CC=$(CC) STRIP=(CROSS_COMPILE)strip \
++	cd $(TOP)/libnfnetlink && CC=$(CC) \
  		CFLAGS="-Os -Wall $(EXTRACFLAGS) -ffunction-sections -fdata-sections" \
  		LDFLAGS="-ffunction-sections -fdata-sections -Wl,--gc-sections" \
  		$(CONFIGURE) --prefix=/usr --enable-shared --enable-static
@@ -23,7 +23,7 @@
  
  pptpd/stamp-h1:
 -	cd $(TOP)/pptpd && $(CONFIGURE) --prefix=$(INSTALLDIR)/pptpd --enable-bcrelay CC=$(CC) STRIP=$(STRIP) AR=$(AR) LD=$(LD) NM=$(NM) RANLIB=$(RANLIB)
-+	cd $(TOP)/pptpd && $(CONFIGURE) --prefix=$(INSTALLDIR)/pptpd --enable-bcrelay CC=$(CC) STRIP=$(CROSS_COMPILE)strip AR=$(AR) LD=$(LD) NM=$(NM) RANLIB=$(RANLIB)
++	cd $(TOP)/pptpd && $(CONFIGURE) --prefix=$(INSTALLDIR)/pptpd --enable-bcrelay CC=$(CC) AR=$(AR) LD=$(LD) NM=$(NM) RANLIB=$(RANLIB)
  	touch $@
  
  pptpd: pptpd/stamp-h1
@@ -41,7 +41,7 @@
  
  libmnl/stamp-h1:
 -	cd $(TOP)/libmnl && CC=$(CC) STRIP=$(STRIP) \
-+	cd $(TOP)/libmnl && CC=$(CC) STRIP=$(CROSS_COMPILE)strip \
++	cd $(TOP)/libmnl && CC=$(CC) \
  	CFLAGS="-Os -Wall $(EXTRACFLAGS) -ffunction-sections -fdata-sections" \
  	LDFLAGS="-ffunction-sections -fdata-sections -Wl,--gc-sections" \
  	$(CONFIGURE) --prefix=/usr
@@ -58,29 +58,7 @@
  
  ipset_arm/stamp-h1: libmnl
 -	cd $(TOP)/ipset_arm && CC=$(CC) STRIP=$(STRIP) \
-+	cd $(TOP)/ipset_arm && CC=$(CC) STRIP=$(CROSS_COMPILE)strip \
++	cd $(TOP)/ipset_arm && CC=$(CC) \
  	autoreconf -i -f && \
  	CFLAGS="-Os -Wall $(EXTRACFLAGS) -ffunction-sections -fdata-sections" \
  	LDFLAGS="-ffunction-sections -fdata-sections -Wl,--gc-sections" \
-@@ -3654,10 +3655,10 @@
- 	rm -f $(INSTALLDIR)/diskdev_cmds-332.14/usr/sbin/mkfs.hfs 
- 	rm -f $(INSTALLDIR)/diskdev_cmds-332.14/usr/sbin/fsck.hfs 
- 	
--wget/Makefile.in: wget/Makefile.am
-+wget-Makefile.in: wget/Makefile.am
- 	cd wget && autoreconf -fi
- 
--wget/Makefile: wget/Makefile.in
-+wget-Makefile: wget-Makefile.in
- 	cd wget && $(CONFIGURE) \
- 		--with-ssl=openssl --with-libssl-prefix=$(TOP)/openssl \
- 		--sysconfdir=/etc --disable-opie --disable-ntlm --disable-debug --disable-nls --disable-rpath \
-@@ -3666,7 +3667,7 @@
- 		CFLAGS="-Os -Wall $(EXTRACFLAGS) -ffunction-sections -fdata-sections -I$(TOP)/openssl/include -I$(TOP)/zlib" \
- 		LDFLAGS="$(EXTRALDFLAGS) -Wl,--gc-sections -L$(TOP)/openssl -lssl -lcrypto -L$(TOP)/zlib -lz"
- 
--wget: openssl zlib wget/Makefile
-+wget: openssl zlib wget-Makefile
- 	$(MAKE) -C $@
- 
- wget-clean:
