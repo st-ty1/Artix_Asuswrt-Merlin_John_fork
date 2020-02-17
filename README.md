@@ -4,12 +4,14 @@ This repo here is still based on version 374.43_39E3j9527.
  An updated version of this repo accoring to 374.43_41E8j9527 version of john9527/asuswrt-merlin repo will follow soon.
  
  Preview:
- 
-  3.) is still needed
+   
+  2.) and 3.) is still needed
  
   4.) no longer needed
  
-  2.), 6.) and 7.) has to checked, if they are still needed or have to be modified
+  5.), 6.) and 7.) still needed (6. in an updated form), as they result from using different host OS (Artix instead of Debian/Ubuntu)
+
+ Some files are now missing in openssl, pptpd/modules and nano directories, which will break the building process: They have to be included before starting build process. TODO: script files in this repo have to be adapted.
 
 st-ty1/_st_ty/st_ty_
 
