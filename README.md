@@ -1,51 +1,39 @@
-**16/02/2020: repo of john9527/asuswrt-merlin has been updated from 374.43_39E3j9527 to 374.43_41E8j9527!**
-
-This repo here is still based on version 374.43_39E3j9527.
- An updated version of this repo accoring to 374.43_41E8j9527 version of john9527/asuswrt-merlin repo will follow soon.
- 
- Preview:
-   
-  2.) and 3.) is still needed
- 
-  4.) no longer needed
- 
-  5.), 6.) and 7.) still needed (6. in an updated form), as they result from using different host OS (Artix instead of Debian/Ubuntu)
-
- Some files are now missing in openssl, pptpd/modules and nano directories, which will break the building process: They have to be included before starting build process. TODO: script files in this repo have to be adapted.
-
-st-ty1/_st_ty/st_ty_
-
-
 # Building Asuswrt-Merlin [John's fork] with Artix (Arch-Linux fork)
 For building asuswrt-merlin under Artix, first clone asuswrt-Merlin (Johns fork) repo (https://github.com/john9527/asuswrt-merlin)
 
 Following steps are needed to make build process successful:
 
-0.) Install the Artix-packages as mentioned in file needed_packages_on_Artix.txt. 
+1. Install the Artix-packages as mentioned in file needed_packages_on_Artix.txt. 
 
-1.) Download this repo to a first folder of your user directory.
+2. Create a new folder in your user directory and download this repo into this folder.
 
-2.) About 80 files are missing within wget-folder (/release/src/router/wget) of auswrt-merlin (John fork) repo: 
-    Download wget-1.19.5 (https://ftp.gnu.org/gnu/wget) and extract it to a second folder in your user directory. 
+3. About 80 files are missing within wget-folder (/release/src/router/wget) of auswrt-merlin (John fork) repo: 
+    Download wget-1.19.5 (https://ftp.gnu.org/gnu/wget/wget-1.19.5.tar.gz) and extract it to a first subfolder of your local repo folder (see step 2.) 
     
-3.) only ARM-builds: wlconf is missing in release/src/router/wlconf_arm/prebuilt: Download wlconf from Asuswrt-merlin github repo of RMerlin (https://github.com/RMerl/asuswrt-merlin) and save it to the first folder (step 1). 
+4. Makefile.org is missing within openssl-1.0-folder (/release/src/router/openssl-1.0) of auswrt-merlin (John fork) repo: 
+    Download openssl-1.0.2u (https://ftp.openssl.org/source/old/1.0.2/openssl-1.0.2u.tar.gz) and extract it to a second subfolder of your local repo folder.
+    
+5. Makefile is missing within pptpd/plugins-folder (/release/src/router/pptpd/plugins) of auswrt-merlin (John fork) repo: 
+    Download pptpd-1.3.4 (https://sourceforge.net/projects/poptop/files/pptpd/pptpd-1.3.4/pptpd-1.3.4.tar.gz/download) and extract it to a third subfolder of your local repo folder.
+    
+6. Some files are missing within nano-folder (/release/src/router/nano) of auswrt-merlin (John fork) repo: 
+    Download nano-4.4 (https://ftp.gnu.org/gnu/nano/nano-4.4.tar.gz) and extract it to a forth subfolder of your local repo folder.
+    
+7. only ARM-builds: wlconf is missing in release/src/router/wlconf_arm/prebuilt: Download wlconf from Asuswrt-merlin github repo of RMerlin (https://github.com/RMerl/asuswrt-merlin) and save it to your local repo folder (step 2). 
 
-~~4.) The Makefile of openssl in release/src/router/openssl has to be removed.~~
-
-5.) only MIPS-builds: Following line has to be inserted in release/src-rt-6.x/linux/linux-2.6/scripts/squashfs/mksquashfs.c (because of newer glib 
-     in Artix than in Debian9):
+8. only MIPS-builds: Following line has to be inserted in release/src-rt-6.x/linux/linux-2.6/scripts/squashfs/mksquashfs.c (because of newer glib in Artix than in Debian9):
      
 	             #include <sys/sysmacros.h> 
 
    An adaquate patch is supplied (mksquashfs.c.patch) in this repo.
 
-6.) A patch is supplied (Makefile.patch) in this repo for all amendments needed in release/src/router/Makefile. The amendments are listed in file needed_modifations.txt for further information.
+9. A patch is supplied (Makefile.patch) in this repo for all amendments needed in release/src/router/Makefile. The amendments are listed in file needed_modifations.txt for further information.
 
-7.) Source code of libgpg-error-1.10 has to be patched, as Artix uses newer awk 5.0. Source code of version 1.10 is still for awk 4.x. 
+10. Source code of libgpg-error-1.10 has to be patched, as Artix uses newer awk 5.0. Source code of version 1.10 is still for awk 4.x. 
     A patch is supplied (libgpg-error.patch) in this repo.
     
 
-Enclosed you will find two shell scripts (for mips and arm) for setting path variables, resetting and cleaning your local repo, inserting the needed files (2.,3.), removing unwanted files (4.) and applying needed mods of source code (5.-7.). 
+Enclosed you will find two shell scripts (for mips and arm) for setting path variables, resetting and cleaning your local repo, inserting the needed files (step 3.-7.) and applying needed patches of source code (step 8.-10.). 
 This is the easiest way: Just start the script for MIPS- or ARM-builds (Don't forget to make it executable before!)
 
 If you dont want to use these shell scripts, please remember to clean sources only with "git clean -dxf". Cleaning with "make clean" leads most likely to an error at Makefile-target openssl.
