@@ -1,11 +1,13 @@
-all modification are located in src/router/Makefile file:
+all modifications located in src/router/Makefile file:
 
-1. remove in targets libmnl/stamp-h1, libnfnetlink/stamp-h1, pptpd/ und ipset_arm/stamp-h1:
-	STRIP=$(STRIP) 
-2. in target openpam/Makefile (only for ARM-builds)
-	delete line "--prefix=/usr --bindir=/usr/sbin --libdir=/usr/lib \"  
+1. remove in targets libmnl/stamp-h1, libnfnetlink/stamp-h1, pptpd/stamp-h1 
+and ipset_arm/stamp-h1 (only needed for MIPS-builds):
+	STRIP=$(STRIP)
+	
+2. delete in target openpam/Makefile (only for ARM-builds):
+	 "--prefix=/usr --bindir=/usr/sbin --libdir=/usr/lib \"  
 
-3. at end of target libmnl insert the following line: (only needed in ARM-builds and if ipset is installed in host system)
+3. insert at end of target libmnl the following line (only needed in ARM-builds and if ipset is installed in host system):
 		@rm -f libmnl/staged/usr/lib/libmnl.la 
 
 
