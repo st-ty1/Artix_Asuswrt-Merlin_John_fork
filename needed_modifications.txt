@@ -1,11 +1,7 @@
-all modification are located in n src/router/Makefile file:
+all modification are located in src/router/Makefile file:
 
-1.  in targets libmnl/stamp-h1, libnfnetlink/stamp-h1, pptpd/ und ipset_arm/stamp-h1:
+1. remove in targets libmnl/stamp-h1, libnfnetlink/stamp-h1, pptpd/ und ipset_arm/stamp-h1:
 	STRIP=$(STRIP) 
-
-
-
-
 2. in target openpam/Makefile (only for ARM-builds)
 	delete line "--prefix=/usr --bindir=/usr/sbin --libdir=/usr/lib \"  
 
@@ -13,3 +9,4 @@ all modification are located in n src/router/Makefile file:
 		@rm -f libmnl/staged/usr/lib/libmnl.la 
 
 
+       
