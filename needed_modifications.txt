@@ -1,17 +1,15 @@
 all modification are located in n src/router/Makefile file:
 
-1. change in targets libmnl/stamp-h1, libnfnetlink/stamp-h1, pptpd/ und ipset_arm/stamp-h1:
-	STRIP=$(STRIP) in STRIP=$(CROSS_COMPILE)strip 
+1.  in targets libmnl/stamp-h1, libnfnetlink/stamp-h1, pptpd/ und ipset_arm/stamp-h1:
+	STRIP=$(STRIP) 
 
-2. rename following targets:
-	- openssl/Makefile to openssl-Makefile (line 1165 and 1179) 
-	- wget/Makefile to wget-Makefile (line 3660 and 3669)
-	- wget/Makefile.in zu wget-Makefile.in (line 3657 and 3660)
 
-3. delete in target openpam/Makefile: (only for ARM-builds)
+
+
+2. in target openpam/Makefile (only for ARM-builds)
 	delete line "--prefix=/usr --bindir=/usr/sbin --libdir=/usr/lib \"  
 
-4. at end of target libmnl insert the following line: (only needed in ARM-builds and if ipset is installed in host system)
+3. at end of target libmnl insert the following line: (only needed in ARM-builds and if ipset is installed in host system)
 		@rm -f libmnl/staged/usr/lib/libmnl.la 
 
 
