@@ -1,5 +1,5 @@
 # Building Asuswrt-Merlin [John's fork] with Artix (Arch-Linux fork)
-For building asuswrt-merlin under Artix, first clone asuswrt-Merlin (Johns fork) repo (https://github.com/john9527/asuswrt-merlin)
+For building asuswrt-merlin under Artix, first clone asuswrt-Merlin (Johns fork) repo (https://github.com/john9527/asuswrt-merlin). 
 
 Following steps are needed to make build process successful:
 
@@ -36,7 +36,8 @@ Following steps are needed to make build process successful:
 Enclosed you will find two shell scripts (for mips and arm) for setting path variables, resetting and cleaning your local repo, inserting the needed files (step 3.-7.) and applying needed patches of source code (step 8.-10.). 
 This is the easiest way: Just start the script for MIPS- or ARM-builds (Don't forget to make it executable before!)
 
-If you dont want to use these shell scripts, please remember to clean sources only with "git clean -dxf". Cleaning with "make clean" leads most likely to an error at Makefile-target openssl.
+Applying these shell scripts is only needed, if you are working with "git clean -dxf" (e.g. 1st build after cloning repo, after updating repo, ...) for cleaning sources. 
+Cleaning sources only with "make clean" these scripts (step 3.-10.) are not needed anymore. 
 
 
 BR
