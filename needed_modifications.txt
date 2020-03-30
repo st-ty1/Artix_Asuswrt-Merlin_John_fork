@@ -9,6 +9,10 @@ and ipset_arm/stamp-h1 (only needed for MIPS-builds):
 
 3. insert at end of target libmnl the following line (only needed in ARM-builds and if ipset is installed in host system):
 		@rm -f libmnl/staged/usr/lib/libmnl.la 
+		
+4. add these two additional -D arguments to cmake command getdns/build/Makefile-target:
+ 		  -DSTRPTIME_WORKS_EXITCODE="PLEASE_FILL_OUT-FAILED_TO_RUN" \
+		  -DSTRPTIME_WORKS_EXITCODE__TRYRUN_OUTPUT="PLEASE_FILL_OUT-NOTFOUND" -Hforce \
 
 
        
