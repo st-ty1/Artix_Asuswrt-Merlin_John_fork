@@ -36,15 +36,6 @@
  	touch $@
  
  pptpd: pptpd/stamp-h1
-@@ -2836,7 +2836,7 @@
- 	cd $(INSTALLDIR)/lzo/usr/lib && ln -sf liblzo2.so.2 liblzo2.so
- 
- openpam: openpam/Makefile
--	$(MAKE) -C $@ $(PARALLEL_BUILD) && $(MAKE) $@-stage
-+	$(MAKE) -C $@ $(PARALLEL_BUILD)
- 
- openpam/Makefile:
- 	( cd openpam && ./autogen.sh && \
 @@ -3484,7 +3484,7 @@
  	$(STRIP) $(INSTALLDIR)/ipset/usr/sbin/ipset
  
