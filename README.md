@@ -34,6 +34,8 @@ Following steps are needed to make build process successful:
 10. Source code of libgpg-error-1.10 has to be patched, as Artix uses newer awk 5.0. Source code of version 1.10 is still for awk 4.x. 
     A patch is supplied (libgpg-error.patch) in this repo.
     
+11. Delete file desdata.stamp in folder /release/src/router/nettle (as it crashes building process!)
+
 
 Enclosed you will find two shell scripts (for mips and arm) for setting path variables, resetting and cleaning your local repo, inserting the needed files (step 3.-7.) and applying needed patches of source code (step 8.-10.). 
 This is the easiest way: Just start the script for MIPS- or ARM-builds (Don't forget to make it executable before!)
