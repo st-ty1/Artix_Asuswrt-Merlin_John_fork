@@ -11,5 +11,7 @@ and ipset_arm/stamp-h1 (only needed for MIPS-builds):
  		  -DSTRPTIME_WORKS_EXITCODE="PLEASE_FILL_OUT-FAILED_TO_RUN" \
 		  -DSTRPTIME_WORKS_EXITCODE__TRYRUN_OUTPUT="PLEASE_FILL_OUT-NOTFOUND" -Hforce \
 
-4. for colored output change SEP=echo "\033[41;1m   $@   \033[0m" into SEP=printf "\033[41;1m   $@   \033[0m" as bash shell is used in Artix instead of Dash shell in Ubuntu/Debian.
+4. Delete file desdata.stamp in folder /release/src/router/nettle (as it crashes building process!)
+
+5. for colored output change SEP=echo "\033[41;1m   $@   \033[0m" into SEP=printf "\033[41;1m   $@   \033[0m" as bash shell is used in Artix instead of Dash shell in Ubuntu/Debian.
        
