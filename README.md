@@ -1,4 +1,6 @@
 # Building Asuswrt-Merlin [John's fork] with Artix (Arch-Linux fork)
+---- tested with 374.43_43E6j9527 ----
+
 For building asuswrt-merlin under Artix, first clone asuswrt-Merlin (Johns fork) repo (https://github.com/john9527/asuswrt-merlin). 
 
 Following steps are needed to make build process successful:
