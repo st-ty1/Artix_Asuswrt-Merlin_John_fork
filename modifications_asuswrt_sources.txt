@@ -4,12 +4,16 @@ all modifications are located in src/router/Makefile file:
 and ipset_arm/stamp-h1 (only needed for MIPS-builds):
 	STRIP=$(STRIP)
 	
-2. insert at end of target libmnl the following line (only needed in ARM-builds and if ipset is installed in host system):
+2. insert at end of target libmnl the following line (only needed with ARM-builds and if ipset is installed in host system):
 		@rm -f libmnl/staged/usr/lib/libmnl.la 
 		
 3. add these two additional -D arguments to cmake command getdns/build/Makefile-target:
  		  -DSTRPTIME_WORKS_EXITCODE="PLEASE_FILL_OUT-FAILED_TO_RUN" \
 		  -DSTRPTIME_WORKS_EXITCODE__TRYRUN_OUTPUT="PLEASE_FILL_OUT-NOTFOUND" -Hforce \
+		  
+4. add " &&./buildconf" in curl/Makefile target (otherwise building process of mips arch will crash) 
+   i.e. change  line "@cd curl && CC=$(CC) \" to "@cd curl && ./buildconf && CC=$(CC) \"
 
-4. for colored output change SEP=echo "\033[41;1m   $@   \033[0m" into SEP=printf "\033[41;1m   $@   \033[0m" as bash shell is used in Artix instead of Dash shell in Ubuntu/Debian.
+5. for colored output change SEP=echo "\033[41;1m   $@   \033[0m" into SEP=printf "\033[41;1m   $@   \033[0m" 
+   as bash shell is used on Artix instead of Dash shell on Ubuntu/Debian.
        
