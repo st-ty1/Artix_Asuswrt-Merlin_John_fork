@@ -1,0 +1,72 @@
+--- Makefile_orig	2020-04-25 15:57:46.769987000 +0200
++++ Makefile	2020-04-25 16:02:28.619984054 +0200
+@@ -96,7 +96,7 @@
+ #
+ #
+ #
+-SEP=echo "\033[41;1m   $@   \033[0m"
++SEP=printf "\033[41;1m   $@   \033[0m"
+ 
+ #
+ # standard packages
+@@ -1427,6 +1427,8 @@
+ 		-DOPENSSL_INCLUDE_DIR=$(TOP)/openssl-1.1/include \
+ 		-DOPENSSL_CRYPTO_LIBRARY=$(TOP)/openssl-1.1/libcrypto.so \
+ 		-DOPENSSL_SSL_LIBRARY=$(TOP)/openssl-1.1/libssl.so \
++		-DSTRPTIME_WORKS_EXITCODE="PLEASE_FILL_OUT-FAILED_TO_RUN" \
++		-DSTRPTIME_WORKS_EXITCODE__TRYRUN_OUTPUT="PLEASE_FILL_OUT-NOTFOUND" -Hforce \
+ 		-DLIBYAML_DIR=$(TOP)/libyaml \
+ 		-DLIBYAML_INCLUDE_DIR=$(TOP)/libyaml/include \
+ 		-DLIBYAML_LIBRARY=$(TOP)/libyaml/src/.libs/libyaml.a \
+@@ -1584,7 +1586,7 @@
+ 
+ libnfnetlink/stamp-h1:
+ # tomatoraf.com, Victek
+-	cd $(TOP)/libnfnetlink && CC=$(CC) STRIP=$(STRIP) \
++	cd $(TOP)/libnfnetlink && CC=$(CC) STRIP=$(CROSS_COMPILE)strip \
+ 		CFLAGS="-Os -Wall $(EXTRACFLAGS) -ffunction-sections -fdata-sections" \
+ 		LDFLAGS="-ffunction-sections -fdata-sections -Wl,--gc-sections" \
+ 		$(CONFIGURE) --prefix=/usr --enable-shared --enable-static
+@@ -2084,7 +2086,7 @@
+ 	$(MAKE) -C accel-pptpd server_install
+ 
+ pptpd/stamp-h1:
+-	cd $(TOP)/pptpd && $(CONFIGURE) --prefix=$(INSTALLDIR)/pptpd --enable-bcrelay CC=$(CC) STRIP=$(STRIP) AR=$(AR) LD=$(LD) NM=$(NM) RANLIB=$(RANLIB)
++	cd $(TOP)/pptpd && $(CONFIGURE) --prefix=$(INSTALLDIR)/pptpd --enable-bcrelay CC=$(CC) STRIP=$(CROSS_COMPILE)strip AR=$(AR) LD=$(LD) NM=$(NM) RANLIB=$(RANLIB)
+ 	touch $@
+ 
+ pptpd: pptpd/stamp-h1
+@@ -3189,7 +3191,7 @@
+ 	@$(MAKE) -C $@ $(PARALLEL_BUILD)
+ 
+ curl/Makefile: curl/configure
+-	@cd curl && CC=$(CC) \
++	@cd curl && ./buildconf && CC=$(CC) \
+ 	CFLAGS="-Os -Wall -ffunction-sections -fdata-sections" \
+ 	./$(CONFIGURE) --prefix=/usr --bindir=/usr/sbin --libdir=/usr/lib \
+ 	--enable-http --with-ssl=$(TOP)/openssl \
+@@ -3540,7 +3542,7 @@
+ 	$(STRIP) $(INSTALLDIR)/ipset/usr/sbin/ipset
+ 
+ libmnl/stamp-h1:
+-	cd $(TOP)/libmnl && CC=$(CC) STRIP=$(STRIP) \
++	cd $(TOP)/libmnl && CC=$(CC) STRIP=$(CROSS_COMPILE)strip \
+ 	CFLAGS="-Os -Wall $(EXTRACFLAGS) -ffunction-sections -fdata-sections" \
+ 	LDFLAGS="-ffunction-sections -fdata-sections -Wl,--gc-sections" \
+ 	$(CONFIGURE) --prefix=/usr
+@@ -3563,12 +3565,12 @@
+ 	-@rm -rf libmnl/staged
+ 
+ ipset_arm/stamp-h1: libmnl
+-	cd $(TOP)/ipset_arm && CC=$(CC) STRIP=$(STRIP) \
++	cd $(TOP)/ipset_arm && CC=$(CC) STRIP=$(CROSS_COMPILE)strip \
+ 	autoreconf -i -f && \
+ 	CFLAGS="-Os -Wall $(EXTRACFLAGS) -ffunction-sections -fdata-sections" \
+ 	LDFLAGS="-ffunction-sections -fdata-sections -Wl,--gc-sections" \
+-	libmnl_CFLAGS="-I$(TOP)/libmnl/staged/usr/include" \
+-	libmnl_LIBS="-L$(TOP)/libmnl/staged/usr/lib -lmnl" \
++	libmnl_CFLAGS="-I$(TOP)/libmnl/include" \
++	libmnl_LIBS="-L$(TOP)/libmnl/src/.libs -lmnl" \
+ 	$(CONFIGURE) --prefix=/usr --with-kmod=yes --with-kbuild=$(LINUXDIR)
+ 	touch ipset_arm/stamp-h1
+ 
