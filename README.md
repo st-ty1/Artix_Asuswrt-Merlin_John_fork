@@ -41,7 +41,7 @@ Enclosed you will find two shell scripts (for mips and arm) for setting path var
 This is the easiest way: Just start the script for MIPS- or ARM-builds (Don't forget to make it executable before!)
 
 Applying these shell scripts is only needed, if you are working with "git clean -dxf" (e.g. 1st build after cloning repo, after updating repo, ...) for cleaning sources. 
-Cleaning sources only with "make clean" these scripts (step 3.-10.) are not needed anymore. 
+By cleaning sources with "make clean", these scripts are not needed for step 3.-10. anymore. Step 11 has to be done, though.
 
 
 BR
