@@ -22,6 +22,9 @@ cp -r $ASUSWRT_PATCHES_DIR/nano-4.4/* $ASUSWRT_REPO_DIR/release/src/router/nano/
 ## patch because of newer awk in Artix; Makefile.in need to be patched not Makefile.am (not used)!
 patch -p1 -d$ASUSWRT_REPO_DIR/release/src/router/libgpg-error-1.10 < $ASUSWRT_PATCHES_DIR/libgpg-error.patch 
 
+## if Makefile.in exists, autotools insists on automake 1.15, without Makefile.in it uses existing automake version
+rm -f $ASUSWRT_REPO_DIR/release/src/router/wget/Makefile.in
+
 patch -i $ASUSWRT_PATCHES_DIR/Makefile.patch $ASUSWRT_REPO_DIR/release/src/router/Makefile
 
 rm -f $ASUSWRT_REPO_DIR/release/src/router/nettle/desdata.stamp
