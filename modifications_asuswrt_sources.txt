@@ -1,19 +1,22 @@
 all modifications are located in src/router/Makefile file:
 
-1. remove in targets libmnl/stamp-h1, libnfnetlink/stamp-h1, pptpd/stamp-h1 
-and ipset_arm/stamp-h1 (only needed for MIPS-builds):
-	STRIP=$(STRIP)
+1. remove in targets libmnl/stamp-h1, libnfnetlink/stamp-h1, pptpd/stamp-h1 and ipset_arm/stamp-h1 (ipset_arm/stamp-h1
+   only needed for ARM-builds):
+		" STRIP=$(STRIP) "
 	
 2. insert at end of target libmnl the following line (only needed with ARM-builds and if ipset is installed in host system):
-		@rm -f libmnl/staged/usr/lib/libmnl.la 
+		" @rm -f libmnl/staged/usr/lib/libmnl.la "
 		
 3. add these two additional -D arguments to cmake command getdns/build/Makefile-target:
- 		  -DSTRPTIME_WORKS_EXITCODE="PLEASE_FILL_OUT-FAILED_TO_RUN" \
-		  -DSTRPTIME_WORKS_EXITCODE__TRYRUN_OUTPUT="PLEASE_FILL_OUT-NOTFOUND" -Hforce \
+ 		" -DSTRPTIME_WORKS_EXITCODE="PLEASE_FILL_OUT-FAILED_TO_RUN" \
+		  -DSTRPTIME_WORKS_EXITCODE__TRYRUN_OUTPUT="PLEASE_FILL_OUT-NOTFOUND" -Hforce \  "
 		  
-4. add " &&./buildconf" in curl/Makefile target (otherwise building process of mips arch will crash) 
+4. add " &&./buildconf " in target curl/Makefile (otherwise building process of mips arch will crash) 
    i.e. change  line "@cd curl && CC=$(CC) \" to "@cd curl && ./buildconf && CC=$(CC) \"
+   
+5. insert " && autoreconf -fi " in libdaemon/stamp-h1 target to rebuild configure from scratch 
+   (and so loosing its dependency of old automake 1.11)
 
-5. for colored output change SEP=echo "\033[41;1m   $@   \033[0m" into SEP=printf "\033[41;1m   $@   \033[0m" 
+6. for colored output change SEP=echo "\033[41;1m   $@   \033[0m" into SEP=printf "\033[41;1m   $@   \033[0m" 
    as bash shell is used on Artix instead of Dash shell on Ubuntu/Debian.
        
