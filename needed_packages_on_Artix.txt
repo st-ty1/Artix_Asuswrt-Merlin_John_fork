@@ -1,8 +1,10 @@
 Necessary packages for building Asuswrt-merin/John's fork on Artix:
-- Packages already pre-installed by "base"- group: (these were installed by initial installation of Artix) 
+==================================================================
+
+- Packages already pre-installed by "base"- group: (these are already installed by initial installation of Artix) 
   bzip2, gawk, gettext, texinfo, groff, autopoint (included in package gettext), libelf1 (as package libelf), libc6 (included in package glibc), ncurses (as dependency of base group package bash)
 
-- Packages already preinstalled by “base-devel” group: (these were installed by initial installation of Artix)
+- Packages already preinstalled by “base-devel” group: (these are already installed by initial installation of Artix)
   autoconf, automake, binutils, bison, flex, gcc, g++, libstdc++ (included in package gcc), libtool, m4, patch, pkg-config (included in package pkgconf)
 
 - Packages to be installed from Arch-repos, with same package name as in Debian/Ubuntu: 
@@ -12,7 +14,7 @@ Necessary packages for building Asuswrt-merin/John's fork on Artix:
 
 	Debian package name 			Artix package name
 		
-	zlib1g-dev			->	Zlib (needed by sqlite)
+	zlib1g-dev			->	zlib (needed by sqlite)
 	shtool				->	shtool (AUR)
 	libssl-dev			->	openssl-1.0 or openssl (1.1, preinstalled by base group))
 	libxml2-dev			->	libxml2
@@ -22,13 +24,12 @@ Necessary packages for building Asuswrt-merin/John's fork on Artix:
 	libnotify-dev			->	libnotify
 	libevent-dev			->	libevent
 	texlive				->	texlive-core
-	linux-headers-$(uname -r)	->	linux-lts-headers or linux-headers
+	linux-headers-$(uname -r)	->	linux-lts-headers and/or linux-headers
 	libelf1:i386, libelf-dev:i386	->	lib32-libelf
 	lib32stdc++			->	lib32-gcc-libs
 	lib32-zlib			->	lib32z1-dev
 
 - additional Packages to be installed: 
-  rpcsvc-proto (needed by nfs-utils, integrated in former glibc , but deprecated in newer glibc)
+  rpcsvc-proto (needed by nfs-utils, integrated in former glibc, but deprecated in newer glibc of Artix/Arch Linux)
   lib32-glibc (required by lib32-gcc-libs)
-  automake-1.15 (due to wget)
-  automake 1.11 (due to libdaemon)
+ 
