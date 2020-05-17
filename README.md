@@ -1,6 +1,10 @@
 # Building Asuswrt-Merlin [John's fork] on Artix (Arch-Linux fork)
 ---- tested with 374.43_43E6j9527 ----
 
+######################################################################################################################
+17-05-20 Artix/Arch-Linux has switched to gcc-10.0 ; I have to recheck if adaption is needed (e.g. src/router/config)
+#######################################################################################################################
+
 For building asuswrt-merlin on Artix, first clone asuswrt-Merlin (Johns fork) repo (https://github.com/john9527/asuswrt-merlin). 
 
 Following steps are needed to make build process successful:
