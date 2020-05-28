@@ -3,7 +3,6 @@
 ######################################################################################################################
 ---- tested with 374.43_44E5j9527 ----
 28-05-20 
-- Artix/Arch-Linux has switched to gcc-10.0 -> additional patch for linx/scripts/squashfs/Makefile still not added yet
 - nano source has to be updated (4.8 -> 4.9.4; still missing part of source code)
 #######################################################################################################################
 
@@ -47,8 +46,8 @@ Following steps are needed to make build process successful:
     
 12. Delete file desdata.stamp in folder /release/src/router/nettle (as it crashes building process!)
 
-13. Due to change of gcc from version 9.4 to 10.1 on host-OS Artix/Arch linux the file /release/src/router/config/Makefile 
-    has to be patched (patched supplied in this repo). 
+13. Due to change of gcc from version 9.4 to 10.1 on host-OS Artix/Arch linux the files /release/src/router/config/Makefile 
+    and /release/src-rt/linux/linux-2.6/scripts/squashfs/Makefile have to be patched (patches supplied in this repo). 
 
 Enclosed you will find two shell scripts (for mips and arm) for setting path variables, resetting and cleaning your local repo, inserting the needed files (step 3.-7.) and applying needed patches of source code (step 8.-10./13.). 
 This is the easiest way: Just start the script for MIPS- or ARM-builds (Don't forget to make it executable before!)
