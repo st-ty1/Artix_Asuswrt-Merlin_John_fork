@@ -30,4 +30,6 @@ patch -i $ASUSWRT_PATCHES_DIR/Makefile.patch $ASUSWRT_REPO_DIR/release/src/route
 
 rm -f $ASUSWRT_REPO_DIR/release/src/router/nettle/desdata.stamp
 
+patch -i $ASUSWRT_PATCHES_DIR/Makefile_config.patch $ASUSWRT_REPO_DIR/release/src/router/config/Makefile
+
 cd release/src-rt-6.x.4708 && make rt-ac56u   ## e.g. for ac56u 
