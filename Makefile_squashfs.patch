@@ -1,0 +1,11 @@
+--- Makefile	2020-05-17 21:17:53.383917504 +0200
++++ Makefile_mod	2020-05-17 20:18:17.430459000 +0200
+@@ -1,7 +1,7 @@
+ INCLUDEDIR = .
+ LZMAPATH = ./lzma/C/7zip/Compress/LZMA_Lib
+ 
+-CFLAGS := -I$(INCLUDEDIR) -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -O2 
++CFLAGS := -I$(INCLUDEDIR) -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -O2 -fcommon
+ 
+ all: mksquashfs-lzma unsquashfs
+ CC=gcc
