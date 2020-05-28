@@ -29,7 +29,8 @@ patch -i $ASUSWRT_PATCHES_DIR/Makefile.patch $ASUSWRT_REPO_DIR/release/src/route
 
 rm -f $ASUSWRT_REPO_DIR/release/src/router/nettle/desdata.stamp
 
-cp $ASUSWRT_PATCHES_DIR/mksquashfs.c $ASUSWRT_REPO_DIR/release/src-rt/linux/linux-2.6/scripts/squashfs
+patch -i $ASUSWRT_PATCHES_DIR/mksquashfs.c.patch $ASUSWRT_REPO_DIR/release/src-rt/linux/linux-2.6/scripts/squashfs/mksquashfs.c
+patch -i $ASUSWRT_PATCHES_DIR/Makefile_squashfs.patch $ASUSWRT_REPO_DIR/release/src-rt/linux/linux-2.6/scripts/squashfs/Makefile
 
 patch -i $ASUSWRT_PATCHES_DIR/Makefile_config.patch $ASUSWRT_REPO_DIR/release/src-rt-6.x.4708/router/config/Makefile
 
