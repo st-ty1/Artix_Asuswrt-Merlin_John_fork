@@ -16,7 +16,7 @@ cp $ASUSWRT_PATCHES_DIR/openssl-1.0.2u/Makefile.org $ASUSWRT_REPO_DIR/release/sr
 
 cp -r $ASUSWRT_PATCHES_DIR/wget-1.19.5/* $ASUSWRT_REPO_DIR/release/src/router/wget/
 
-cp -r $ASUSWRT_PATCHES_DIR/nano-4.4/* $ASUSWRT_REPO_DIR/release/src/router/nano/
+cp -r $ASUSWRT_PATCHES_DIR/nano-4.9.2/* $ASUSWRT_REPO_DIR/release/src/router/nano/
 
 cp $ASUSWRT_PATCHES_DIR/wlconf $ASUSWRT_REPO_DIR/release/src/router/wlconf_arm/prebuilt
 
