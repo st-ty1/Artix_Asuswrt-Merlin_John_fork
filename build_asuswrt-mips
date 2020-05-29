@@ -17,7 +17,7 @@ cp $ASUSWRT_PATCHES_DIR/openssl-1.0.2u/Makefile.org $ASUSWRT_REPO_DIR/release/sr
 
 cp -r $ASUSWRT_PATCHES_DIR/wget-1.19.5/* $ASUSWRT_REPO_DIR/release/src/router/wget
 
-cp -r $ASUSWRT_PATCHES_DIR/nano-4.4/* $ASUSWRT_REPO_DIR/release/src/router/nano/
+cp -r $ASUSWRT_PATCHES_DIR/nano-4.9.2/* $ASUSWRT_REPO_DIR/release/src/router/nano/
 
 ## patch because of newer awk in Artix; Makefile.in need to be patched not Makefile.am (not used)!
 patch -p1 -d$ASUSWRT_REPO_DIR/release/src/router/libgpg-error-1.10 < $ASUSWRT_PATCHES_DIR/libgpg-error.patch 
