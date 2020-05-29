@@ -27,15 +27,6 @@
  		CFLAGS="-Os -Wall $(EXTRACFLAGS) -ffunction-sections -fdata-sections" \
  		LDFLAGS="-ffunction-sections -fdata-sections -Wl,--gc-sections" \
  		$(CONFIGURE) --prefix=/usr --enable-shared --enable-static
-@@ -1866,7 +1868,7 @@
- 	@rm -f libusb-0.1.12/stamp-h1
- 
- libdaemon/stamp-h1:
--	cd libdaemon && $(CONFIGURE) ac_cv_func_setpgrp_void=yes \
-+	cd libdaemon && autoreconf -fi && $(CONFIGURE) ac_cv_func_setpgrp_void=yes \
- 	--disable-dependency-tracking
- 	touch $@
- 
 @@ -2084,7 +2086,7 @@
  	$(MAKE) -C accel-pptpd server_install
  
