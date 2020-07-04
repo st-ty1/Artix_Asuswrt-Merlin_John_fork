@@ -1,12 +1,20 @@
-*** mksquashfs.c_a	2019-11-02 16:38:49.289935990 +0100
---- mksquashfs.c_b	2019-02-24 12:50:40.000000000 +0100
-***************
-*** 31,36 ****
---- 31,37 ----
-  #include <stdio.h>
-  #include <sys/types.h>
-  #include <sys/stat.h>
-+ #include <sys/sysmacros.h>
-  #include <fcntl.h>
-  #include <errno.h>
-  #include <dirent.h>
+--- mksquashfs.c	2020-07-04 14:45:30.816512000 +0200
++++ mksquashfs.c_mod	2020-07-04 20:09:27.782286000 +0200
+@@ -31,6 +31,7 @@
+ #include <stdio.h>
+ #include <sys/types.h>
+ #include <sys/stat.h>
++#include <sys/sysmacros.h>
+ #include <fcntl.h>
+ #include <errno.h>
+ #include <dirent.h>
+@@ -88,7 +89,8 @@
+ /* filesystem flags for building */
+ int duplicate_checking = 1, noF = 0, no_fragments = 0, always_use_fragments = 0;
+ int noI = 0, noD = 0, check_data = 0;
+-int swap, silent = TRUE;
++extern int swap;
++int silent = TRUE;
+ long long global_uid = -1, global_gid = -1;
+ 
+ /* superblock attributes */
