@@ -25,11 +25,11 @@ Following steps are needed to make build process successful:
     
 7. only ARM-builds: wlconf is missing in release/src/router/wlconf_arm/prebuilt: Download wlconf from Asuswrt-merlin github repo of RMerlin (https://github.com/RMerl/asuswrt-merlin) and save it to your local repo folder (step 2). 
 
-8. only MIPS-builds: Following line has to be inserted in release/src-rt-6.x/linux/linux-2.6/scripts/squashfs/mksquashfs.c (because of newer glib in Artix than in Debian9):
+8. only MIPS-builds: Following line has to be inserted in release/src-rt/linux/linux-2.6/scripts/squashfs/mksquashfs.c (because of newer glib in Artix than in Debian9):
      
 	             #include <sys/sysmacros.h> 
 
-   An adaquate patch is supplied (mksquashfs.c.patch) in this repo.
+   An adaquate patch is supplied (mksquashfs.c.patch) in this repo. (see also 13.)
 
 9. A patch is supplied (Makefile.patch) in this repo for all amendments needed in release/src/router/Makefile. The amendments
    are listed in file needed_modifations.txt for further information.
@@ -44,7 +44,7 @@ Following steps are needed to make build process successful:
 12. Delete file desdata.stamp in folder /release/src/router/nettle (as it crashes building process!)
 
 13. Due to change of gcc from version 9.4 to 10.1 on host-OS Artix/Arch linux some old source code in /release/src/router/config (arm + mips) 
-    and mksquashfs.c in /release/src-rt/linux/linux-2.6/scripts/squashfs (only mips) have to be patched (patches supplied in this repo). 
+    and again mksquashfs.c in /release/src-rt/linux/linux-2.6/scripts/squashfs (only mips) have to be patched (patches supplied in this repo. patch of mksquashfs.c is combined with 8.). 
 
 Enclosed you will find two shell scripts (for mips and arm) for setting path variables, resetting and cleaning your local repo, inserting the needed files (step 3.-7.) and applying needed patches of source code (step 8.-10./13.). 
 This is the easiest way: Just start the script for MIPS- or ARM-builds (Don't forget to make it executable before!)
