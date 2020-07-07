@@ -46,11 +46,13 @@ Following steps are needed to make build process successful:
 13. Due to change of gcc from version 9.4 to 10.1 on host-OS Artix/Arch linux some old source code in /release/src/router/config (arm + mips) 
     and again mksquashfs.c in /release/src-rt/linux/linux-2.6/scripts/squashfs (only mips) have to be patched (patches supplied in this repo; patch of mksquashfs.c is combined with 8.). 
 
+14. Remove Makefile in /release/src/router/curl (as it crashes building process!)
+
 Enclosed you will find two shell scripts (for mips and arm) for setting path variables, resetting and cleaning your local repo, inserting the needed files (step 3.-7.) and applying needed patches of source code (step 8.-10./13.). 
 This is the easiest way: Just start the script for MIPS- or ARM-builds (Don't forget to make it executable before!)
 
 Applying these shell scripts is only needed, if you are working with "git clean -dxf" (e.g. 1st build after cloning repo, after updating repo, ...) for cleaning sources. 
-By cleaning sources with "make clean", these scripts are not needed for step 3.-10. + 13. anymore. Step 11 has to be done, though.
+By cleaning sources with "make clean", these scripts are not needed for step 3.-10. + 13. anymore. Step 11 has to be done, though. (step 12. and 14. not tested yet, if they can be omitted with "make clean").
 
 
 BR
