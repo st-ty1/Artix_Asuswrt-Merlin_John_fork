@@ -1,6 +1,6 @@
 # Building Asuswrt-Merlin [John's fork] on Artix (Arch-Linux fork)
 
----- tested with 374.43_44E5j9527 ----
+---- tested with 374.43_44EAj9527 ----
 
 
 For building asuswrt-merlin on Artix, first clone asuswrt-Merlin (Johns fork) repo (https://github.com/john9527/asuswrt-merlin). 
@@ -21,7 +21,7 @@ Following steps are needed to make build process successful:
     Download pptpd-1.3.4 (https://sourceforge.net/projects/poptop/files/pptpd/pptpd-1.3.4/pptpd-1.3.4.tar.gz/download) and extract it to a third subfolder of your local repo folder.
     
 6. Some files are missing within nano-folder (/release/src/router/nano) of auswrt-merlin (John fork) repo: 
-    Download nano-4.9.2 (https://ftp.gnu.org/gnu/nano/nano-4.9.2.tar.gz) and extract it to a forth subfolder of your local repo folder.
+    Download nano-4.9.3 (https://ftp.gnu.org/gnu/nano/nano-4.9.3.tar.gz) and extract it to a forth subfolder of your local repo folder.
     
 7. only ARM-builds: wlconf is missing in release/src/router/wlconf_arm/prebuilt: Download wlconf from Asuswrt-merlin github repo of RMerlin (https://github.com/RMerl/asuswrt-merlin) and save it to your local repo folder (step 2). 
 
