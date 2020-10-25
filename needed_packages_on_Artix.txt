@@ -1,3 +1,10 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Rem: 
+===
+The information below is quit old and maybe far too many packages are mentioned to be installed. 
+Actually, I will verify this by use of Artix on wsl2/Windows. Meanwhile you can start with the packages I mentioned in "needed_packages_on_Artix.txt" on my repo https://github.com/st-ty1/Artix_FreshTomato, which is already updated.
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 Necessary packages for building Asuswrt-merin/John's fork on Artix:
 ==================================================================
 
