@@ -1,0 +1,31 @@
+Use windows terminal:
+====================
+
+$ mkdir %USERPROFILE%\wsl\artix
+$ cd %USERPROFILE%\wsl\artix
+$ curl -O https://github.com/hdk5/ArtixWSL/releases/download/20200502153634-60934cb/Artix.zip
+$ tar -xf Artix.zip
+$ wsl --import artix artix-rootfs.tar.gz
+$ ./artix
+   ------  automatic switch to Linux  -------
+[root@PC-NAME user]# nano /etc/wsl.conf  ( add the following:
+			[interop]
+			appendWindowsPath=false)
+[root@PC-NAME user]# echo "%wheel ALL=(ALL)  ALL" > /etc/sudoers.d/01wheel
+[root@PC-NAME user]# chmod 440 /etc/sudoers.d/01wheel
+[root@PC-NAME user]# useradd -m aG wheel <username>
+[root@PC-NAME user]# passwd <username>
+[root@PC-NAME user]# exit
+   ----- automatic switch to Windows  -------
+$ artix config --default-user <username>
+$ ./artix
+   ------ automatic switch to Linux  -------
+[user@PC-NAME dir]$ cd $HOME
+[user@PC-NAME dir]$ git clone https://github.com/john9527/asuswrt-merlin
+[user@PC-NAME dir]$ makedir documents/asuswrt
+[user@PC-NAME dir]$ git clone https://github.com/st-ty1/Artix_Asuswrt-Merlin_John_fork documents/asuswrt
+[user@PC-NAME dir]$ cd documents/asuswrt
+[user@PC-NAME dir]$ ./build_asuswrt-mips.sh (or ./build_asuswrt-mips.sh)
+  
+(Of course creation of rootfs.tar.gz by using rootfs.img of official Artix-iso is possible. 
+ Even if using smallest Artix base-iso (without any desktop environment) results in bigger roots.tar.gz than that of https://github.com/hdk5/ArtixWSL)
