@@ -11,10 +11,17 @@ $ ./artix
 [PC-NAME Artix]# pacman-key --init
 [PC-NAME Artix]# pacman-key --populate archlinux artix
 [PC-NAME Artix]# pacman -Syu
-[PC-NAME Artix]# pacman -S sudo nano make gcc which autoconf automake pkgconf patch bison flex cmake rpcsvc-proto gperf python intltool re2c
-[PC-NAME Artix]# nano /etc/wsl.conf  ( add the following:
-			[interop]
-			appendWindowsPath=false)
+[PC-NAME Artix]# pacman -S sudo nano make gcc which autoconf automake pkgconf patch bison flex cmake rpcsvc-proto gperf python intltool re2c diffutils
+[PC-NAME Artix]# nano /etc/pacman.conf  (enable multilib repository by uncomment the [multilib] section: 
+					[multilib]
+					Include = /etc/pacman.d/mirrorlist	
+					)
+[PC-NAME Artix]# pacman -Syy
+[PC-NAME Artix]# pacman -S sudo lib32-glibc, lib32-gcc-libs and lib32-zlib
+[PC-NAME Artix]# nano /etc/wsl.conf  	(add the following:
+					[interop]
+					appendWindowsPath=false
+					)
 [PC-NAME Artix]# echo "%wheel ALL=(ALL)  ALL" > /etc/sudoers.d/01wheel
 [PC-NAME Artix]# useradd -m -G wheel <username>
 [PC-NAME Artix]# passwd <username>
@@ -26,7 +33,7 @@ $ ./artix
 [<username>@PC-NAME ~]$ cd $HOME
 [<username>@PC-NAME dir]$ git clone https://github.com/john9527/asuswrt-merlin
 [<username>@PC-NAME dir]$ makedir documents/asuswrt
-[<username>@PC-NAME dir]$ git clone https://github.com/st-ty1/Artix_Asuswrt-Merlin_John_fork documents/asuswrt
+[<username>@PC-NAME dir]$ git clone https://github.com/st-ty1/Artix_Asuswrt-Merlin_John_fork /asuswrt_artix
 [<username>@PC-NAME dir]$ cd documents/asuswrt
 [<username>@PC-NAME dir]$ ./build_asuswrt-mips.sh (or ./build_asuswrt-mips.sh)
   
