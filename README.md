@@ -20,7 +20,7 @@ Following steps are needed to make build process successful:
     Download openssl-1.0.2u (https://ftp.openssl.org/source/old/1.0.2/openssl-1.0.2u.tar.gz) and extract it to a second subfolder of your local repo folder.
     
 5. Makefile is missing within pptpd/plugins-folder (/release/src/router/pptpd/plugins) of auswrt-merlin (John fork) repo: 
-    Download pptpd-1.3.4 (https://sourceforge.net/projects/poptop/files/pptpd/pptpd-1.3.4/pptpd-1.3.4.tar.gz/download) and extract it to a third subfolder of your local repo folder.
+    Download pptpd-1.3.4 (https://sourceforge.net/projects/poptop/files/pptpd/pptpd-1.3.4/pptpd-1.3.4.tar.gz) and extract it to a third subfolder of your local repo folder.
     
 6. Some files are missing within nano-folder (/release/src/router/nano) of auswrt-merlin (John fork) repo: 
     Download nano-4.9.3 (https://ftp.gnu.org/gnu/nano/nano-4.9.3.tar.gz) and extract it to a forth subfolder of your local repo folder.
