@@ -32,7 +32,7 @@ $ ./artix
    ------ automatic switch to Linux  -------
 [<username>@PC-NAME ~]$ cd $HOME
 [<username>@PC-NAME dir]$ git clone https://github.com/john9527/asuswrt-merlin
-[<username>@PC-NAME dir]$ git clone https://github.com/st-ty1/Artix_Asuswrt-Merlin_John_fork /asuswrt_artix
+[<username>@PC-NAME dir]$ git clone https://github.com/st-ty1/Artix_Asuswrt-Merlin_John_fork asuswrt_artix
 [<username>@PC-NAME dir]$ cd asuswrt_artix
 [<username>@PC-NAME dir]$ ./build_asuswrt-mips.sh (or ./build_asuswrt-mips.sh)
   
