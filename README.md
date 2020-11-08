@@ -3,13 +3,15 @@
 ---- tested with 374.43_44EAj9527 ----
 
 
-For building asuswrt-merlin on Artix, first clone asuswrt-Merlin (Johns fork) repo (https://github.com/john9527/asuswrt-merlin). 
+For building asuswrt-merlin on Artix, first clone asuswrt-Merlin (Johns fork) repo (https://github.com/john9527/asuswrt-merlin) into your HOME directory. 
 
 Following steps are needed to make build process successful:
 
 1. Install the Artix-packages as mentioned in file needed_packages_on_Artix.txt. 
 
-2. Create a new folder in your user directory and download this repo into this folder.
+2. Clone this repo into your HOME directory:
+
+    git clone https://github.com/st-ty1/Artix_Asuswrt-Merlin_John_fork /asuswrt_artix
 
 3. About 80 files are missing within wget-folder (/release/src/router/wget) of auswrt-merlin (John fork) repo: 
     Download wget-1.19.5 (https://ftp.gnu.org/gnu/wget/wget-1.19.5.tar.gz) and extract it to a first subfolder of your local repo folder (see step 2.) 
