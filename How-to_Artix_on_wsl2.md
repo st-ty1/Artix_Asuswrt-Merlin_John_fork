@@ -38,7 +38,7 @@ $ ./artix
 
 [PC-NAME Artix]# nano /etc/wsl.conf  	(add the following two lines at end of file:
 
-                                        "...
+                                    "...
 					
 					 [interop]
 					 
@@ -48,15 +48,15 @@ $ ./artix
 					 
 [PC-NAME Artix]# echo "%wheel ALL=(ALL)  ALL" > /etc/sudoers.d/01wheel
 
-[PC-NAME Artix]# useradd -m -G wheel <username>
+[PC-NAME Artix]# useradd -m -G wheel \<username>
 
-[PC-NAME Artix]# passwd <username>
+[PC-NAME Artix]# passwd \<username>
 
 [PC-NAME Artix]# exit
 
    ----- automatic switch to Windows  -------
    
-$ artix config --default-user <username>
+$ artix config --default-user \<username>
 
 $ ./artix
 
@@ -91,6 +91,5 @@ $ ./artix
 [<username>@PC-NAME asuswrt_artix]$ ./build_asuswrt-mips.sh (or ./build_asuswrt-mips.sh)
 
   
-(Of course creation of rootfs.tar.gz by using rootfs.img of official Artix-iso is possible.
-
+(Of course creation of rootfs.tar.gz by using rootfs.img of official Artix-iso is possible. 
  Even if using smallest Artix base-iso (without any desktop environment) results in bigger roots.tar.gz than that of https://github.com/hdk5/ArtixWSL)
