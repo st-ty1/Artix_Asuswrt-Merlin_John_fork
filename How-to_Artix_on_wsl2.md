@@ -52,6 +52,10 @@ $ ./artix
 
 [PC-NAME Artix]# passwd \<username>
 
+[PC-NAME Artix]# ln -s /usr/lib/libmpc.so /usr/lib/libmpc.so.2
+
+[PC-NAME Artix]# ln -s /usr/lib/libmpfr.so /usr/lib/libmpfr.so.4
+
 [PC-NAME Artix]# exit
 
    ----- automatic switch to Windows  -------
