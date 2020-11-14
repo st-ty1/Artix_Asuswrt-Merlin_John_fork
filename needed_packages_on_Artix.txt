@@ -1,42 +1,13 @@
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Rem: 
-===
-The information below is quit old and maybe far too many packages are mentioned to be installed. 
-Actually, I will verify this by use of Artix on wsl2/Windows. Meanwhile you can start with the packages I mentioned in "needed_packages_on_Artix.txt" on my repo https://github.com/st-ty1/Artix_FreshTomato, which is already updated.
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Necessary packages for building Aususwrt on Artix are:
+make, gcc, which, autoconf, automake, pkgconf, patch, bison, flex, cmake, rpcsvc-proto, gperf, python, intltool and re2c
 
-Necessary packages for building Asuswrt-merin/John's fork on Artix:
-==================================================================
+The precompiled 32-bit host-tools of FT need following packages: lib32-glibc, lib32-gcc-libs and lib32-zlib
+(Therefore, don't forget to uncomment the lines of the "Multilib" and the "lib32" section in /etc/pacman.conf).
 
-- Packages already pre-installed by "base"- group: (these are already installed by initial installation of Artix) 
-  bzip2, gawk, gettext, texinfo, groff, autopoint (included in package gettext), libelf1 (as package libelf), libc6 (included in package glibc), ncurses (as dependency of base group package bash)
+For generating/editing Artix-specific patches installing of package diffutils should be helpful.
 
-- Packages already preinstalled by “base-devel” group: (these are already installed by initial installation of Artix)
-  autoconf, automake, binutils, bison, flex, gcc, g++, libstdc++ (included in package gcc), libtool, m4, patch, pkg-config (included in package pkgconf)
+If you are working with Artix or Arch Linux on wsl2/Windows then you should also install nano-package.
 
-- Packages to be installed from Arch-repos, with same package name as in Debian/Ubuntu: 
-  autogen, dos2unix, gconf-editor, git (includes gitk too), gperf, intltool, make, mc, mtd-tools, no-dejs, re2c, sqlite (needed by pacakge python2), unzip
-
-- Packages to be installed from Arch-repos, but with altering package name as in Debian: 
-
-	Debian package name 			Artix package name
-		
-	zlib1g-dev			->	zlib (needed by sqlite)
-	shtool				->	shtool (AUR)
-	libssl-dev			->	openssl-1.0 or openssl (1.1, preinstalled by base group))
-	libxml2-dev			->	libxml2
-	libglib2.0-dev			->	glib2
-	xsltproc			->	libxslt 
-	libgtk2.0-dev			->	gtk2
-	libnotify-dev			->	libnotify
-	libevent-dev			->	libevent
-	texlive				->	texlive-core
-	linux-headers-$(uname -r)	->	linux-lts-headers and/or linux-headers
-	libelf1:i386, libelf-dev:i386	->	lib32-libelf
-	lib32stdc++			->	lib32-gcc-libs
-	lib32-zlib			->	lib32z1-dev
-
-- additional Packages to be installed: 
-  rpcsvc-proto (needed by nfs-utils, integrated in former glibc, but deprecated in newer glibc of Artix/Arch Linux)
-  lib32-glibc (required by lib32-gcc-libs)
- 
+That's all !!!
+BR
+st-ty1/st_ty_/_st_ty
