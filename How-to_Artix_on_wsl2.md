@@ -1,4 +1,4 @@
-Open windows terminal and type:
+On Windows 10 open Command Prompt or PowerShell and type:
 
 $ mkdir %USERPROFILE%\wsl\artix
 
@@ -12,7 +12,7 @@ $ wsl --import artix artix-rootfs.tar.gz
 
 $ ./artix
 
-   ------  automatic switch to Linux  -------
+   ------  automatic switch to Linux OS follows -------
    
 [PC-NAME Artix]# pacman-key --init
 
@@ -22,29 +22,23 @@ $ ./artix
 
 [PC-NAME Artix]# pacman -S sudo nano make gcc which autoconf automake pkgconf patch bison flex cmake rpcsvc-proto gperf python intltool re2c diffutils
 
-[PC-NAME Artix]# nano /etc/pacman.conf  (enable multilib repository by uncomment these two lines of [multilib] section:
-
-					"...
-					
-					 [multilib]
-					 
-					 Include = /etc/pacman.d/mirrorlist
-					 
-					 ...")
+[PC-NAME Artix]# nano /etc/pacman.conf  # -> enable multilib repository by uncomment these two lines of [multilib] section of pacman.conf
+				
+				 [multilib]
+				 
+				 Include = /etc/pacman.d/mirrorlist
+				 
 					 
 [PC-NAME Artix]# pacman -Syy
 
 [PC-NAME Artix]# pacman -S sudo lib32-glibc lib32-gcc-libs lib32-zlib git wget
 
-[PC-NAME Artix]# nano /etc/wsl.conf  	(add the following two lines at end of file:
-
-                                    "...
+[PC-NAME Artix]# nano /etc/wsl.conf  # -> append following two lines at end of wsl.conf:
 					
 					 [interop]
 					 
 					 appendWindowsPath=false
 					 
-					 ")
 					 
 [PC-NAME Artix]# echo "%wheel ALL=(ALL)  ALL" > /etc/sudoers.d/01wheel
 
@@ -58,13 +52,13 @@ $ ./artix
 
 [PC-NAME Artix]# exit
 
-   ----- automatic switch to Windows  -------
+   ----- automatic switch to Windows 10 OS follows -------
    
 $ artix config --default-user \<username>
 
 $ ./artix
 
-   ------ automatic switch to Linux  -------
+   ------ automatic switch to Linux OS follows -------
    
 [<username>@PC-NAME ~]$ git clone https://github.com/john9527/asuswrt-merlin
 
@@ -82,10 +76,6 @@ $ ./artix
 
 [<username>@PC-NAME ~]$ tar -C asuswrt_artix -zxvf pptpd.tar.gz
 
-[<username>@PC-NAME ~]$ wget -O nano.tar.gz https://ftp.gnu.org/gnu/nano/nano-5.2.tar.gz 
-
-[<username>@PC-NAME ~]$ tar -C asuswrt_artix -zxvf nano.tar.gz
-
 [<username>@PC-NAME ~]$ cd asuswrt_artix
 
 [<username>@PC-NAME asuswrt_artix]$ wget -O wlconf https://github.com/RMerl/asuswrt-merlin/blob/master/release/src/router/wlconf_arm/prebuilt/wlconf
@@ -96,4 +86,4 @@ $ ./artix
 
   
 (Of course creation of rootfs.tar.gz by using rootfs.img of official Artix-iso is possible. 
- Even if using smallest Artix base-iso (without any desktop environment) results in bigger roots.tar.gz than that of https://github.com/hdk5/ArtixWSL)
+ But even if using smallest iso (base-iso without any desktop environment) results in bigger roots.tar.gz than that of https://github.com/hdk5/ArtixWSL)
