@@ -38,10 +38,6 @@ After system has booted, start typing:
   
 Login as <username> and type:
 
-  [<username>@PC-NAME ~]$ git clone https://github.com/john9527/asuswrt-merlin
-  [<username>@PC-NAME ~]$ make~ documents/asuswrt
-  [<username>@PC-NAME ~]$ git clone https://github.com/st-ty1/Artix_Asuswrt-Merlin_John_fork documents/asuswrt
-  [<username>@PC-NAME ~]$ cd documents/asuswrt
   [<username>@PC-NAME ~]$ git clone https://github.com/john9527/asuswrt-merlin 
   [<username>@PC-NAME ~]$ git clone https://github.com/st-ty1/Artix_Asuswrt-Merlin_John_fork asuswrt_artix 
   [<username>@PC-NAME ~]$ wget -O wget.tar.gz https://ftp.gnu.org/gnu/wget/wget-1.19.5.tar.gz 
