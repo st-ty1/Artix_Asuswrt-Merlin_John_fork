@@ -1,0 +1,56 @@
+Goto the weekly download section of Artix (https://artixlinux.org/download.php#weekly) and download the "base-openrc" version.
+Install VM-player and generate new VM (min. 20 GB of free disk space and 1 GB of RAM in your system). 
+Start VM/ISO. 
+A window appears where you can change to your prefeered language and keybord. 
+Then click on “Boot Arch Linux (x86_64) from iso". The system will start booting. 
+After system has booted start typing:
+
+	artix:[artix]# loadkeys <your-preferred-keyoard-layout> 
+	artix:[artix]# sudo  mkfs.ext4 -L ROOT /dev/sda 
+	artix:[artix]# sudo mount /dev/sda /mnt
+	artix:[artix]# basestrap /mnt base base-devel linux-lts linux-firmware openrc elogind-openrc nano dhcpd sudo grub os-prober
+	artix:[artix]# su
+	root:[root]# genfstab /mnt >> /mnt/etc/fstab
+	root:[root]# artools-chroot /mnt
+	/bin/sh5 # nano /etc/locale.gen	 (Select language configuration "en_US.UTF-8 UTF-8","de_DE.UTF-8 UTF-8" by deleting the #)
+	/bin/sh5 # locale-gen
+	/bin/sh5 # nano /etc/locale.conf 	(Add your language to the system by adding this line: export "LANG=en_US.UTF-8" LANG=de_DE.UTF-8)
+	/bin/sh5 # echo KEYMAP=de-latin1-nodeadkeys > /etc/vconsole.conf
+	/bin/sh5 # nano /etc/conf.d/keymaps 	   (add: keymap="de-latin1")
+	/bin/sh5 # ln –sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime 	(List of all the zones of the world: ls /usr/share/zoneinfo)
+	/bin/sh5 # hwclock --systohc
+	/bin/sh5 # passwd 			   (type your password)
+	/bin/sh5 # nano /etc/hostname		 (type any name)
+	/bin/sh5 # ip -s link                	   	(Get the exact name of your interface)
+	/bin/sh5 # nano /etc/conf.d/net         	 (Add config_<interface>="dhcp")
+	/bin/sh5 # ln -s /etc/init.d/net.lo /etc/init.d/net.<interface>
+	/bin/sh5 # rc-update add net.<interface> default
+	/bin/sh5 # rc-update add dhcpcd default
+
+	/bin/sh5 # nano /etc/sudoer 	   	(To allow members of group wheel sudo access: %wheel      ALL=(ALL) ALL)
+	/bin/sh5 # useradd -m aG wheel <username>
+	/bin/sh5 # passwd <username>
+
+	/bin/sh5 # grub-install --recheck /dev/sda
+	/bin/sh5 # grub-mkconfig –o /boot/grub/grub.cfg
+	/bin/sh5 # exit
+	root:[root]# reboot
+  
+Login as <username> and type:
+
+  [<username>@PC-NAME ~]$ git clone https://github.com/john9527/asuswrt-merlin
+  [<username>@PC-NAME ~]$ make~ documents/asuswrt
+  [<username>@PC-NAME ~]$ git clone https://github.com/st-ty1/Artix_Asuswrt-Merlin_John_fork documents/asuswrt
+  [<username>@PC-NAME ~]$ cd documents/asuswrt
+  [<username>@PC-NAME ~]$ git clone https://github.com/john9527/asuswrt-merlin 
+  [<username>@PC-NAME ~]$ git clone https://github.com/st-ty1/Artix_Asuswrt-Merlin_John_fork asuswrt_artix 
+  [<username>@PC-NAME ~]$ wget -O wget.tar.gz https://ftp.gnu.org/gnu/wget/wget-1.19.5.tar.gz 
+  [<username>@PC-NAME ~]$ tar -C asuswrt_artix -zxvf wget.tar.gz 
+  [<username>@PC-NAME ~]$ wget -O openssl-1.0.tar.gz https://ftp.openssl.org/source/old/1.0.2/openssl-1.0.2u.tar.gz  
+  [<username>@PC-NAME ~]$ tar -C asuswrt_artix -zxvf openssl-1.0.tar.gz 
+  [<username>@PC-NAME ~]$ wget -O pptpd.tar.gz https://sourceforge.net/projects/poptop/files/pptpd/pptpd-1.3.4/pptpd-1.3.4.tar.gz 
+  [<username>@PC-NAME ~]$ tar -C asuswrt_artix -zxvf pptpd.tar.gz 
+  [<username>@PC-NAME ~]$ cd asuswrt_artix 
+  [<username>@PC-NAME asuswrt_artix]$ wget -O wlconf https://github.com/RMerl/asuswrt-merlin/blob/master/release/src/router/wlconf_arm/prebuilt/wlconf 
+  [<username>@PC-NAME asuswrt_artix]$ chmod 744 *.sh 
+  [<username>@PC-NAME asuswrt_artix]$ ./build_asuswrt-mips.sh (or ./build_asuswrt-mips.sh)
