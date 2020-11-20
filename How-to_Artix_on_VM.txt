@@ -1,9 +1,9 @@
 Goto the weekly download section of Artix (https://artixlinux.org/download.php#weekly) and download the "base-openrc" version.
 Install VM-player and generate new VM (min. 20 GB of free disk space and 1 GB of RAM in your system). 
 Start VM/ISO. 
-A window appears where you can change to your prefeered language and keybord. 
-Then click on “Boot Arch Linux (x86_64) from iso". The system will start booting. 
-After system has booted start typing:
+A window appears where you can change to your preferred language and keybord. 
+Then click on “Boot Arch Linux (x86_64) from iso" to reboot the OS in the VM. 
+After system has booted, start typing:
 
 	artix:[artix]# loadkeys <your-preferred-keyoard-layout> 
 	artix:[artix]# sudo  mkfs.ext4 -L ROOT /dev/sda 
