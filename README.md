@@ -22,39 +22,36 @@ Following steps are needed to make build process successful:
 5. Makefile is missing within pptpd/plugins-folder (/release/src/router/pptpd/plugins) of auswrt-merlin (John fork) repo: 
     Download pptpd-1.3.4 (https://sourceforge.net/projects/poptop/files/pptpd/pptpd-1.3.4/pptpd-1.3.4.tar.gz) and extract it to a third subfolder of your local repo folder.
     
-6. Some files are missing within nano-folder (/release/src/router/nano) of auswrt-merlin (John fork) repo: 
-    Download nano-4.9.3 (https://ftp.gnu.org/gnu/nano/nano-4.9.3.tar.gz) and extract it to a forth subfolder of your local repo folder.
-    
-7. only ARM-builds: wlconf is missing in release/src/router/wlconf_arm/prebuilt: Download wlconf from Asuswrt-merlin github repo of RMerlin (https://github.com/RMerl/asuswrt-merlin) and save it to your local repo folder (step 2). 
+6. only ARM-builds: wlconf is missing in release/src/router/wlconf_arm/prebuilt: Download wlconf from Asuswrt-merlin github repo of RMerlin (https://github.com/RMerl/asuswrt-merlin) and save it to your local repo folder (step 2). 
 
-8. only MIPS-builds: Following line has to be inserted in release/src-rt/linux/linux-2.6/scripts/squashfs/mksquashfs.c (because of newer glib in Artix than in Debian9):
+7. only MIPS-builds: Following line has to be inserted in release/src-rt/linux/linux-2.6/scripts/squashfs/mksquashfs.c (because of newer glib in Artix than in Debian9):
      
 	             #include <sys/sysmacros.h> 
 
    An adaquate patch is supplied (mksquashfs.c.patch) in this repo. (see also 13.)
 
-9. A patch is supplied (Makefile.patch) in this repo for all amendments needed in release/src/router/Makefile. The amendments
+8. A patch is supplied (Makefile.patch) in this repo for all amendments needed in release/src/router/Makefile. The amendments
    are listed in file needed_modifations.txt for further information.
 
-10. Source code of libgpg-error-1.10 has to be patched, as Artix uses newer awk 5.0. Source code of version 1.10 is still 
-    for awk 4.x. 
-    A patch is supplied (libgpg-error.patch) in this repo.
+9. Source code of libgpg-error-1.10 has to be patched, as Artix uses newer awk 5.0. Source code of version 1.10 is still 
+   for awk 4.x. 
+   A patch is supplied (libgpg-error.patch) in this repo.
     
-11. Remove Makefile.in in /release/src/router/wget, because GNU autotools of wget insist on automake 1.15, without
+10. Remove Makefile.in in /release/src/router/wget, because GNU autotools of wget insist on automake 1.15, without
     Makefile.in actual automake version of OS is used.
     
-12. Delete file desdata.stamp in folder /release/src/router/nettle (as it crashes building process!)
+11. Delete file desdata.stamp in folder /release/src/router/nettle (as it crashes building process!)
 
-13. Due to change of gcc from version 9.4 to 10.1 on host-OS Artix/Arch linux some old source code in /release/src/router/config (arm + mips) 
+12. Due to change of gcc from version 9.4 to 10.1 on host-OS Artix/Arch linux some old source code in /release/src/router/config (arm + mips) 
     and again mksquashfs.c in /release/src-rt/linux/linux-2.6/scripts/squashfs (only mips) have to be patched (patches supplied in this repo; patch of mksquashfs.c is combined with 8.). 
 
-14. Remove Makefile in /release/src/router/curl (as it crashes building process!)
+13. Remove Makefile in /release/src/router/curl (as it crashes building process!)
 
-Enclosed you will find two shell scripts (for mips and arm) for setting path variables, resetting and cleaning your local repo, inserting the needed files (step 3.-7.) and applying needed patches of source code (step 8.-10./13.). 
+Enclosed you will find two shell scripts (for mips and arm) for setting path variables, resetting and cleaning your local repo, inserting the needed files (step 3.-7.) and applying needed patches of source code (step 7.-9./12.). 
 This is the easiest way: Just start the script for MIPS- or ARM-builds (Don't forget to make it executable before!)
 
 Applying these shell scripts is only needed, if you are working with "git clean -dxf" (e.g. 1st build after cloning repo, after updating repo, ...) for cleaning sources. 
-By cleaning sources with "make clean", these scripts are not needed for step 3.-10. + 13. anymore. Step 11 has to be done, though. (step 12. and 14. not tested yet, if they can be omitted with "make clean").
+By cleaning sources with "make clean", step 3.-9. + 12./13. are not needed for  anymore. Step 11 has to be done, though. (step 12. and 13. are not tested yet, if they can be omitted with using "make clean"). With using "make clean" you can either amend the scripts or you use make command in appropriate folder (if so, don#t forget to insert path to execs of the toolchain of your local asuswrt-Merlin (Johns fork) repo in your .bashrc)
 
 
 BR
