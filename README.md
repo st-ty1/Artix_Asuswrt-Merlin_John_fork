@@ -43,15 +43,19 @@ Following steps are needed to make build process successful:
 11. Delete file desdata.stamp in folder /release/src/router/nettle (as it crashes building process!)
 
 12. Due to change of gcc from version 9.4 to 10.1 on host-OS Artix/Arch linux some old source code in /release/src/router/config (arm + mips) 
-    and again mksquashfs.c in /release/src-rt/linux/linux-2.6/scripts/squashfs (only mips) have to be patched (patches supplied in this repo; patch of mksquashfs.c is combined with 8.). 
+    and again mksquashfs.c in /release/src-rt/linux/linux-2.6/scripts/squashfs (only mips) have to be patched (patches supplied in this repo; 
+    patch of mksquashfs.c is combined with 8.). 
 
 13. Remove Makefile in /release/src/router/curl (as it crashes building process!)
 
-Enclosed you will find two shell scripts (for mips and arm) for setting path variables, resetting and cleaning your local repo, inserting the needed files (step 3.-6.) and applying needed patches of source code (step 7.-9./12.). 
+14. Source code of configure.in in /release/src/router/libxml2 has to be patched, as libxml2 is quite old and uses appropiate aged versions of
+    autotools for configuring. A macro in configure.in has to be deacticated. A patch is supplied in this repo.
+
+Enclosed you will find two shell scripts (for mips and arm) for setting path variables, resetting and cleaning your local repo, inserting the needed files (step 3.-6.) and applying needed patches of source code (step 7.-9./12./14.). 
 This is the easiest way: Just start the script for MIPS- or ARM-builds (Don't forget to make it executable before!)
 
 Applying these shell scripts is only needed, if you are working with "git clean -dxf" (e.g. 1st build after cloning repo, after updating repo, ...) for cleaning sources. 
-By cleaning sources with "make clean", step 3.-9. + 12./13. are not needed for  anymore. Step 11 has to be done, though. (step 12. and 13. are not tested yet, if they can be omitted with using "make clean"). With using "make clean" you can either amend the scripts or you use make command in appropriate folder (if so, don#t forget to insert path to execs of the toolchain of your local asuswrt-Merlin (Johns fork) repo in your .bashrc)
+By cleaning sources with "make clean", step 3.-10. + 12.-14. are not needed for  anymore. Step 11 has to be done, though. (I don't have tested step 12.-14. yet, if they really can be omitted when using "make clean", but I suppose so.). With using "make clean" you can either amend the scripts or you use make command in appropriate folder (if so, don#t forget to insert path to execs of the toolchain of your local asuswrt-Merlin (Johns fork) repo in your .bashrc)
 
 
 BR
