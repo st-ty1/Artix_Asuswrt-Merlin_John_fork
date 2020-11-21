@@ -26,11 +26,15 @@ After system has booted, start typing:
 	/bin/sh5 # ln -s /etc/init.d/net.lo /etc/init.d/net.<interface>
 	/bin/sh5 # rc-update add net.<interface> default
 	/bin/sh5 # rc-update add dhcpcd default
-
+	/bin/sh5 # pacman -S sudo nano make gcc which autoconf automake pkgconf patch bison flex cmake rpcsvc-proto gperf python intltool re2c diffutils
+	/bin/sh5 # nano /etc/pacman.conf # -> enable multilib repository by uncomment these two lines of [multilib] section of pacman.conf
+					 [multilib]
+					 Include = /etc/pacman.d/mirrorlist
+	/bin/sh5 # pacman -Syy
+	/bin/sh5 # pacman -S sudo lib32-glibc lib32-gcc-libs lib32-zlib git wget
 	/bin/sh5 # nano /etc/sudoer 	   	(To allow members of group wheel sudo access: %wheel      ALL=(ALL) ALL)
 	/bin/sh5 # useradd -m aG wheel <username>
 	/bin/sh5 # passwd <username>
-
 	/bin/sh5 # grub-install --recheck /dev/sda
 	/bin/sh5 # grub-mkconfig –o /boot/grub/grub.cfg
 	/bin/sh5 # exit
