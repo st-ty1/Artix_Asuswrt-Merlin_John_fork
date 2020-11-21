@@ -78,7 +78,7 @@ $ ./artix
 
 [<username>@PC-NAME ~]$ cd asuswrt_artix
 
-[<username>@PC-NAME asuswrt_artix]$ wget -O wlconf https://github.com/RMerl/asuswrt-merlin/blob/master/release/src/router/wlconf_arm/prebuilt/wlconf
+[<username>@PC-NAME asuswrt_artix]$ wget -O wlconf https://github.com/RMerl/asuswrt-merlin/blob/master/release/src/router/wlconf_arm/prebuilt/wlconf?raw=true
 
 [<username>@PC-NAME asuswrt_artix]$ chmod 744 *.sh
 
