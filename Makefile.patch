@@ -1,5 +1,5 @@
---- Makefile_orig	2020-07-04 19:30:06.429061000 +0200
-+++ Makefile	2020-07-04 19:33:43.489051914 +0200
+--- Makefile.orig	2020-11-21 16:46:02.000000000 +0000
++++ Makefile_mod	2020-11-21 16:46:30.000000000 +0000
 @@ -96,7 +96,7 @@
  #
  #
@@ -9,7 +9,7 @@
  
  #
  # standard packages
-@@ -1427,6 +1427,8 @@
+@@ -1431,6 +1431,8 @@
  		-DOPENSSL_INCLUDE_DIR=$(TOP)/openssl-1.1/include \
  		-DOPENSSL_CRYPTO_LIBRARY=$(TOP)/openssl-1.1/libcrypto.so \
  		-DOPENSSL_SSL_LIBRARY=$(TOP)/openssl-1.1/libssl.so \
@@ -18,7 +18,7 @@
  		-DLIBYAML_DIR=$(TOP)/libyaml \
  		-DLIBYAML_INCLUDE_DIR=$(TOP)/libyaml/include \
  		-DLIBYAML_LIBRARY=$(TOP)/libyaml/src/.libs/libyaml.a \
-@@ -1584,7 +1586,7 @@
+@@ -1588,7 +1590,7 @@
  
  libnfnetlink/stamp-h1:
  # tomatoraf.com, Victek
@@ -27,7 +27,7 @@
  		CFLAGS="-Os -Wall $(EXTRACFLAGS) -ffunction-sections -fdata-sections" \
  		LDFLAGS="-ffunction-sections -fdata-sections -Wl,--gc-sections" \
  		$(CONFIGURE) --prefix=/usr --enable-shared --enable-static
-@@ -1846,6 +1848,7 @@
+@@ -1850,6 +1852,7 @@
  
  libdaemon: libdaemon/stamp-h1
  	$(MAKE) -C $@ && $(MAKE) $@-stage
@@ -35,7 +35,7 @@
  
  libdaemon-install: libdaemon
  	install -D libdaemon/libdaemon/.libs/libdaemon.so.0.5.0 $(INSTALLDIR)/libdaemon/usr/lib/libdaemon.so.0.5.0
-@@ -2058,7 +2061,7 @@
+@@ -2062,7 +2065,7 @@
  	$(MAKE) -C accel-pptpd server_install
  
  pptpd/stamp-h1:
@@ -44,7 +44,7 @@
  	touch $@
  
  pptpd: pptpd/stamp-h1
-@@ -2870,7 +2873,7 @@
+@@ -2874,7 +2877,7 @@
  
  openpam/Makefile:
  	( cd openpam && ./autogen.sh && \
@@ -53,7 +53,16 @@
  		$(CONFIGURE) --prefix=/usr --bindir=/usr/sbin --libdir=/usr/lib \
  		--without-doc --with-pam-unix \
  	)
-@@ -3163,7 +3166,7 @@
+@@ -3087,7 +3090,7 @@
+ 	@rm -f pcre-8.31/stamp-h1
+ 
+ libxml2/stamp-h1:
+-	cd libxml2 && \
++	cd libxml2 && autoreconf -fsi && \
+ 	CC=$(CC) AR=$(AR) RANLIB=$(RANLIB) LD=$(LD) CFLAGS="-Os -Wall $(EXTRACFLAGS)" \
+ 	./$(CONFIGURE) --prefix=/usr --without-python --disable-dependency-tracking
+ 	touch $@
+@@ -3167,7 +3170,7 @@
  	@$(MAKE) -C $@ $(PARALLEL_BUILD)
  
  curl/Makefile: curl/configure
@@ -62,7 +71,7 @@
  	CFLAGS="-Os -Wall -ffunction-sections -fdata-sections" \
  	./$(CONFIGURE) --prefix=/usr --bindir=/usr/sbin --libdir=/usr/lib \
  	--enable-http --with-ssl=$(TOP)/openssl \
-@@ -3566,7 +3569,7 @@
+@@ -3570,7 +3573,7 @@
  	$(STRIP) $(INSTALLDIR)/ipset/usr/sbin/ipset
  
  libmnl/stamp-h1:
@@ -71,7 +80,7 @@
  	CFLAGS="-Os -Wall $(EXTRACFLAGS) -ffunction-sections -fdata-sections" \
  	LDFLAGS="-ffunction-sections -fdata-sections -Wl,--gc-sections" \
  	$(CONFIGURE) --prefix=/usr
-@@ -3589,12 +3592,12 @@
+@@ -3593,12 +3596,12 @@
  	-@rm -rf libmnl/staged
  
  ipset_arm/stamp-h1: libmnl

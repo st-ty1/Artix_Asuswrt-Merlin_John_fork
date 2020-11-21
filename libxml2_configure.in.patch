@@ -1,0 +1,11 @@
+--- configure.in	2020-11-16 18:41:43.000000000 +0000
++++ configure.in_mod	2020-11-16 18:38:43.000000000 +0000
+@@ -62,7 +62,7 @@
+ AC_PATH_PROG(XSLTPROC, xsltproc, /usr/bin/xsltproc)
+ 
+ dnl Make sure we have an ANSI compiler
+-AM_C_PROTOTYPES
++dnl AM_C_PROTOTYPES
+ test "x$U" != "x" && AC_MSG_ERROR(Compiler not ANSI compliant)
+ 
+ AC_LIBTOOL_WIN32_DLL
