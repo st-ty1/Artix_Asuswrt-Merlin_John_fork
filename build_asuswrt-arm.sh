@@ -31,5 +31,5 @@ rm -f $ASUSWRT_REPO_DIR/release/src/router/nettle/desdata.stamp
 patch -p1 -d$ASUSWRT_REPO_DIR/release/src/router/config < $ASUSWRT_PATCHES_DIR/config_gcc10.patch
 
 patch -i $ASUSWRT_PATCHES_DIR/libxml2_configure.in.patch $ASUSWRT_REPO_DIR/release/src/router/libxml2/configure.in
-exit
+
 cd release/src-rt-6.x.4708 && make rt-ac56u   ## e.g. for ac56u 
