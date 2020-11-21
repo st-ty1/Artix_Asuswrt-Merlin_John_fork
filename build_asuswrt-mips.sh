@@ -32,6 +32,8 @@ patch -p1 -d$ASUSWRT_REPO_DIR/release/src/router/config < $ASUSWRT_PATCHES_DIR/c
 
 rm -f $ASUSWRT_REPO_DIR/release/src/router/curl/Makefile
 
+patch -i $ASUSWRT_PATCHES_DIR/libxml2_configure.in.patch $ASUSWRT_REPO_DIR/release/src/router/libxml2/configure.in
+
 cd release/src-rt && make rt-n16     ## for rt-n16  do not start with rt-n66u from src-rt!
 #cd release/src-rt-6.x && make rt-ac66u       ## for rt-ac66u 
 #cd release/src-rt-6.x && make rt-n66u       ## for rt-n66u 
