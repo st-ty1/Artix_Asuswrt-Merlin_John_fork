@@ -37,19 +37,17 @@ Following steps are needed to make build process successful:
    for awk 4.x. 
    A patch is supplied (libgpg-error.patch) in this repo.
     
-10. Remove Makefile.in in /release/src/router/wget, because GNU autotools of wget insist on automake 1.15, without
-    Makefile.in actual automake version of OS is used.
+10. Remove Makefile.in in /release/src/router/wget, because GNU autotools of wget insist on automake 1.15. Without Makefile.in the actual automake version of host-OS is used.
     
 11. Delete file desdata.stamp in folder /release/src/router/nettle (as it crashes building process!)
 
-12. Due to change of gcc from version 9.4 to 10.1 on host-OS Artix/Arch linux some old source code in /release/src/router/config (arm + mips) 
-    and again mksquashfs.c in /release/src-rt/linux/linux-2.6/scripts/squashfs (only mips) have to be patched (patches supplied in this repo; 
-    patch of mksquashfs.c is combined with 8.). 
+12. Due to change of gcc from version 9.4 to 10.1 on host-OS Artix/Arch linux some old source code in /release/src/router/config (-> config_gcc10.patch) 
+    and mksquashfs.c in /release/src-rt/linux/linux-2.6/scripts/squashfs (only mips) have to be patched (-> mksquashfs.c.patch; both patches supplied in this repo). 
 
 13. Remove Makefile in /release/src/router/curl (as it crashes building process!)
 
 14. Source code of configure.in in /release/src/router/libxml2 has to be patched, as libxml2 is quite old and uses appropiate aged versions of
-    autotools for configuring. A macro in configure.in has to be deacticated. A patch is supplied in this repo.
+    autotools for configuring, so a macro in configure.in has to be deactivated. A patch is supplied in this repo (-> libxml2_configure.in.patch).
 
 Enclosed you will find two shell scripts (for mips and arm) for setting path variables, resetting and cleaning your local repo, inserting the needed files (step 3.-6.) and applying needed patches of source code (step 7.-9./12./14.). 
 This is the easiest way: Just start the script for MIPS- or ARM-builds (Don't forget to make it executable before!)
