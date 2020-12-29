@@ -31,7 +31,7 @@ After system has booted, start typing:
 					 [multilib]
 					 Include = /etc/pacman.d/mirrorlist
 	/bin/sh5 # pacman -Syy
-	/bin/sh5 # pacman -S sudo lib32-glibc lib32-gcc-libs lib32-zlib git wget
+	/bin/sh5 # pacman -S sudo lib32-glibc lib32-gcc-libs lib32-zlib lib32-libelf git wget
 	/bin/sh5 # nano /etc/sudoer 	   	(To allow members of group wheel sudo access: %wheel      ALL=(ALL) ALL)
 	/bin/sh5 # useradd -m aG wheel <username>
 	/bin/sh5 # passwd <username>
