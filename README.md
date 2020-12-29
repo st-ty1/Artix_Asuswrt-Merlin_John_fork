@@ -1,6 +1,6 @@
 # Building Asuswrt-Merlin [John's fork] on Artix (Arch-Linux fork)
 
----- tested with 374.43_44EAj9527 ----
+---- tested with 374.43_46E8j9527 ----
 
 
 For building asuswrt-merlin on Artix, first clone asuswrt-Merlin (Johns fork) repo (https://github.com/john9527/asuswrt-merlin) into your HOME directory. 
@@ -22,7 +22,7 @@ Following steps are needed to make build process successful:
 5. Makefile is missing within pptpd/plugins-folder (/release/src/router/pptpd/plugins) of auswrt-merlin (John fork) repo: 
     Download pptpd-1.3.4 (https://sourceforge.net/projects/poptop/files/pptpd/pptpd-1.3.4/pptpd-1.3.4.tar.gz) and extract it to a third subfolder of your local repo folder.
     
-6. only ARM-builds: wlconf is missing in release/src/router/wlconf_arm/prebuilt: Download wlconf from Asuswrt-merlin github repo of RMerlin (https://github.com/RMerl/asuswrt-merlin) and save it to your local repo folder (step 2). 
+6. only ARM-builds: wlconf is missing in release/src/router/wlconf_arm/prebuilt: Download wlconf from Asuswrt-merlin github repo of RMerlin (https://github.com/RMerl/asuswrt-merlin) and save it to your local repo folder (see step 2). 
 
 7. only MIPS-builds: Following line has to be inserted in release/src-rt/linux/linux-2.6/scripts/squashfs/mksquashfs.c (because of newer glib in Artix than in Debian9):
      
@@ -48,12 +48,15 @@ Following steps are needed to make build process successful:
 
 14. Source code of configure.in in /release/src/router/libxml2 has to be patched, as libxml2 is quite old and uses appropiate aged versions of
     autotools for configuring, so a macro in configure.in has to be deactivated. A patch is supplied in this repo (-> libxml2_configure.in.patch).
+    
+15. cipher-negotiation.rst is missing within /openvpn/doc/man-sections -folder (release/src/router/openvpn/doc/man-sections/).
+    Copy cipher-negotiation.rst from https://github.com/OpenVPN/openvpn/tree/release/2.5/doc/man-sections to your local repo folder (see step 2).
 
-Enclosed you will find two shell scripts (for mips and arm) for setting path variables, resetting and cleaning your local repo, inserting the needed files (step 3.-6.) and applying needed patches of source code (step 7.-9./12./14.). 
-This is the easiest way: Just start the script for MIPS- or ARM-builds (Don't forget to make it executable before!)
+Enclosed you will find two shell scripts (for mips and arm) for setting path variables, resetting and cleaning your local repo, inserting the needed files (from steps 3.-6.), removing the troublesome files (step 10./11./13./15.) and applying the needed patches (step 7.-9./12./14.) to source code of your liocal repo. 
+So, the easiest way is to just start the script for MIPS- or ARM-builds (Don't forget to make the script executable before!)
 
 Applying these shell scripts is only needed, if you are working with "git clean -dxf" (e.g. 1st build after cloning repo, after updating repo, ...) for cleaning sources. 
-By cleaning sources with "make clean", step 3.-10. + 12.-14. are not needed for  anymore. Step 11 has to be done, though. (I don't have tested step 12.-14. yet, if they really can be omitted when using "make clean", but I suppose so.). With using "make clean" you can either amend the scripts or you use make command in appropriate folder (if so, don#t forget to insert path to execs of the toolchain of your local asuswrt-Merlin (Johns fork) repo in your .bashrc)
+By cleaning sources with "make clean", steps 3.-10. + 12.-15. are not needed anymore. Step 11 has to be done, though. (I don't have tested yet, if steps 12.-15. really can be omitted when using "make clean", but I suppose so.). With using "make clean" you can either amend the scripts or you use make command in appropriate folder (if so, don't forget to insert path to the execs of the toolchain of your local asuswrt-Merlin (Johns fork) repo in your .bashrc or .profile)
 
 
 BR
