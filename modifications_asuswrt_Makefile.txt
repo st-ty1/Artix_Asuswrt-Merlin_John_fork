@@ -1,7 +1,6 @@
  release/src/router/Makefile has to be modified as follows:
 
-1. remove in targets libmnl/stamp-h1, libnfnetlink/stamp-h1, pptpd/stamp-h1 and ipset_arm/stamp-h1 (ipset_arm/stamp-h1
-   only needed for ARM-builds):
+1. remove in targets libmnl/stamp-h1, libnfnetlink/stamp-h1 and pptpd/stamp-h1:
 		" STRIP=$(STRIP) "
 	
 2. insert at end of target libmnl the following line (only needed with ARM-builds and if ipset is installed in host system):
@@ -24,9 +23,10 @@
 	"-L$(TOOLCHAIN)/arm-brcm-linux-uclibcgnueabi/sysroot/usr/lib -L$(TOOLCHAIN)/lib"
    The former option "-ldl" is not needed.
    
- 8. at target ipset_arm/stamp-h change flag libml_CFLAGS to "-I$(TOP)/libmnl/include" and flag libmnl_LIBS   
-    to "-L$(TOP)/libmnl/src/.libs -lmnl"
-    
+ 8. at target ipset-7/stamp-h1:
+ 	- change flag libml_CFLAGS to "-I$(TOP)/libmnl-1.0.4/include" and flag libmnl_LIBS to "-L$(TOP)/libmnl-1.0.4/src/.libs -lmnl"
+        - and add to LDFLAGS "-L$(TOOLCHAIN)/arm-brcm-linux-uclibcgnueabi/sysroot/usr/lib -L$(TOOLCHAIN)/lib" (-> similar to 7. openpam)
+	
  9. add " autoreconf -fsi && \" in target libxml2/stamp-h1:
     i.e. change line   "cd libxml2 && \"   to   "cd libxml2 && autoreconf -fsi && \"
-		
+   
