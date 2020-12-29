@@ -1,0 +1,91 @@
+--- Makefile.orig	2020-12-29 16:03:20.217478000 +0100
++++ Makefile	2020-12-29 16:05:45.432608170 +0100
+@@ -96,7 +96,7 @@
+ #
+ #
+ #
+-SEP=echo "\033[41;1m   $@   \033[0m"
++SEP=printf "\033[41;1m   $@   \033[0m"
+ 
+ #
+ # standard packages
+@@ -1432,6 +1432,8 @@
+ 		-DOPENSSL_INCLUDE_DIR=$(TOP)/openssl-1.1/include \
+ 		-DOPENSSL_CRYPTO_LIBRARY=$(TOP)/openssl-1.1/libcrypto.so \
+ 		-DOPENSSL_SSL_LIBRARY=$(TOP)/openssl-1.1/libssl.so \
++		-DSTRPTIME_WORKS_EXITCODE="PLEASE_FILL_OUT-FAILED_TO_RUN" \
++		-DSTRPTIME_WORKS_EXITCODE__TRYRUN_OUTPUT="PLEASE_FILL_OUT-NOTFOUND" -Hforce \
+ 		-DLIBYAML_DIR=$(TOP)/libyaml \
+ 		-DLIBYAML_INCLUDE_DIR=$(TOP)/libyaml/include \
+ 		-DLIBYAML_LIBRARY=$(TOP)/libyaml/src/.libs/libyaml.a \
+@@ -1589,7 +1591,7 @@
+ 
+ libnfnetlink/stamp-h1:
+ # tomatoraf.com, Victek
+-	cd $(TOP)/libnfnetlink && CC=$(CC) STRIP=$(STRIP) \
++	cd $(TOP)/libnfnetlink && CC=$(CC) STRIP=$(CROSS_COMPILE)strip \
+ 		CFLAGS="-Os -Wall $(EXTRACFLAGS) -ffunction-sections -fdata-sections" \
+ 		LDFLAGS="-ffunction-sections -fdata-sections -Wl,--gc-sections" \
+ 		$(CONFIGURE) --prefix=/usr --enable-shared --enable-static
+@@ -1851,6 +1853,7 @@
+ 
+ libdaemon: libdaemon/stamp-h1
+ 	$(MAKE) -C $@ && $(MAKE) $@-stage
++	rm -f $(STAGEDIR)/usr/lib/libdaemon.la
+ 
+ libdaemon-install: libdaemon
+ 	install -D libdaemon/libdaemon/.libs/libdaemon.so.0.5.0 $(INSTALLDIR)/libdaemon/usr/lib/libdaemon.so.0.5.0
+@@ -2063,7 +2066,7 @@
+ 	$(MAKE) -C accel-pptpd server_install
+ 
+ pptpd/stamp-h1:
+-	cd $(TOP)/pptpd && $(CONFIGURE) --prefix=$(INSTALLDIR)/pptpd --enable-bcrelay CC=$(CC) STRIP=$(STRIP) AR=$(AR) LD=$(LD) NM=$(NM) RANLIB=$(RANLIB)
++	cd $(TOP)/pptpd && $(CONFIGURE) --prefix=$(INSTALLDIR)/pptpd --enable-bcrelay CC=$(CC) STRIP=$(CROSS_COMPILE)strip AR=$(AR) LD=$(LD) NM=$(NM) RANLIB=$(RANLIB)
+ 	touch $@
+ 
+ pptpd: pptpd/stamp-h1
+@@ -2884,7 +2887,7 @@
+ 
+ openpam/Makefile:
+ 	( cd openpam && ./autogen.sh && \
+-		LDFLAGS=-ldl \
++		LDFLAGS="-L$(TOOLCHAIN)/arm-brcm-linux-uclibcgnueabi/sysroot/usr/lib -L$(TOOLCHAIN)/lib" \
+ 		$(CONFIGURE) --prefix=/usr --bindir=/usr/sbin --libdir=/usr/lib \
+ 		--without-doc --with-pam-unix \
+ 	)
+@@ -3103,7 +3106,7 @@
+ 	@rm -f pcre-8.31/stamp-h1
+ 
+ libxml2/stamp-h1:
+-	cd libxml2 && \
++	cd libxml2 && autoreconf -fsi && \
+ 	CC=$(CC) AR=$(AR) RANLIB=$(RANLIB) LD=$(LD) CFLAGS="-Os -Wall $(EXTRACFLAGS)" \
+ 	./$(CONFIGURE) --prefix=/usr --without-python --disable-dependency-tracking
+ 	touch $@
+@@ -3183,7 +3186,7 @@
+ 	@$(MAKE) -C $@ $(PARALLEL_BUILD)
+ 
+ curl/Makefile: curl/configure
+-	@cd curl && CC=$(CC) \
++	@cd curl && ./buildconf && CC=$(CC) \
+ 	CFLAGS="-Os -Wall -ffunction-sections -fdata-sections" \
+ 	./$(CONFIGURE) --prefix=/usr --bindir=/usr/sbin --libdir=/usr/lib \
+ 	--enable-http --with-ssl=$(TOP)/openssl \
+@@ -3633,13 +3636,13 @@
+ 
+ ipset-7/configure:
+ 	cd ipset-7 && ./autogen.sh
+-
++	
+ ipset-7/Makefile: ipset-7/configure
+ 	cd ipset-7 && \
+-	libmnl_CFLAGS="-I$(STAGEDIR)/usr/include" \
+-	libmnl_LIBS="-L$(STAGEDIR)/usr/lib -lmnl" \
++	libmnl_CFLAGS="-I$(TOP)/libmnl-1.0.4/include" \
++	libmnl_LIBS="-L$(TOP)/libmnl-1.0.4/src/.libs -lmnl" \
+ 	CFLAGS="-Os -Wall $(EXTRACFLAGS) -ffunction-sections -fdata-sections" \
+-	LDFLAGS="-Wl,--gc-sections" \
++	LDFLAGS="-Wl,--gc-sections -L$(TOOLCHAIN)/arm-brcm-linux-uclibcgnueabi/sysroot/usr/lib -L$(TOOLCHAIN)/lib" \
+ 	$(CONFIGURE) --prefix=/usr \
+ 		--with-kmod=no --with-kbuild=$(LINUXDIR)
+ 
