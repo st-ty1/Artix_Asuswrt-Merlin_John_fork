@@ -10,8 +10,12 @@ Following steps are needed to make build process successful:
 1. Install the Artix-packages as mentioned in file needed_packages_on_Artix.txt. 
 
 2. Clone this repo into your HOME directory:
-
-    git clone https://github.com/st-ty1/Artix_Asuswrt-Merlin_John_fork asuswrt_artix
+    
+    $ cd $HOME
+ 
+     $ git clone https://github.com/st-ty1/Artix_Asuswrt-Merlin_John_fork asuswrt_artix
+    
+      (From now, /$HOME/asuswrt_artix will be your local repo folder.)
 
 3. About 80 files are missing within wget-folder (/release/src/router/wget) of auswrt-merlin (John fork) repo: 
     Download wget-1.19.5 (https://ftp.gnu.org/gnu/wget/wget-1.19.5.tar.gz) and extract it to a first subfolder of your local repo folder (see step 2.) 
@@ -49,7 +53,7 @@ Following steps are needed to make build process successful:
 14. Source code of configure.in in /release/src/router/libxml2 has to be patched, as libxml2 is quite old and uses appropiate aged versions of
     autotools for configuring, so a macro in configure.in has to be deactivated. A patch is supplied in this repo (-> libxml2_configure.in.patch).
     
-15. cipher-negotiation.rst is missing within /openvpn/doc/man-sections -folder (release/src/router/openvpn/doc/man-sections/).
+15. cipher-negotiation.rst is missing within openvpn/doc/man-sections -folder (/release/src/router/openvpn/doc/man-sections/).
     Copy cipher-negotiation.rst from https://github.com/OpenVPN/openvpn/tree/release/2.5/doc/man-sections to your local repo folder (see step 2).
 
 Enclosed you will find two shell scripts (for mips and arm) for setting path variables, resetting and cleaning your local repo, inserting the needed files (from steps 3.-6.), removing the troublesome files (step 10./11./13./15.) and applying the needed patches (step 7.-9./12./14.) to source code of your liocal repo. 
