@@ -38,29 +38,24 @@ Following steps are needed to make build process successful:
    are listed in file needed_modifations.txt for further information.
 
 9. Source code of libgpg-error-1.10 has to be patched, as Artix uses newer awk 5.0. Source code of version 1.10 is still 
-   for awk 4.x. 
-   A patch is supplied (libgpg-error.patch) in this repo.
+   for awk 4.x. A patch is supplied (libgpg-error.patch) in this repo.
     
 10. Remove Makefile.in in /release/src/router/wget, because GNU autotools of wget insist on automake 1.15. Without Makefile.in the actual automake version of host-OS is used.
-    
-11. Delete file desdata.stamp in folder /release/src/router/nettle (as it crashes building process!)
 
-12. Due to change of gcc from version 9.4 to 10.1 on host-OS Artix/Arch linux some old source code in /release/src/router/config (-> config_gcc10.patch) 
+11. Due to change of gcc from version 9.4 to 10.1 on host-OS Artix/Arch linux some old source code in /release/src/router/config (-> config_gcc10.patch) 
     and mksquashfs.c in /release/src-rt/linux/linux-2.6/scripts/squashfs (only mips) have to be patched (-> mksquashfs.c.patch; both patches supplied in this repo). 
 
-13. Remove Makefile in /release/src/router/curl (as it crashes building process!)
+12. Host-OS has updated to autoconf-2.70. Source code of configure.in in /release/src/router/libxml2 has to be patched, as libxml2 is quite old and its input files for
+    autotools too old, a macro in configure.in has to be deactivated. A patch is supplied in this repo (-> libxml2_configure.in.patch).
 
-14. Source code of configure.in in /release/src/router/libxml2 has to be patched, as libxml2 is quite old and uses appropiate aged versions of
-    autotools for configuring, so a macro in configure.in has to be deactivated. A patch is supplied in this repo (-> libxml2_configure.in.patch).
-    
-15. cipher-negotiation.rst is missing within openvpn/doc/man-sections -folder (/release/src/router/openvpn/doc/man-sections/).
-    Copy cipher-negotiation.rst from https://github.com/OpenVPN/openvpn/tree/release/2.5/doc/man-sections to your local repo folder (see step 2).
+13. An M4-macro in nano-5.4 needs to be patched as it doesn't work with autoconf-2.70 anymore, too. The patch, supplied by this repo, can be removed again as soon as nano-5.5
+    will be introduced in source code of asuswrt-merlin (John fork) repo.
 
-Enclosed you will find two shell scripts (for mips and arm) for setting path variables, resetting and cleaning your local repo, inserting the needed files (from steps 3.-6.), removing the troublesome files (step 10./11./13./15.) and applying the needed patches (step 7.-9./12./14.) to source code of your liocal repo. 
+Enclosed you will find two shell scripts (for mips and arm) for setting path variables, resetting and cleaning your local repo, inserting the needed files (from steps 3.-6.), removing the troublesome files (step 10.) and applying the needed patches (step 7.-9./11.-13.) to source code of your local repo. 
 So, the easiest way is to just start the script for MIPS- or ARM-builds (Don't forget to make the script executable before!)
 
 Applying these shell scripts is only needed, if you are working with "git clean -dxf" (e.g. 1st build after cloning repo, after updating repo, ...) for cleaning sources. 
-By cleaning sources with "make clean", steps 3.-10. + 12.-15. are not needed anymore. Step 11 has to be done, though. (I don't have tested yet, if steps 12.-15. really can be omitted when using "make clean", but I suppose so.). With using "make clean" you can either amend the scripts or you use make command in appropriate folder (if so, don't forget to insert path to the execs of the toolchain of your local asuswrt-Merlin (Johns fork) repo in your .bashrc or .profile)
+By cleaning sources with "make clean", you can either amend the shell scripts (by commenting all the cp-, rm-, and patch-commands) or you can use make command in appropriate folder (if so, don't forget to insert path to the execs of the toolchain of your local asuswrt-Merlin (Johns fork) repo in your .bashrc or .profile)
 
 
 BR
