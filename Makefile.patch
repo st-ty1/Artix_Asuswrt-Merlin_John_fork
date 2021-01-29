@@ -1,5 +1,5 @@
---- Makefile.orig	2020-12-29 16:03:20.217478000 +0100
-+++ Makefile	2020-12-29 16:05:45.432608170 +0100
+--- Makefile.orig	2021-01-29 07:56:39.200000000 +0100
++++ Makefile_mips	2021-01-29 10:04:42.820000000 +0100
 @@ -96,7 +96,7 @@
  #
  #
@@ -35,6 +35,15 @@
  
  libdaemon-install: libdaemon
  	install -D libdaemon/libdaemon/.libs/libdaemon.so.0.5.0 $(INSTALLDIR)/libdaemon/usr/lib/libdaemon.so.0.5.0
+@@ -1933,7 +1936,7 @@
+ 
+ radvd/stamp-h1:
+ 	cd radvd && autoreconf -fi && \
+-	CFLAGS="-Os $(EXTRACFLAGS) -ffunction-sections -fdata-sections" \
++	CFLAGS="-Os $(EXTRACFLAGS) -ffunction-sections -fdata-sections -std=gnu99" \
+ 	LDFLAGS="-ffunction-sections -fdata-sections -Wl,--gc-sections $(EXTRALDFLAGS)" \
+ 	$(CONFIGURE) --prefix="" --disable-dependency-tracking $(if $(RTCONFIG_BCMARM),,--without-stack-protector) \
+ 	DAEMON_CFLAGS="-I$(TOP)/libdaemon" \
 @@ -2063,7 +2066,7 @@
  	$(MAKE) -C accel-pptpd server_install
  
@@ -44,7 +53,7 @@
  	touch $@
  
  pptpd: pptpd/stamp-h1
-@@ -2884,7 +2887,7 @@
+@@ -2875,7 +2878,7 @@
  
  openpam/Makefile:
  	( cd openpam && ./autogen.sh && \
@@ -53,7 +62,7 @@
  		$(CONFIGURE) --prefix=/usr --bindir=/usr/sbin --libdir=/usr/lib \
  		--without-doc --with-pam-unix \
  	)
-@@ -3103,7 +3106,7 @@
+@@ -3088,7 +3091,7 @@
  	@rm -f pcre-8.31/stamp-h1
  
  libxml2/stamp-h1:
@@ -62,7 +71,7 @@
  	CC=$(CC) AR=$(AR) RANLIB=$(RANLIB) LD=$(LD) CFLAGS="-Os -Wall $(EXTRACFLAGS)" \
  	./$(CONFIGURE) --prefix=/usr --without-python --disable-dependency-tracking
  	touch $@
-@@ -3183,7 +3186,7 @@
+@@ -3168,7 +3171,7 @@
  	@$(MAKE) -C $@ $(PARALLEL_BUILD)
  
  curl/Makefile: curl/configure
@@ -71,21 +80,37 @@
  	CFLAGS="-Os -Wall -ffunction-sections -fdata-sections" \
  	./$(CONFIGURE) --prefix=/usr --bindir=/usr/sbin --libdir=/usr/lib \
  	--enable-http --with-ssl=$(TOP)/openssl \
-@@ -3633,13 +3636,13 @@
+@@ -3571,7 +3574,7 @@
+ 	$(STRIP) $(INSTALLDIR)/ipset/usr/sbin/ipset
  
- ipset-7/configure:
- 	cd ipset-7 && ./autogen.sh
--
-+	
- ipset-7/Makefile: ipset-7/configure
- 	cd ipset-7 && \
--	libmnl_CFLAGS="-I$(STAGEDIR)/usr/include" \
--	libmnl_LIBS="-L$(STAGEDIR)/usr/lib -lmnl" \
-+	libmnl_CFLAGS="-I$(TOP)/libmnl-1.0.4/include" \
-+	libmnl_LIBS="-L$(TOP)/libmnl-1.0.4/src/.libs -lmnl" \
+ libmnl/stamp-h1:
+-	cd $(TOP)/libmnl && CC=$(CC) STRIP=$(STRIP) \
++	cd $(TOP)/libmnl && CC=$(CC) STRIP=$(CROSS_COMPILE)strip \
  	CFLAGS="-Os -Wall $(EXTRACFLAGS) -ffunction-sections -fdata-sections" \
--	LDFLAGS="-Wl,--gc-sections" \
-+	LDFLAGS="-Wl,--gc-sections -L$(TOOLCHAIN)/arm-brcm-linux-uclibcgnueabi/sysroot/usr/lib -L$(TOOLCHAIN)/lib" \
- 	$(CONFIGURE) --prefix=/usr \
- 		--with-kmod=no --with-kbuild=$(LINUXDIR)
+ 	LDFLAGS="-ffunction-sections -fdata-sections -Wl,--gc-sections" \
+ 	$(CONFIGURE) --prefix=/usr
+@@ -3594,12 +3597,12 @@
+ 	-@rm -rf libmnl/staged
  
+ ipset_arm/stamp-h1: libmnl
+-	cd $(TOP)/ipset_arm && CC=$(CC) STRIP=$(STRIP) \
++	cd $(TOP)/ipset_arm && CC=$(CC) STRIP=$(CROSS_COMPILE)strip \
+ 	autoreconf -i -f && \
+ 	CFLAGS="-Os -Wall $(EXTRACFLAGS) -ffunction-sections -fdata-sections" \
+ 	LDFLAGS="-ffunction-sections -fdata-sections -Wl,--gc-sections" \
+-	libmnl_CFLAGS="-I$(TOP)/libmnl/staged/usr/include" \
+-	libmnl_LIBS="-L$(TOP)/libmnl/staged/usr/lib -lmnl" \
++	libmnl_CFLAGS="-I$(TOP)/libmnl/include" \
++	libmnl_LIBS="-L$(TOP)/libmnl/src/.libs -lmnl" \
+ 	$(CONFIGURE) --prefix=/usr --with-kmod=yes --with-kbuild=$(LINUXDIR)
+ 	touch ipset_arm/stamp-h1
+ 
+@@ -3660,7 +3663,7 @@
+ nano/Makefile:
+ 	cd nano && \
+ 	autoreconf -i -f && $(CONFIGURE) --prefix=$(INSTALLDIR)/nano/usr --sysconfdir=/jffs/configs \
+-	CFLAGS="$(EXTRACFLAGS) -Os -I$(TOP)/ncurses/include -ffunction-sections -fdata-sections" \
++	CFLAGS="$(EXTRACFLAGS) -Os -I$(TOP)/ncurses/include -ffunction-sections -fdata-sections -std=gnu99" \
+ 	LDFLAGS="$(LDFLAGS) -L$(TOP)/ncurses/lib -ffunction-sections -fdata-sections -Wl,--gc-sections" \
+ 	PKG_CONFIG_PATH="$(TOP)/ncurses/misc" PKG_CONFIG_LIBDIR="$(TOP)/ncurses/misc"\
+ 	$(if $(RTCONFIG_BCMARM),ac_cv_lib_ncursesw_get_wch=yes,ac_cv_lib_ncursesw_get_wch=no) \
