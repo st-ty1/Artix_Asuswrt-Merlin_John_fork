@@ -80,15 +80,6 @@
  	CFLAGS="-Os -Wall -ffunction-sections -fdata-sections" \
  	./$(CONFIGURE) --prefix=/usr --bindir=/usr/sbin --libdir=/usr/lib \
  	--enable-http --with-ssl=$(TOP)/openssl \
-@@ -3571,7 +3574,7 @@
- 	$(STRIP) $(INSTALLDIR)/ipset/usr/sbin/ipset
- 
- libmnl/stamp-h1:
--	cd $(TOP)/libmnl && CC=$(CC) STRIP=$(STRIP) \
-+	cd $(TOP)/libmnl && CC=$(CC) STRIP=$(CROSS_COMPILE)strip \
- 	CFLAGS="-Os -Wall $(EXTRACFLAGS) -ffunction-sections -fdata-sections" \
- 	LDFLAGS="-ffunction-sections -fdata-sections -Wl,--gc-sections" \
- 	$(CONFIGURE) --prefix=/usr
 @@ -3594,12 +3597,12 @@
  	-@rm -rf libmnl/staged
  
