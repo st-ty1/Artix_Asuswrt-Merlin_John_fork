@@ -1,5 +1,5 @@
---- Makefile.orig	2021-01-29 07:56:39.200000000 +0100
-+++ Makefile_mips	2021-01-29 10:04:42.820000000 +0100
+--- Makefile.orig	2021-02-05 16:59:51.300000000 +0100
++++ Makefile	2021-02-08 17:42:06.590000000 +0100
 @@ -96,7 +96,7 @@
  #
  #
@@ -53,7 +53,7 @@
  	touch $@
  
  pptpd: pptpd/stamp-h1
-@@ -2875,7 +2878,7 @@
+@@ -2884,7 +2887,7 @@
  
  openpam/Makefile:
  	( cd openpam && ./autogen.sh && \
@@ -62,7 +62,7 @@
  		$(CONFIGURE) --prefix=/usr --bindir=/usr/sbin --libdir=/usr/lib \
  		--without-doc --with-pam-unix \
  	)
-@@ -3088,7 +3091,7 @@
+@@ -3103,7 +3106,7 @@
  	@rm -f pcre-8.31/stamp-h1
  
  libxml2/stamp-h1:
@@ -71,7 +71,7 @@
  	CC=$(CC) AR=$(AR) RANLIB=$(RANLIB) LD=$(LD) CFLAGS="-Os -Wall $(EXTRACFLAGS)" \
  	./$(CONFIGURE) --prefix=/usr --without-python --disable-dependency-tracking
  	touch $@
-@@ -3168,7 +3171,7 @@
+@@ -3183,7 +3186,7 @@
  	@$(MAKE) -C $@ $(PARALLEL_BUILD)
  
  curl/Makefile: curl/configure
@@ -80,23 +80,21 @@
  	CFLAGS="-Os -Wall -ffunction-sections -fdata-sections" \
  	./$(CONFIGURE) --prefix=/usr --bindir=/usr/sbin --libdir=/usr/lib \
  	--enable-http --with-ssl=$(TOP)/openssl \
-@@ -3594,12 +3597,12 @@
- 	-@rm -rf libmnl/staged
+@@ -3636,10 +3639,10 @@
  
- ipset_arm/stamp-h1: libmnl
--	cd $(TOP)/ipset_arm && CC=$(CC) STRIP=$(STRIP) \
-+	cd $(TOP)/ipset_arm && CC=$(CC) STRIP=$(CROSS_COMPILE)strip \
- 	autoreconf -i -f && \
+ ipset-7/Makefile: ipset-7/configure
+ 	cd ipset-7 && \
+-	libmnl_CFLAGS="-I$(STAGEDIR)/usr/include" \
+-	libmnl_LIBS="-L$(STAGEDIR)/usr/lib -lmnl" \
++	libmnl_CFLAGS="-I$(TOP)/libmnl-1.0.4/include" \
++	libmnl_LIBS="-L$(TOP)/libmnl-1.0.4/src/.libs -lmnl" \
  	CFLAGS="-Os -Wall $(EXTRACFLAGS) -ffunction-sections -fdata-sections" \
- 	LDFLAGS="-ffunction-sections -fdata-sections -Wl,--gc-sections" \
--	libmnl_CFLAGS="-I$(TOP)/libmnl/staged/usr/include" \
--	libmnl_LIBS="-L$(TOP)/libmnl/staged/usr/lib -lmnl" \
-+	libmnl_CFLAGS="-I$(TOP)/libmnl/include" \
-+	libmnl_LIBS="-L$(TOP)/libmnl/src/.libs -lmnl" \
- 	$(CONFIGURE) --prefix=/usr --with-kmod=yes --with-kbuild=$(LINUXDIR)
- 	touch ipset_arm/stamp-h1
+-	LDFLAGS="-Wl,--gc-sections" \
++	LDFLAGS="-Wl,--gc-sections -L$(TOOLCHAIN)/arm-brcm-linux-uclibcgnueabi/sysroot/usr/lib -L$(TOOLCHAIN)/lib" \
+ 	$(CONFIGURE) --prefix=/usr \
+ 		--with-kmod=no --with-kbuild=$(LINUXDIR)
  
-@@ -3660,7 +3663,7 @@
+@@ -3697,7 +3700,7 @@
  nano/Makefile:
  	cd nano && \
  	autoreconf -i -f && $(CONFIGURE) --prefix=$(INSTALLDIR)/nano/usr --sysconfdir=/jffs/configs \
