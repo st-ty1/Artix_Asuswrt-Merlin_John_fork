@@ -1,7 +1,7 @@
  release/src/router/Makefile has to be modified as follows:
 
-1. remove in targets libmnl/stamp-h1, libnfnetlink/stamp-h1 and pptpd/stamp-h1:
-		" STRIP=$(STRIP) "
+1. replace in targets libnfnetlink/stamp-h1 and pptpd/stamp-h1: (nneded by mips)
+		" STRIP=$(STRIP) " by "STRIP=$(CROSS_COMPILE)strip"
 	
 2. insert at end of target libmnl the following line (only needed with ARM-builds and if ipset is installed in host system):
 		" @rm -f libmnl/staged/usr/lib/libmnl.la "
@@ -19,14 +19,15 @@
 6. insert at end of target libdaemon the following line:
 		" @rm -f libmnl/staged/usr/lib/libdaemon.la "
 		
-7. add to LDFLAGS of target openpam/Makefile the following options:
+7. add to LDFLAGS of target openpam/Makefile the following options: (needed for arm)
 	"-L$(TOOLCHAIN)/arm-brcm-linux-uclibcgnueabi/sysroot/usr/lib -L$(TOOLCHAIN)/lib"
    The former option "-ldl" is not needed.
    
- 8. at target ipset-7/stamp-h1:
+ 8. at target ipset-7/stamp-h1: (needed for arm)
  	- change flag libml_CFLAGS to "-I$(TOP)/libmnl-1.0.4/include" and flag libmnl_LIBS to "-L$(TOP)/libmnl-1.0.4/src/.libs -lmnl"
         - and add to LDFLAGS "-L$(TOOLCHAIN)/arm-brcm-linux-uclibcgnueabi/sysroot/usr/lib -L$(TOOLCHAIN)/lib" (-> similar to 7. openpam)
 	
  9. add " autoreconf -fsi && \" in target libxml2/stamp-h1:
     i.e. change line   "cd libxml2 && \"   to   "cd libxml2 && autoreconf -fsi && \"
-   
+ 
+ 10. add "-std=gnu99" at CFLAGS of targets radvd/stamp-h1 and nano/Makefile
