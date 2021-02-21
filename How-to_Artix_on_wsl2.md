@@ -4,7 +4,7 @@ $ mkdir %USERPROFILE%\wsl\artix
 
 $ cd %USERPROFILE%\wsl\artix
 
-$ curl -O https://github.com/hdk5/ArtixWSL/releases/download/20200502153634-60934cb/Artix.zip
+$ curl -LJO https://github.com/hdk5/ArtixWSL/releases/download/20200502153634-60934cb/Artix.zip
 
 $ tar -xf Artix.zip
 
