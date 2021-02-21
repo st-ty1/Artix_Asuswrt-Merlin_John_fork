@@ -62,7 +62,9 @@ $ ./artix
    
 [<username>@PC-NAME ~]$ git clone https://github.com/john9527/asuswrt-merlin
 
-[<username>@PC-NAME ~]$ git clone https://github.com/st-ty1/Artix_Asuswrt-Merlin_John_fork asuswrt_artix
+[<username>@PC-NAME ~]$ git clone https://github.com/st-ty1/Artix_Asuswrt-Merlin_John_fork
+
+[<username>@PC-NAME ~]$ cd asuswrt_artix
 
 [<username>@PC-NAME ~]$ wget -O wget.tar.gz https://ftp.gnu.org/gnu/wget/wget-1.19.5.tar.gz
 
@@ -75,8 +77,6 @@ $ ./artix
 [<username>@PC-NAME ~]$ wget -O pptpd.tar.gz https://sourceforge.net/projects/poptop/files/pptpd/pptpd-1.3.4/pptpd-1.3.4.tar.gz
 
 [<username>@PC-NAME ~]$ tar -C asuswrt_artix -zxvf pptpd.tar.gz
-
-[<username>@PC-NAME ~]$ cd asuswrt_artix
 
 [<username>@PC-NAME asuswrt_artix]$ wget -O wlconf https://github.com/RMerl/asuswrt-merlin/blob/master/release/src/router/wlconf_arm/prebuilt/wlconf?raw=true
 
