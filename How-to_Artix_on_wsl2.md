@@ -31,7 +31,7 @@ $ ./artix
 					 
 [PC-NAME Artix]# pacman -Syy
 
-[PC-NAME Artix]# pacman -S sudo lib32-glibc lib32-gcc-libs lib32-zlib lib32-lib32elf git wget
+[PC-NAME Artix]# pacman -S sudo lib32-glibc lib32-gcc-libs lib32-zlib lib32-libelf git wget
 
 [PC-NAME Artix]# nano /etc/wsl.conf  # -> append following two lines at end of wsl.conf:
 					
