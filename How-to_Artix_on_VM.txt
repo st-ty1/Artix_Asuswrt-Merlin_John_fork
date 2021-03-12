@@ -35,6 +35,8 @@ After system has booted, start typing:
 	/bin/sh5 # nano /etc/sudoer 	   	(To allow members of group wheel sudo access: %wheel      ALL=(ALL) ALL)
 	/bin/sh5 # useradd -m aG wheel <username>
 	/bin/sh5 # passwd <username>
+	/bin/sh5 # ln -s /usr/lib/libmpc.so /usr/lib/libmpc.so.2
+	/bin/sh5 # ln -s /usr/lib/libmpfr.so /usr/lib/libmpfr.so.4
 	/bin/sh5 # grub-install --recheck /dev/sda
 	/bin/sh5 # grub-mkconfig –o /boot/grub/grub.cfg
 	/bin/sh5 # exit
