@@ -30,8 +30,7 @@ patch -i $ASUSWRT_PATCHES_DIR/Makefile.patch $ASUSWRT_REPO_DIR/release/src/route
 patch -p1 -d$ASUSWRT_REPO_DIR/release/src/router/config < $ASUSWRT_PATCHES_DIR/config_gcc10.patch
 
 ## needed for autoconf2.70
-patch -i $ASUSWRT_PATCHES_DIR/libxml_configure.in.patch $ASUSWRT_REPO_DIR/release/src/router/libxml2/configure.in
-patch -i $ASUSWRT_PATCHES_DIR/std-gnu11.m4.patch $ASUSWRT_REPO_DIR/release/src/router/nano/m4/std-gnu11.m4
+patch -i $ASUSWRT_PATCHES_DIR/libxml2_configure.in.patch $ASUSWRT_REPO_DIR/release/src/router/libxml2/configure.in
 
 cd release/src-rt-6.x.4708 
 time make rt-ac56u   ## e.g. for ac56u 
