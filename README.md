@@ -48,10 +48,7 @@ Following steps are needed to make build process successful:
 12. Host-OS has updated to autoconf-2.70. Source code of configure.in in /release/src/router/libxml2 has to be patched, as libxml2 is quite old and its input files for
     autotools too old, a macro in configure.in has to be deactivated. A patch is supplied in this repo (-> libxml2_configure.in.patch).
 
-13. An M4-macro in nano-5.4 needs to be patched as it doesn't work with autoconf-2.70 anymore, too. The patch, supplied by this repo, can be removed again as soon as nano-5.5
-    will be introduced in source code of asuswrt-merlin (John fork) repo.
-
-Enclosed you will find two shell scripts (for mips and arm) for setting path variables, resetting and cleaning your local repo, inserting the needed files (from steps 3.-6.), removing the troublesome files (step 10.) and applying the needed patches (step 7.-9./11.-13.) to source code of your local repo. 
+Enclosed you will find two shell scripts (for mips and arm) for setting path variables, resetting and cleaning your local repo, inserting the needed files (from steps 3.-6.), removing the troublesome files (step 10.) and applying the needed patches (step 7.-9./11.-12.) to source code of your local repo. 
 So, the easiest way is to just start the script for MIPS- or ARM-builds (Don't forget to make the script executable before!)
 
 Applying these shell scripts is only needed, if you are working with "git clean -dxf" (e.g. 1st build after cloning repo, after updating repo, ...) for cleaning sources. 
