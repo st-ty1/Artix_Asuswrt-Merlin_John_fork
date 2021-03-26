@@ -78,11 +78,11 @@ $ ./artix
 	
 [<username>@PC-NAME ~]$ cd Artix_asuswrt
 
-[<username>@PC-NAME asuswrt_artix]$ wget -O wlconf https://github.com/RMerl/asuswrt-merlin/blob/master/release/src/router/wlconf_arm/prebuilt/wlconf?raw=true
+[<username>@PC-NAME Artix_asuswrt]$ wget -O wlconf https://github.com/RMerl/asuswrt-merlin/blob/master/release/src/router/wlconf_arm/prebuilt/wlconf?raw=true
 
-[<username>@PC-NAME asuswrt_artix]$ chmod 744 *.sh
+[<username>@PC-NAME Artix_asuswrt]$ chmod 744 *.sh
 
-[<username>@PC-NAME asuswrt_artix]$ ./build_asuswrt-mips.sh (or ./build_asuswrt-mips.sh)
+[<username>@PC-NAME Artix_asuswrt]$ ./build_asuswrt-mips.sh (or ./build_asuswrt-mips.sh)
 
   
 (Of course creation of rootfs.tar.gz by using rootfs.img of official Artix-iso is possible. 
