@@ -1,7 +1,7 @@
 #! /bin/sh
 
 ASUSWRT_REPO_DIR=$HOME/asuswrt-merlin    ## path to your local "Asuswrt-Merlin_John_fork" repo
-ASUSWRT_PATCHES_DIR=$HOME/asuswrt_artix  ## path to your local copy of this repo
+ASUSWRT_PATCHES_DIR=$HOME/Artix_asuswrt  ## path to your local copy of this repo
 
 PATH="$PATH:$ASUSWRT_REPO_DIR/tools/brcm/hndtools-mipsel-uclibc/bin:$ASUSWRT_REPO_DIR/tools/brcm/hndtools-mipsel-linux/bin"
 
