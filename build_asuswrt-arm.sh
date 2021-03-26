@@ -1,7 +1,7 @@
 #! /bin/sh
 
 ASUSWRT_REPO_DIR=$HOME/asuswrt-merlin    ## path to your local "Asuswrt-Merlin_John_fork" repo
-ASUSWRT_PATCHES_DIR=$HOME/asuswrt_artix  ## path to your local "Artix_Asuswrt-Merlin_John_fork" repo
+ASUSWRT_PATCHES_DIR=$HOME/Artix_asuswrt  ## path to your local "Artix_Asuswrt-Merlin_John_fork" repo
 
 PATH="$PATH:$ASUSWRT_REPO_DIR/release/src-rt-6.x.4708/toolchains/hndtools-arm-linux-2.6.36-uclibc-4.5.3/bin"
 
