@@ -13,9 +13,9 @@ Following steps are needed to make build process successful:
     
     $ cd $HOME
  
-     $ git clone https://github.com/st-ty1/Artix_Asuswrt-Merlin_John_fork asuswrt_artix
+     $ git clone https://github.com/st-ty1/Artix_Asuswrt-Merlin_John_fork Artix_asuswrt
     
-      (From now, /$HOME/asuswrt_artix will be your local repo folder.)
+      (From now, /$HOME/Artix_asuswrt will be your local repo folder.)
 
 3. About 80 files are missing within wget-folder (/release/src/router/wget) of auswrt-merlin (John fork) repo: 
     Download wget-1.19.5 (https://ftp.gnu.org/gnu/wget/wget-1.19.5.tar.gz) and extract it to a first subfolder of your local repo folder (see step 2.) 
@@ -34,7 +34,7 @@ Following steps are needed to make build process successful:
 
    An adaquate patch is supplied (mksquashfs.c.patch) in this repo. (see also 13.)
 
-8. A patch is supplied (Makefile.patch) in this repo for all amendments needed in release/src/router/Makefile. The amendments
+8. A patch is supplied (Makefile.patch) in this repo for all amendments needed in /release/src/router/Makefile. The amendments
    are listed in file needed_modifations.txt for further information.
 
 9. Source code of libgpg-error-1.10 has to be patched, as Artix uses newer awk 5.0. Source code of version 1.10 is still 
