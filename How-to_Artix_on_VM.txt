@@ -45,14 +45,14 @@ After system has booted, start typing:
 Login as <username> and type:
 
   [<username>@PC-NAME ~]$ git clone https://github.com/john9527/asuswrt-merlin 
-  [<username>@PC-NAME ~]$ git clone https://github.com/st-ty1/Artix_Asuswrt-Merlin_John_fork asuswrt_artix 
+  [<username>@PC-NAME ~]$ git clone https://github.com/st-ty1/Artix_Asuswrt-Merlin_John_fork Artix_asuswrt 
   [<username>@PC-NAME ~]$ wget -O wget.tar.gz https://ftp.gnu.org/gnu/wget/wget-1.19.5.tar.gz 
-  [<username>@PC-NAME ~]$ tar -C asuswrt_artix -zxvf wget.tar.gz 
+  [<username>@PC-NAME ~]$ tar -C Artix_asuswrt -zxvf wget.tar.gz 
   [<username>@PC-NAME ~]$ wget -O openssl-1.0.tar.gz https://ftp.openssl.org/source/old/1.0.2/openssl-1.0.2u.tar.gz  
-  [<username>@PC-NAME ~]$ tar -C asuswrt_artix -zxvf openssl-1.0.tar.gz 
+  [<username>@PC-NAME ~]$ tar -C Artix_asuswrt -zxvf openssl-1.0.tar.gz 
   [<username>@PC-NAME ~]$ wget -O pptpd.tar.gz https://sourceforge.net/projects/poptop/files/pptpd/pptpd-1.3.4/pptpd-1.3.4.tar.gz 
-  [<username>@PC-NAME ~]$ tar -C asuswrt_artix -zxvf pptpd.tar.gz 
-  [<username>@PC-NAME ~]$ cd asuswrt_artix 
-  [<username>@PC-NAME asuswrt_artix]$ wget -O wlconf https://github.com/RMerl/asuswrt-merlin/blob/master/release/src/router/wlconf_arm/prebuilt/wlconf?raw=true
-  [<username>@PC-NAME asuswrt_artix]$ chmod 744 *.sh 
-  [<username>@PC-NAME asuswrt_artix]$ ./build_asuswrt-mips.sh (or ./build_asuswrt-mips.sh)
+  [<username>@PC-NAME ~]$ tar -C Artix_asuswrt -zxvf pptpd.tar.gz 
+  [<username>@PC-NAME ~]$ cd Artix_asuswrt 
+  [<username>@PC-NAME Artix_asuswrt]$ wget -O wlconf https://github.com/RMerl/asuswrt-merlin/blob/master/release/src/router/wlconf_arm/prebuilt/wlconf?raw=true
+  [<username>@PC-NAME Artix_asuswrt]$ chmod 744 *.sh 
+  [<username>@PC-NAME Artix_asuswrt]$ ./build_asuswrt-mips.sh (or ./build_asuswrt-mips.sh)
