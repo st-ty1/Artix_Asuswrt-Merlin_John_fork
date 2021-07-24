@@ -27,7 +27,7 @@ Following steps are needed to make build process successful:
     Download pptpd-1.3.4 (https://sourceforge.net/projects/poptop/files/pptpd/pptpd-1.3.4/pptpd-1.3.4.tar.gz) and extract it to a third subfolder of your local repo folder.
     
 6. options.h is missing within curl/include/curl folder ((/release/src/router/curl/include/curl) of auswrt-merlin (John fork) repo:
-    Download curl 7.76.1 (https://curl.se/download/curl-7.76.1.tar.bz2) and extract it to a fourth subfolder of your local repo folder.
+    Download curl 7.76.1 (https://curl.se/download/curl-7.76.1.tar.gz) and extract it to a fourth subfolder of your local repo folder.
     
 7. only ARM-builds: wlconf is missing in release/src/router/wlconf_arm/prebuilt: Download wlconf from Asuswrt-merlin github repo of RMerlin (https://github.com/RMerl/asuswrt-merlin) and save it to your local repo folder (see step 2). 
 
@@ -51,10 +51,10 @@ Following steps are needed to make build process successful:
 13. Host-OS has updated to autoconf-2.70. Source code of configure.in in /release/src/router/libxml2 has to be patched, as libxml2 is quite old and its input files for
     autotools too old, a macro in configure.in has to be deactivated. A patch is supplied in this repo (-> libxml2_configure.in.patch).
 
-Enclosed you will find two shell scripts (for mips and arm) for setting path variables, resetting and cleaning your local repo, inserting the needed files (steps 3.-7.), removing the troublesome files (step 11.) and applying the needed patches (step 8.-10./12.-13.) to source code of your local repo. 
-So, the easiest way is to just start the script for MIPS- or ARM-builds (Don't forget to make the script executable before!)
+Enclosed you will find two shell scripts (for mips and arm) for setting path variables, resetting and cleaning your local repo, inserting the needed files ( after steps 3.-7.), removing the troublesome files (step 11.) and applying the needed patches (step 8.-10./12.-13.) to source code of your local repo. 
+So, the easiest way is to just do step 1. to 7. and then start the shell script for MIPS- or ARM-builds (Don't forget to make the script executable before!)
 
-Applying these shell scripts is only needed, if you are working with "git clean -dxf" (e.g. 1st build after cloning repo, after updating repo, ...) for cleaning sources. 
+Applying one of these shell scripts is only needed, if you are working with "git clean -dxf" (e.g. 1st build after cloning repo, after updating repo, ...) for cleaning sources. 
 By cleaning sources with "make clean", you can either amend the shell scripts (by commenting all the cp-, rm-, and patch-commands) or you can use make command in appropriate folder (if so, don't forget to insert path to the execs of the toolchain of your local asuswrt-Merlin (Johns fork) repo in your .bashrc or .profile)
 
 
