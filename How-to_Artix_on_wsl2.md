@@ -76,6 +76,10 @@ $ ./artix
 
 [<username>@PC-NAME ~]$ tar -C Artix_asuswrt -zxvf pptpd.tar.gz
 	
+[<username>@PC-NAME ~]$ wget -O curl-7.76.1.tar.gz https://curl.se/download/curl-7.76.1.tar.gz
+	
+[<username>@PC-NAME ~]$ tar -C Artix_asuswrt -zxvf curl-7.76.1.tar.gz
+	
 [<username>@PC-NAME ~]$ cd Artix_asuswrt
 
 [<username>@PC-NAME Artix_asuswrt]$ wget -O wlconf https://github.com/RMerl/asuswrt-merlin/blob/master/release/src/router/wlconf_arm/prebuilt/wlconf?raw=true
