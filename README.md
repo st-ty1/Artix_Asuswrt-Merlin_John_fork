@@ -2,7 +2,7 @@
 
 ---- tested with 374.43_52E3j9527 ----
 
-Following packages are needed for building  Asuswrt-Merlin [John's fork] on Artix: make, gcc, which, autoconf, automake, pkgconf, patch, bison, flex, cmake, rpcsvc-proto, gperf, python, intltool, re2c and gtk-doc
+Currently, the following packages are needed for building  Asuswrt-Merlin [John's fork] on Artix: make, gcc, which, autoconf, automake, pkgconf, patch, bison, flex, cmake, rpcsvc-proto, gperf, python, intltool and re2c.
 
 The precompiled 32-bit host-tools of Asuswrt-Merlin [John's fork] need also following packages: lib32-glibc, lib32-gcc-libs and lib32-zlib (Therefore, don't forget to uncomment the lines of the "Multilib" and the "lib32" section in /etc/pacman.conf).
 
