@@ -1,7 +1,13 @@
 # Building Asuswrt-Merlin [John's fork] on Artix (Arch-Linux fork)
 
 ---- tested with 374.43_52E3j9527 ----
+Following packages are needed for building  Asuswrt-Merlin [John's fork] on Artix: make, gcc, which, autoconf, automake, pkgconf, patch, bison, flex, cmake, rpcsvc-proto, gperf, python, intltool, re2c and gtk-doc
 
+The precompiled 32-bit host-tools of Asuswrt-Merlin [John's fork] need also following packages: lib32-glibc, lib32-gcc-libs and lib32-zlib (Therefore, don't forget to uncomment the lines of the "Multilib" and the "lib32" section in /etc/pacman.conf).
+
+For generating/editing Artix-specific patches installing of package diffutils should be helpful. If you are working with Artix or Arch Linux on wsl2/Windows then you should also install the nano package or you can use a smart editor on Windows (like Notepad++).
+
+It is recommended to use Artix on wsl2/Windows or as a VM (for both approaches there is a manual in this repo) without (!) any desktop environment or unneeded packages, to keep the needed patches as low as possible. Any additional package, like graphical environments, can make build process more complicate, as execectables on Artix/Arch Linux are build with shared libs, which can mislead the building tools within the Asuswrt-Merlin [John's fork] sources, at worst.
 
 For building asuswrt-merlin on Artix, first clone asuswrt-Merlin (Johns fork) repo (https://github.com/john9527/asuswrt-merlin) into your HOME directory. 
 
