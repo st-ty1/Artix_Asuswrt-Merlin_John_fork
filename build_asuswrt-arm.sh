@@ -12,17 +12,10 @@ git reset --hard
 
 git checkout 374.43_2-update
 
-## missing files
-cp $ASUSWRT_PATCHES_DIR/pptpd-1.3.4/plugins/Makefile $ASUSWRT_REPO_DIR/release/src/router/pptpd/plugins/Makefile
-cp $ASUSWRT_PATCHES_DIR/openssl-1.0.2u/Makefile.org $ASUSWRT_REPO_DIR/release/src/router/openssl-1.0
-cp -r $ASUSWRT_PATCHES_DIR/wget-1.19.5/* $ASUSWRT_REPO_DIR/release/src/router/wget/
-cp $ASUSWRT_PATCHES_DIR/wlconf $ASUSWRT_REPO_DIR/release/src/router/wlconf_arm/prebuilt
-cp -v $ASUSWRT_PATCHES_DIR/curl-7.76.1/include/curl/options.h $ASUSWRT_REPO_DIR/release/src/router/curl/include/curl
-
 ## patch because of newer awk in Artix; Makefile.in need to be patched not Makefile.am (not used)!
 patch -p1 -d$ASUSWRT_REPO_DIR/release/src/router/libgpg-error-1.10 < $ASUSWRT_PATCHES_DIR/libgpg-error.patch 
 
-## if Makefile.in exists, autotools insists on automake 1.15, without Makefile.in it uses existing automake version
+## if Makefile.in exists, autotools insists on automake 1.15, without Makefile.in it uses existing host version of automake
 rm -f $ASUSWRT_REPO_DIR/release/src/router/wget/Makefile.in
 
 patch -i $ASUSWRT_PATCHES_DIR/Makefile.patch $ASUSWRT_REPO_DIR/release/src/router/Makefile
