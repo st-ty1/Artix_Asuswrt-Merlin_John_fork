@@ -1,6 +1,6 @@
 # Building Asuswrt-Merlin [John's fork] on Artix (Arch-Linux fork)
 
----- tested with 374.43_52E3j9527 ----
+---- intended for 374.43_52E7j9527 ----
 
 It is recommended to use a bare version of Artix on wsl2/Windows or as a VM (for both approaches there is a manual in this repo) without(!!) any desktop environment and any package not needed for building process in order to keep the number of needed patches as low as possible. Any additional package, like graphical desktop environments, can make build process more complicate, as all execectables on Artix/Arch Linux are build with shared libs, which can mislead the building tools within the Asuswrt-Merlin [John's fork] sources, at worst.
 
