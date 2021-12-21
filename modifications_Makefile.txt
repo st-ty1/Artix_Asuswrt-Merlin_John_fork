@@ -10,7 +10,7 @@
  		" -DSTRPTIME_WORKS_EXITCODE="PLEASE_FILL_OUT-FAILED_TO_RUN" \
 		  -DSTRPTIME_WORKS_EXITCODE__TRYRUN_OUTPUT="PLEASE_FILL_OUT-NOTFOUND" -Hforce \  "
 		  
-4. add " &&./buildconf " in target curl/Makefile (otherwise building process of mips arch will crash) 
+4. add " &&./buildconf " in target curl/Makefile (otherwise building process of mips will crash) 
    i.e. change  line "@cd curl && CC=$(CC) \" to "@cd curl && ./buildconf && CC=$(CC) \"
    
 5. for colored output change SEP=echo "\033[41;1m   $@   \033[0m" into SEP=printf "\033[41;1m   $@   \033[0m" 
