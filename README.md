@@ -2,9 +2,7 @@
 
 ---- tested with 374.43_52E3j9527 ----
 
-It is recommended to use Artix on wsl2/Windows or as a VM (for both approaches there is a manual in this repo) without (!) any desktop environment and any package not needed for building process in order to keep the number of needed patches as low as possible. 
-
-Any additional package, like graphical desktop environments, can make build process more complicate, as all execectables on Artix/Arch Linux are build with shared libs, which can mislead the building tools within the Asuswrt-Merlin [John's fork] sources, at worst.
+It is recommended to use a bare version of Artix on wsl2/Windows or as a VM (for both approaches there is a manual in this repo) without(!!) any desktop environment and any package not needed for building process in order to keep the number of needed patches as low as possible. Any additional package, like graphical desktop environments, can make build process more complicate, as all execectables on Artix/Arch Linux are build with shared libs, which can mislead the building tools within the Asuswrt-Merlin [John's fork] sources, at worst.
 
 Following steps are needed to make build process successful:
 
@@ -12,7 +10,7 @@ Following steps are needed to make build process successful:
 	make, gcc, which, autoconf, automake, pkgconf, patch, bison, flex, cmake, rpcsvc-proto, gperf, python, intltool and re2c
 
     The precompiled 32-bit host-tools of Asuswrt-Merlin [John's fork] need following packages: lib32-glibc, lib32-gcc-libs, lib32-zlib and lib32-libelf. (Therefore, don't forget to uncomment the lines of the "Multilib" and the "lib32" section in /etc/pacman.conf).
-	For generating/editing Artix-specific patches installing of package diffutils should be helpful.  If you are working with Artix or Arch Linux on wsl2/Windows then you should also install the nano package or you can use a smart editor on Windows (like Notepad++).
+	For generating/editing Artix-specific patches you can also install the diffutils and the nano package. If you are working with Artix/Arch Linux on wsl2/Windows the use of a smart editor on Windows (like Notepad++) is very helpful.
 
 1. Clone asuswrt-Merlin (Johns fork) repo (https://github.com/john9527/asuswrt-merlin) into your HOME directory. 
 
@@ -21,8 +19,6 @@ Following steps are needed to make build process successful:
     $ cd $HOME
  
     $ git clone https://github.com/st-ty1/Artix_Asuswrt-Merlin_John_fork Artix_asuswrt
-    
-      (From now, /$HOME/Artix_asuswrt will be your "local repo folder".)
        
 3. Remove Makefile.in in /release/src/router/wget, because GNU autotools of wget insist on automake 1.15. Without Makefile.in the actual automake version of host-OS can be used.
 
