@@ -1,9 +1,9 @@
  release/src/router/Makefile has to be modified as follows:
 
-1. replace in targets libnfnetlink/stamp-h1 and pptpd/stamp-h1: (nneded by mips)
+1. replace in targets libnfnetlink/stamp-h1 and pptpd/stamp-h1: (needed by mips)
 		" STRIP=$(STRIP) " by "STRIP=$(CROSS_COMPILE)strip"
 	
-2. insert at end of target libmnl the following line (only needed with ARM-builds and if ipset is installed in host system):
+2. insert at end of target libmnl-1.0.4 the following line (only needed with ARM-builds and if ipset is installed in host system):
 		" @rm -f libmnl/staged/usr/lib/libmnl.la "
 		
 3. add these two additional -D arguments to cmake command getdns/build/Makefile-target:
@@ -17,7 +17,7 @@
    as bash shell is used on Artix instead of Dash shell on Ubuntu/Debian.
        
 6. insert at end of target libdaemon the following line:
-		" @rm -f libmnl/staged/usr/lib/libdaemon.la "
+		" @rm -f libdaemon/staged/usr/lib/libdaemon.la "
 		
 7. add to LDFLAGS of target openpam/Makefile the following options: (needed for arm)
 	"-L$(TOOLCHAIN)/arm-brcm-linux-uclibcgnueabi/sysroot/usr/lib -L$(TOOLCHAIN)/lib"
