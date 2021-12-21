@@ -8,7 +8,7 @@ Any additional package, like graphical desktop environments, can make build proc
 
 Following steps are needed to make build process successful:
 
-0. Install the Artix-packages which are needed for building  Asuswrt-Merlin [John's fork] on Artix:
+0. Install following packages which are needed for building Asuswrt-Merlin [John's fork] on Artix:
 	make, gcc, which, autoconf, automake, pkgconf, patch, bison, flex, cmake, rpcsvc-proto, gperf, python, intltool and re2c
 
     The precompiled 32-bit host-tools of Asuswrt-Merlin [John's fork] need following packages: lib32-glibc, lib32-gcc-libs, lib32-zlib and lib32-libelf. (Therefore, don't forget to uncomment the lines of the "Multilib" and the "lib32" section in /etc/pacman.conf).
