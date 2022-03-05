@@ -12,7 +12,7 @@ On Windows 10 open Command Prompt or PowerShell and type:
 
 	$ ./artix
 
-(rem.: Of course, the creation of artix-rootfs.tar.gz by using rootfs.img of official Artix-iso is also possible. 
+(rem.: Of course, the creation of artix-rootfs.tar.gz by using rootfs.img of official Artix-iso is also possible. See at end of file.
 
 But even using smallest iso (base-iso without any desktop environment) results in bigger roots.tar.gz than that of https://github.com/hdk5/ArtixWSL)
 
@@ -90,3 +90,18 @@ Go on typing:
 	[<username>@<PC_NAME> Artix_asuswrt]$ ./build_asuswrt-mips.sh (or ./build_asuswrt-mips.sh)
 
 The building process will start.
+
+---------------------------------
+
+Rem.:
+
+If you want to create rootfs.tar.gz by your own using rootfs.img of official Artix-iso, than go on in Windows 10 as follows:
+ - Download squashfs-tools-ng-1.0.3-mingw64.zip at https://infraroot.at/pub/squashfs/windows. Extract archive into a squashfs-tools-ng-1.0.3-mingw64 folder.
+ - Download artix-base-openrc-YYYYMMDD-x86_64.iso at https://iso.artixlinux.org/weekly-isos.php .
+ - Mount the iso-file within Windows Explorer.
+ - Copy /LiveOS/rootfs.img of mounted iso-file into the /bin-subfolder of squashfs-tools-ng-1.0.3-mingw64 directory.
+ - Open Windows Command Prompt and change to bin-subfolder in the extracted squashfs-tools-ng-1.0.3-mingw64 directory. 
+ - Run in Windows Command Prompt: sqfs2tar rootfs.img artix-rootfs.tar
+ - Compress artix-rootfs.tar to artix-rootfs.tar.gz by 7-zip.  
+ - Copy generated rootfs.tar.gz to your start directory (%USERPROFILE%\wsl\artix). 
+ - Continue at line "$ wsl --import artix artix-rootfs.tar.gz" as described above.
