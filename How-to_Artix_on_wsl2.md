@@ -4,9 +4,9 @@ On Windows 10 open Command Prompt or PowerShell and type:
 
 	$ cd %USERPROFILE%\wsl\artix
 
-	$ curl -LJO https://github.com/hdk5/ArtixWSL/releases/download/20210114175009-0a7d8e5/Artix.zip
+	$ curl -LJO https://github.com/hdk5/ArtixWSL/releases/download/latest/Artix-runit.zip
 
-	$ tar -xf Artix.zip
+	$ tar -xf Artix-runit.zip
 
 	$ wsl --import artix artix-rootfs.tar.gz
 
@@ -82,22 +82,6 @@ Go on typing:
 	[<username>@PC-NAME ~]$ git clone https://github.com/john9527/asuswrt-merlin
 
 	[<username>@PC-NAME ~]$ git clone https://github.com/st-ty1/Artix_Asuswrt-Merlin_John_fork Artix_asuswrt
-
-	[<username>@PC-NAME ~]$ wget -O wget.tar.gz https://ftp.gnu.org/gnu/wget/wget-1.19.5.tar.gz
-
-	[<username>@PC-NAME ~]$ tar -C Artix_asuswrtx -zxvf wget.tar.gz
-
-	[<username>@PC-NAME ~]$ wget -O openssl-1.0.tar.gz https://ftp.openssl.org/source/old/1.0.2/openssl-1.0.2u.tar.gz 
-
-	[<username>@PC-NAME ~]$ tar -C Artix_asuswrt -zxvf openssl-1.0.tar.gz
-
-	[<username>@PC-NAME ~]$ wget -O pptpd.tar.gz https://sourceforge.net/projects/poptop/files/pptpd/pptpd-1.3.4/pptpd-1.3.4.tar.gz
-
-	[<username>@PC-NAME ~]$ tar -C Artix_asuswrt -zxvf pptpd.tar.gz
-	
-	[<username>@PC-NAME ~]$ wget -O curl-7.76.1.tar.gz https://curl.se/download/curl-7.76.1.tar.gz
-	
-	[<username>@PC-NAME ~]$ tar -C Artix_asuswrt -zxvf curl-7.76.1.tar.gz
 	
 	[<username>@PC-NAME ~]$ cd Artix_asuswrt
 
