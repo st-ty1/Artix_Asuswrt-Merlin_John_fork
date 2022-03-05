@@ -35,9 +35,9 @@ Save file and exit nano.
 Go on typing:
 	/bin/sh5 # pacman -Syy
 	/bin/sh5 # pacman -S sudo lib32-glibc lib32-gcc-libs lib32-zlib lib32-libelf git wget
-	/bin/sh5 # nano /etc/sudoer 	   	(To allow members of group wheel sudo access: %wheel      ALL=(ALL) ALL)
-	/bin/sh5 # useradd -m aG wheel <username>
-	/bin/sh5 # passwd <username>
+	/bin/sh5 # echo "%wheel ALL=(ALL)  ALL" > /etc/sudoers.d/01wheel
+	/bin/sh5 # useradd -m aG wheel <username>.         (choose a name for a new user with superuser rights.)
+	/bin/sh5 # passwd <username>.                    (set a password for the new user)
 	/bin/sh5 # ln -s /usr/lib/libmpc.so /usr/lib/libmpc.so.2
 	/bin/sh5 # ln -s /usr/lib/libmpfr.so /usr/lib/libmpfr.so.4
 	/bin/sh5 # grub-install --recheck /dev/sda
