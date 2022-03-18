@@ -1,0 +1,60 @@
+--- libfoo.pl.orig	2022-02-11 17:48:57.012575300 +0100
++++ libfoo.pl	2022-02-11 17:28:45.898827400 +0100
+@@ -515,7 +515,7 @@
+ 	print LOG "\n\n${base}\n";
+ 	
+ #	$cmd = "mipsel-uclibc-ld -shared -s -z combreloc --warn-common --fatal-warnings ${opt} -soname ${name} -o ${so}";
+-	$cmd = "mipsel-uclibc-gcc -shared -nostdlib -Wl,-s,-z,combreloc -Wl,--warn-common -Wl,--fatal-warnings -Wl,--gc-sections ${opt} -Wl,-soname=${name} -o ${so}";
++	$cmd = "mipsel-brcm-linux-uclibc-gcc -shared -nostdlib -Wl,-s,-z,combreloc -Wl,--warn-common -Wl,--gc-sections ${opt} -Wl,-soname=${name} -o ${so}";
+ 	foreach (@{$elf_lib{$name}}) {
+ 		if ((!$elf_dyn{$name}{$_}) && (/^lib(.+)\.so/)) {
+ 			$cmd .= " -l$1";
+@@ -585,14 +585,14 @@
+ 	$stripshared = "no";
+ }
+ 
+-genSO("${root}/lib/libc.so.0", "${uclibc}/lib/libc.a", "", "-Wl,-init=__uClibc_init ${uclibc}/lib/optinfo/interp.os");
+-genSO("${root}/lib/libresolv.so.0", "${uclibc}/lib/libresolv.a", "${stripshared}");
+-genSO("${root}/lib/libcrypt.so.0", "${uclibc}/lib/libcrypt.a", "${stripshared}");
+-genSO("${root}/lib/libm.so.0", "${uclibc}/lib/libm.a");
+-genSO("${root}/lib/libpthread.so.0", "${uclibc}/lib/libpthread.a", "${stripshared}", "-u pthread_mutexattr_init -Wl,-init=__pthread_initialize_minimal_internal");
+-genSO("${root}/lib/libutil.so.0", "${uclibc}/lib/libutil.a", "${stripshared}");
+-#genSO("${root}/lib/libdl.so.0", "${uclibc}/lib/libdl.a", "${stripshared}");
+-#genSO("${root}/lib/libnsl.so.0", "${uclibc}/lib/libnsl.a", "${stripshared}");
++#genSO("${root}/lib/libc.so.0", "${uclibc}/mipsel-brcm-linux-uclibc/sysroot/usr/lib/libc.a", "", "-Wl,-init=__uClibc_init ${uclibc}/lib/optinfo/interp.os");
++genSO("${root}/lib/libresolv.so.0", "${uclibc}/mipsel-brcm-linux-uclibc/sysroot/usr/lib/libresolv.a", "${stripshared}");
++genSO("${root}/lib/libcrypt.so.0", "${uclibc}/mipsel-brcm-linux-uclibc/sysroot/usr/lib/libcrypt.a", "${stripshared}");
++genSO("${root}/lib/libm.so.0", "${uclibc}/mipsel-brcm-linux-uclibc/sysroot/usr/lib/libm.a");
++genSO("${root}/lib/libpthread.so.0", "${uclibc}/mipsel-brcm-linux-uclibc/sysroot/usr/lib/libpthread.so", "${stripshared}",);
++genSO("${root}/lib/libutil.so.0", "${uclibc}/mipsel-brcm-linux-uclibc/sysroot/usr/lib/libutil.a", "${stripshared}");
++#genSO("${root}/lib/libdl.so.0", "${uclibc}/mipsel-brcm-linux-uclibc/sysroot/usr/lib/libdl.a", "${stripshared}");
++#genSO("${root}/lib/libnsl.so.0", "${uclibc}/mipsel-brcm-linux-uclibc/sysroot/usr/lib/libnsl.a", "${stripshared}");
+ 
+ if ($openssldir eq "openssl") {
+ 	genSO("${root}/usr/lib/libcrypto.so.1.0.0", "${router}/${openssldir}/libcrypto.a");
+@@ -616,11 +616,11 @@
+ genSO("${root}/usr/lib/libavformat.so.52", "${router}/ffmpeg/libavformat/libavformat.a", "", "-L${router}/ffmpeg/libavutil -L${router}/ffmpeg/libavcodec -L${router}/zlib");
+ 
+ genSO("${root}/usr/lib/liblzo2.so.2.0.0", "${router}/lzo/src/.libs/liblzo2.a");
+-#genSO("${root}/usr/lib/libiptc.so", "${router}/iptables/libiptc/libiptc.a");
+-#genSO("${root}/usr/lib/libshared.so", "${router}/shared/libshared.a");
+-#genSO("${root}/usr/lib/libnvram.so", "${router}/nvram/libnvram.a");
+-#genSO("${root}/usr/lib/libusb-1.0.so.0", "${router}/libusb10/libusb/.libs/libusb-1.0.a");
+-#genSO("${root}/usr/lib/libusb-0.1.so.4", "${router}/libusb/libusb/.libs/libusb.a", "", "-L${router}/libusb10/libusb/.libs");
++genSO("${root}/usr/lib/libiptc.so", "${router}/iptables/libiptc/libiptc.a");
++genSO("${root}/usr/lib/libshared.so", "${router}/shared/libshared.a");
++genSO("${root}/usr/lib/libnvram.so", "${router}/nvram/libnvram.a");
++genSO("${root}/usr/lib/libusb-1.0.so.0", "${router}/libusb10/libusb/.libs/libusb-1.0.a");
++genSO("${root}/usr/lib/libusb-0.1.so.4", "${router}/libusb/libusb/.libs/libusb.a", "", "-L${router}/libusb10/libusb/.libs");
+ 
+ genSO("${root}/usr/lib/libbcmcrypto.so", "${router}/libbcmcrypto/libbcmcrypto.a");
+ 
+@@ -633,7 +633,7 @@
+ genSO("${root}/usr/lib/libsodium.so.23.3.0", "${router}/libsodium/src/libsodium/.libs/libsodium.a");
+ genSO("${root}/usr/lib/libpng16.so.16.37.0", "${router}/libpng/.libs/libpng16.a", "", "-L${router}/zlib");
+ genSO("${root}/usr/lib/libxml2.so.2.9.12", "${router}/libxml2/.libs/libxml2.a", "", "-L${router}/zlib");
+-genSO("${root}/usr/lib/libpcre.so.1.2.12", "${router}/pcre/.libs/libpcre.a");
++genSO("${root}/usr/lib/libpcre.so.1.2.13", "${router}/pcre/.libs/libpcre.a");
+ genSO("${root}/usr/lib/libpcreposix.so.0.0.7", "${router}/pcre/.libs/libpcreposix.a");
+ genSO("${root}/usr/lib/libatomic_ops.so.1.0.3", "${router}/libatomic_ops/src/.libs/libatomic_ops.a");
+ genSO("${root}/usr/lib/libncurses.so.6", "${router}/libncurses/lib/libncurses.a");

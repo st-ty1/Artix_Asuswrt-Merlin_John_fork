@@ -1,0 +1,20 @@
+--- Makefile_linux_arm.orig	2022-03-14 15:09:46.000000000 +0000
++++ Makefile_linux_arm	2022-03-12 14:22:17.000000000 +0000
+@@ -231,7 +231,7 @@
+ 
+ HOSTCC       = gcc
+ HOSTCXX      = g++
+-HOSTCFLAGS   = -Wall -Wmissing-prototypes -Wstrict-prototypes -O2 -fomit-frame-pointer
++HOSTCFLAGS   = -Wall -Wmissing-prototypes -Wstrict-prototypes -O2 -fomit-frame-pointer  -std=gnu89
+ HOSTCXXFLAGS = -O2
+ 
+ # Decide whether to build built-in, modular, or both.
+@@ -355,7 +355,7 @@
+ 		   -Wno-format-security \
+ 		   -fno-delete-null-pointer-checks
+ KBUILD_AFLAGS_KERNEL :=
+-KBUILD_CFLAGS_KERNEL :=
++KBUILD_CFLAGS_KERNEL := -std=gnu89
+ KBUILD_AFLAGS   := -D__ASSEMBLY__
+ KBUILD_AFLAGS_MODULE  := -DMODULE
+ KBUILD_CFLAGS_MODULE  := -DMODULE

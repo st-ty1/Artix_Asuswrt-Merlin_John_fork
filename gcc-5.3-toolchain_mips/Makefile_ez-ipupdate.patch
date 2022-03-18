@@ -1,0 +1,11 @@
+--- Makefile_ez-ipupdate.orig	2022-03-18 15:52:04.000000000 +0000
++++ Makefile_ez-ipupdate	2022-03-18 12:43:17.000000000 +0000
+@@ -98,7 +98,7 @@
+ # 2007.03.14 Yau add for ASUS DDNS
+ ez_ipupdate_OBJECTS += asus_ddns.o
+ CFLAGS += -I$(SRCBASE)/include -I$(TOP)/shared -DASUS_DDNS
+-LDFLAGS += -L$(TOP)/shared -lshared -L$(TOP)/nvram${BCMEX} -lnvram
++LDFLAGS += -L$(TOP)/shared -lshared -L$(TOP)/nvram${BCMEX} -lnvram -L$(TOP)/shared -lshared -L$(TOOLCHAIN)/mipsel-brcm-linux-uclibc/sysroot/lib -lgcc_s
+ #end of Yau add
+ ifeq ($(RTCONFIG_HTTPS),y)
+ CFLAGS += -I$(TOP)/mssl -I$(TOP)/openssl-1.1/include -DHAVE_SSL

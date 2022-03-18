@@ -1,0 +1,11 @@
+--- Makefile_infosvr.orig	2022-03-18 15:52:04.000000000 +0000
++++ Makefile_infosvr	2022-03-18 12:43:17.000000000 +0000
+@@ -19,7 +19,7 @@
+ CFLAGS  += -I$(SRCBASE)/shared/bcmwifi/include
+ endif
+ CFLAGS  += -Dlinux -DNO_PARALLEL -DPRNINFO
+-LDFLAGS = -L$(TOP)/shared -lshared -L$(TOP)/nvram${BCMEX} -lnvram 
++LDFLAGS = -L$(TOP)/shared -lshared -L$(TOP)/nvram${BCMEX} -lnvram  -lgcc_s
+ ifeq ($(RTCONFIG_BCMARM),y)
+ CFLAGS += -I$(SRCBASE)/common/include
+ LDFLAGS += -lgcc_s

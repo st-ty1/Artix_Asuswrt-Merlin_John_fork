@@ -1,0 +1,11 @@
+--- Makefile_rstats.orig	2022-03-18 15:52:04.000000000 +0000
++++ Makefile_rstats	2022-03-18 12:43:17.000000000 +0000
+@@ -2,7 +2,7 @@
+ 
+ CFLAGS	= -Os -Wall $(EXTRACFLAGS) #-mips32
+ CFLAGS	+= -I$(SRCBASE)/include -I$(TOP)/shared -DRTCONFIG_ISP_METER -DDEBUG
+-LDFLAGS	= -L$(TOP)/nvram${BCMEX} -lnvram -L$(TOP)/shared -lshared
++LDFLAGS	= -L$(TOP)/nvram${BCMEX} -lnvram -L$(TOP)/shared -lshared -L$(TOOLCHAIN)/mipsel-brcm-linux-uclibc/sysroot/lib -lgcc_s  -L$(TOOLCHAIN)/lib/gcc/mipsel-brcm-linux-uclibc/5.3.0
+ 
+ ifeq ($(RTN14U)$(RTAC52U)$(RTAC51U),y)
+ CFLAGS += -DRA_ESW

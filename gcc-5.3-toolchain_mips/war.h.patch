@@ -1,0 +1,29 @@
+--- /home/stephan/freshtomato-mips/release/src-rt-6.x/linux/linux-2.6/include/asm-mips/war.h	2022-01-24 14:05:37.466249900 +0100
++++ /home/stephan/Dokumente/gcc-5.3-toolchain_mips/mm_2.6.26/war.h	2022-01-22 13:11:25.220548400 +0100
+@@ -8,6 +8,26 @@
+ #ifndef _ASM_WAR_H
+ #define _ASM_WAR_H
+ 
++/*
++ * Work around the "daddi" and "daddiu" CPU errata:
++ *
++ * - The `daddi' instruction fails to trap on overflow.
++ *   "MIPS R4000PC/SC Errata, Processor Revision 2.2 and 3.0",
++ *   erratum #23
++ *
++ * - The `daddiu' instruction can produce an incorrect result.
++ *   "MIPS R4000PC/SC Errata, Processor Revision 2.2 and 3.0",
++ *   erratum #41
++ *   "MIPS R4000MC Errata, Processor Revision 2.2 and 3.0", erratum
++ *   #15
++ *   "MIPS R4400PC/SC Errata, Processor Revision 1.0", erratum #7
++ *   "MIPS R4400MC Errata, Processor Revision 1.0", erratum #5
++ */
++#ifdef CONFIG_CPU_DADDI_WORKAROUNDS
++#define DADDI_WAR 1
++#else
++#define DADDI_WAR 0
++#endif
+ 
+ /*
+  * Another R4600 erratum.  Due to the lack of errata information the exact

@@ -1,0 +1,11 @@
+--- Makefile_u2ec.orig	2022-03-18 15:52:04.000000000 +0000
++++ Makefile_u2ec	2022-03-18 12:43:17.000000000 +0000
+@@ -45,7 +45,7 @@
+ #	LDFLAGS += -L$(TOP)/libusb/libusb/.libs -lusb
+ #	LDFLAGS += -L$(TOP)/libusb-0.1.12/.libs -lusb
+ 	LDFLAGS += -L$(TOP)/shared -lshared
+-	LDFLAGS += -L$(TOP)/nvram${BCMEX} -lnvram
++	LDFLAGS += -L$(TOP)/nvram${BCMEX} -lnvram -L$(TOOLCHAIN)/mipsel-brcm-linux-uclibc/sysroot/lib -lgcc_s  -L$(TOOLCHAIN)/lib/gcc/mipsel-brcm-linux-uclibc/5.3.0
+ #endif
+ 
+ ifeq ($(RTCONFIG_BCMARM),y)

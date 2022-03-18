@@ -1,0 +1,35 @@
+diff -ur config/lkc.h config_new/lkc.h
+--- config/lkc.h	2020-07-01 01:52:06.099276112 +0200
++++ config_new/lkc.h	2020-07-01 01:46:09.072625000 +0200
+@@ -56,7 +56,7 @@
+ int file_write_dep(const char *name);
+ 
+ extern struct menu *current_entry;
+-extern struct menu *current_menu;
++/*extern struct menu *current_menu;
+ 
+ /* symbol.c */
+ void sym_init(void);
+diff -ur config/mconf.c config_new/mconf.c
+--- config/mconf.c	2020-07-01 01:52:06.099276112 +0200
++++ config_new/mconf.c	2020-07-01 01:45:32.892627000 +0200
+@@ -90,7 +90,7 @@
+ static int indent = 0;
+ static struct termios ios_org;
+ static int rows, cols;
+-struct menu *current_menu;
++extern struct menu *current_menu;
+ static int child_count;
+ static int single_menu_mode;
+ 
+diff -ur config/zconf.tab.c_shipped config_new/zconf.tab.c_shipped
+--- config/zconf.tab.c_shipped	2020-07-01 01:52:06.102609444 +0200
++++ config_new/zconf.tab.c_shipped	2020-07-01 01:48:39.465952000 +0200
+@@ -159,6 +159,7 @@
+ static bool zconf_endtoken(int token, int starttoken, int endtoken);
+ 
+ struct symbol *symbol_hash[257];
++struct menu *current_menu; 
+ 
+ #define YYERROR_VERBOSE
+ 

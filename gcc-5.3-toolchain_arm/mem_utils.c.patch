@@ -1,0 +1,20 @@
+--- mem_utils.c.orig	2021-12-30 19:54:43.443929000 +0100
++++ mem_utils.c	2021-12-25 18:56:09.870652200 +0100
+@@ -16,7 +16,7 @@
+  *
+  * Returns: Pointer to freshly allocated memory
+  */
+-inline void *xmalloc(size_t size) {
++extern inline void *xmalloc(size_t size) {
+ 	void *ptr;
+ 	ptr = malloc(size);
+ 	if (ptr == NULL) {
+@@ -34,7 +34,7 @@
+  *
+  * Returns: Pointer to reallocated memory
+  */
+-inline void *xrealloc(void *inptr, size_t size) {
++extern inline void *xrealloc(void *inptr, size_t size) {
+ 	void *ptr;
+ 	ptr = realloc(inptr, size);
+ 	if (ptr == NULL) {

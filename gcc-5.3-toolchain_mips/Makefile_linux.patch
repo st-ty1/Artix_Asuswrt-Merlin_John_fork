@@ -1,0 +1,30 @@
+--- Makefile_linux.orig	2022-01-27 15:12:09.000000000 +0000
++++ Makefile_linux	2022-01-17 13:26:04.000000000 +0000
+@@ -194,7 +194,7 @@
+ 
+ HOSTCC       = gcc
+ HOSTCXX      = g++
+-HOSTCFLAGS   = -Wall -Wstrict-prototypes -O2 -fomit-frame-pointer
++HOSTCFLAGS   = -Wall -Wstrict-prototypes -O2 -fomit-frame-pointer -std=gnu89
+ HOSTCXXFLAGS = -O2
+ 
+ # Decide whether to build built-in, modular, or both.
+@@ -310,14 +310,15 @@
+ CPPFLAGS        := -D__KERNEL__ $(LINUXINCLUDE)
+ 
+ CFLAGS          := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
+-                   -fno-strict-aliasing -fno-common
+-AFLAGS          := -D__ASSEMBLY__
++                   -fno-strict-aliasing -fno-common -Wno-unused -std=gnu89
++AFLAGS          := -D__ASSEMBLY__ 
++
+ 
+ # Broadcom source tree
+ TOPDIR  := $(shell /bin/pwd)
+ SRCBASE ?= $(TOPDIR)/../..
+ export SRCBASE
+-CFLAGS += -I$(SRCBASE)/include
++CFLAGS += -I$(SRCBASE)/include -std=gnu89
+ AFLAGS += -I$(SRCBASE)/include
+ ASFLAGS += -I$(SRCBASE)/include
+ 

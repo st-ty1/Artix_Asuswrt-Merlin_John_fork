@@ -1,0 +1,30 @@
+--- etc_fa.c.orig	2021-12-30 19:54:43.433929000 +0100
++++ etc_fa.c	2021-12-27 18:12:00.885567800 +0100
+@@ -1629,14 +1629,25 @@
+ 	}
+ 
+ 	bhdr.word = NTOH32(*((uint32 *)PKTDATA(si_osh(fai->sih), p)));
+-	if (bhdr.oc10.op_code == 0x2) {
+-		uint32 nid = (bhdr.oc10.napt_flow_id * CTF_MAX_BUCKET_INDEX) + bhdr.oc10.bkt_id;
++/*	if (bhdr.oc10.op_code == 0x2) {
++		uint32 nid;
++		nid = (bhdr.oc10.napt_flow_id * CTF_MAX_BUCKET_INDEX) + bhdr.oc10.bkt_id;
+ 
+ 		if (bhdr.oc10.all_bkts_full) {
+ 			ET_ERROR(("%s All bkts full, leave to SW CTF\n", __FUNCTION__));
+ 			nid = BCM_FA_INVALID_IDX_VAL;
+ 		}
+ 		PKTSETFAHIDX(p, nid);
++	} */
++
++	if (bhdr.oc10.op_code == 0x2) {
++		if (bhdr.oc10.all_bkts_full) {
++			ET_ERROR(("%s All bkts full, leave to SW CTF\n", __FUNCTION__));
++			PKTSETFAHIDX(p, BCM_FA_INVALID_IDX_VAL);
++		}
++		else {
++			PKTSETFAHIDX(p,(bhdr.oc10.napt_flow_id * CTF_MAX_BUCKET_INDEX) + bhdr.oc10.bkt_id);
++		}
+ 	}
+ 
+ 	if (bhdr.oc10.op_code == 0x1) {

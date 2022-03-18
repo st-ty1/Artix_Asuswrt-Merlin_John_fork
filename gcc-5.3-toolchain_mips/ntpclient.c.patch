@@ -1,0 +1,29 @@
+--- ntpclient.c.orig	2022-03-18 15:52:04.000000000 +0000
++++ ntpclient.c	2022-03-18 12:43:17.000000000 +0000
+@@ -35,6 +35,8 @@
+ #include <shared.h>
+ #include <shutils.h>
+ #include <signal.h>
++#include <sys/timex.h>
++
+ 
+ #define ENABLE_DEBUG
+ 
+@@ -109,7 +111,7 @@
+ #ifdef linux
+ 	struct timex txc;
+ 	txc.modes=0;
+-	if (__adjtimex(&txc) < 0) {
++	if (adjtimex(&txc) < 0) {
+ 		perror("adjtimex"); exit(1);
+ 	}
+ 	return txc.freq;
+@@ -126,7 +128,7 @@
+ 	struct timex txc;
+ 	txc.modes = ADJ_FREQUENCY;
+ 	txc.freq = new_freq;
+-	if (__adjtimex(&txc) < 0) {
++	if (adjtimex(&txc) < 0) {
+ 		perror("adjtimex"); exit(1);
+ 	}
+ 	return txc.freq;

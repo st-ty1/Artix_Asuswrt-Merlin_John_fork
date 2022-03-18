@@ -1,0 +1,17 @@
+--- /home/stephan/freshtomato-mips/release/src-rt-6.x/linux/linux-2.6/include/asm-mips/bugs.h	2022-01-24 14:05:37.466249900 +0100
++++ /home/stephan/Dokumente/gcc-5.3-toolchain_mips/mm_2.6.26/bugs.h	2022-01-22 14:46:18.040548400 +0100
+@@ -25,4 +25,14 @@
+ #endif
+ }
+ 
++static inline int r4k_daddiu_bug(void)
++{
++#ifdef CONFIG_64BIT
++	WARN_ON(daddiu_bug < 0);
++	return daddiu_bug != 0;
++#else
++	return 0;
++#endif
++}
++
+ #endif /* _ASM_BUGS_H */

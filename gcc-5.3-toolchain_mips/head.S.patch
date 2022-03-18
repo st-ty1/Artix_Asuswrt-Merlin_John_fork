@@ -1,0 +1,13 @@
+--- head.S_orig	2022-01-27 15:12:09.000000000 +0000
++++ head.S	2022-01-01 11:56:03.000000000 +0000
+@@ -4,8 +4,8 @@
+ /* Copyright 2004 Manuel Novoa III (mjn3@codepoet.org)	*/
+ /* Licensed under the linux kernel's version of the GPL.*/
+ 
+-#include <asm/asm.h>
+-#include <asm/regdef.h>
++#include <asm.h>
++#include <regdef.h>
+ 
+ #define KSEG0		0x80000000
+ 

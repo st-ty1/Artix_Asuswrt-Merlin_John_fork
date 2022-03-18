@@ -1,0 +1,100 @@
+--- Makefile.orig	2022-03-18 15:52:04.000000000 +0000
++++ Makefile	2022-03-18 16:05:21.000000000 +0000
+@@ -33,11 +33,14 @@
+ export CFLAGS += $(EXTRACFLAGS)
+ endif
+ 
++export PLATFORM LIBDIR USRLIBDIR 
++export LD_LIBRARY_PATH := $(TOOLCHAIN)/lib
++
+ ifeq ($(RTCONFIG_BCMARM),y)
+ 
+ LINUX_VERSION=2_6_36
+ LINUX_KERNEL=2.6.36
+-export PLATFORM LIBDIR USRLIBDIR LINUX_VERSION
++export LINUX_VERSION
+ 
+ WLAN_ComponentsInUse := bcmwifi clm ppr olpc
+ include ../../src-rt-6.x.4708/makefiles/WLAN_Common.mk
+@@ -45,7 +48,6 @@
+ export EXTRALDFLAGS = -lgcc_s
+ export EXTRALDFLAGS2 = -L$(TOP)/nvram$(BCMEX) -lnvram -L$(TOP)/shared -lshared
+ 
+-export LD_LIBRARY_PATH := $(SRCBASE)/toolchains/hndtools-arm-linux-2.6.36-uclibc-4.5.3/lib
+ ifeq (2_6_36,$(LINUX_VERSION))
+ export  LINUXDIR := $(BASEDIR)/src-rt-6.x.4708/linux/linux-2.6.36
+ export  KBUILD_VERBOSE := 1
+@@ -96,7 +98,7 @@
+ #
+ #
+ #
+-SEP=echo "\033[41;1m   $@   \033[0m"
++SEP=printf "\033[41;1m   $@   \033[0m"
+ 
+ #
+ # standard packages
+@@ -555,6 +558,7 @@
+ #
+ 
+ all: clean-build kernel_header libc version obj_prelibs kernel $(obj-y)
++#all: clean-build kernel_header libc version obj_prelibs $(obj-y)
+ 
+ ifeq ($(RTCONFIG_BCMARM),y)
+ 	+$(MAKE) $(MAKE_ARGS) post_preplibs
+@@ -1989,7 +1993,7 @@
+ 	$(CONFIGURE) --prefix="" --disable-dependency-tracking
+ else
+ 	cd ndisc6 && CFLAGS="-Os -ffunction-sections -fdata-sections -I$(SRCBASE)/include -I$(TOP)/shared" \
+-	LDFLAGS="-ffunction-sections -fdata-sections -Wl,--gc-sections -L$(TOP)/nvram$(BCMEX) -L$(TOP)/shared" \
++	LDFLAGS="-ffunction-sections -fdata-sections -Wl,--gc-sections -L$(TOP)/nvram$(BCMEX) -L$(TOP)/shared -L$(TOOLCHAIN)/mipsel-brcm-linux-uclibc/sysroot/lib -lgcc_s" \
+ 	$(CONFIGURE) --prefix="" LIBS='-lnvram -lshared' --disable-dependency-tracking
+ endif
+ 	-@$(MAKE) -C ndisc6 clean
+@@ -2007,7 +2011,7 @@
+ 	install -D ndisc6/rdnssd/rdnssd $(INSTALLDIR)/ndisc6/usr/sbin/rdnssd
+ 	$(STRIP) $(INSTALLDIR)/ndisc6/usr/sbin/rdnssd
+ ifneq ($(RTCONFIG_BCMWL6),y)
+-	install -D $(shell dirname $(shell which $(CXX)))/../lib/librt.so.0 $(TARGETDIR)/lib/librt.so.0
++	install -D $(LIBDIR)/librt.so.0 $(TARGETDIR)/lib/librt.so.0
+ endif
+ 
+ dhcpv6/stamp-h1:
+@@ -2212,8 +2216,8 @@
+ phddns/stamp-h1:
+ 	cd phddns && $(CONFIGURE) --prefix="" \
+ 		CFLAGS="-Os -I$(SRCBASE)/include -I$(TOP)/shared $(EXTRACFLAGS)" \
+-		LDFLAGS="-L$(TOP)/nvram$(BCMEX) -L$(TOP)/shared $(if $(RTCONFIG_QTN),-L$(TOP)/libqcsapi_client) $(EXTRALDFLAGS)" \
+-		LIBS="-lnvram -lshared $(if $(RTCONFIG_QTN),-lqcsapi_client)"
++		LDFLAGS="-L$(TOP)/nvram$(BCMEX) -L$(TOP)/shared $(if $(RTCONFIG_QTN),-L$(TOP)/libqcsapi_client) $(EXTRALDFLAGS) -L$(TOOLCHAIN)/mipsel-brcm-linux-uclibc/sysroot/lib" \
++		LIBS="-lnvram -lshared $(if $(RTCONFIG_QTN),-lqcsapi_client) -lgcc_s"
+ 	@touch $@
+ 
+ phddns: phddns/stamp-h1
+@@ -2762,8 +2766,7 @@
+ 
+ mDNSResponder:
+ 	@$(SEP)
+-	@$(MAKE) -C mDNSResponder CC=$(CC) all $(PARALLEL_BUILD)
+-
++	@$(MAKE) -C mDNSResponder CC=$(CC) all 
+ 
+ igmpproxy/stamp-h1:
+ 	cd igmpproxy && CFLAGS="-O2 -Wall $(EXTRACFLAGS) -ffunction-sections -fdata-sections" \
+@@ -2942,7 +2945,7 @@
+ 	LZO_LIBS="-L$(TOP)/lzo/src/.libs -llzo2" \
+ 	LZ4_CFLAGS="-I$(TOP)/lz4/lib" \
+ 	LZ4_LIBS="-L$(TOP)/lz4/lib -llz4" \
+-	LDFLAGS="$(EXTRALDFLAGS) -L$(TOP)/nvram$(BCMEX) -lnvram -L$(TOP)/shared -lshared -L$(TOP)/zlib -lz -lpthread -ldl -ffunction-sections -fdata-sections -Wl,--gc-sections" \
++	LDFLAGS="$(EXTRALDFLAGS) -L$(TOP)/nvram$(BCMEX) -lnvram -L$(TOP)/shared -lshared -L$(TOP)/zlib -lz -lpthread -ldl -ffunction-sections -fdata-sections -Wl,--gc-sections  -L$(TOOLCHAIN)/mipsel-brcm-linux-uclibc/sysroot/lib -lgcc_s" \
+ 	IPROUTE="/usr/sbin/ip" IFCONFIG="/sbin/ifconfig" ROUTE="/sbin/route" \
+ 	$(CONFIGURE) --prefix=/usr --bindir=/usr/sbin --libdir=/usr/lib  --enable-iproute2 \
+ 	--disable-debug --enable-management --disable-small --disable-selinux \
+@@ -3131,7 +3134,7 @@
+ 	@rm -f pcre-8.31/stamp-h1
+ 
+ libxml2/stamp-h1:
+-	cd libxml2 && \
++	cd libxml2 && autoreconf -fsi && \
+ 	CC=$(CC) AR=$(AR) RANLIB=$(RANLIB) LD=$(LD) CFLAGS="-Os -Wall $(EXTRACFLAGS)" \
+ 	./$(CONFIGURE) --prefix=/usr --without-python --disable-dependency-tracking
+ 	touch $@

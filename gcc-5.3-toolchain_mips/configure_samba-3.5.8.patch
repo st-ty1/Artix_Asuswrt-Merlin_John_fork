@@ -1,0 +1,21 @@
+--- configure_samba-3.5.8.orig	2022-03-14 15:09:48.000000000 +0000
++++ configure_samba-3.5.8	2022-03-14 11:49:09.000000000 +0000
+@@ -83598,7 +83598,7 @@
+ 
+ 	     PTHREAD_CFLAGS="-D_REENTRANT -D_POSIX_PTHREAD_SEMANTICS"
+ 	     if test "${HOST}" = "arm"; then
+-		PTHREAD_LDFLAGS="$LD_LIBRARY_PATH/../arm-brcm-linux-uclibcgnueabi/sysroot/usr/lib/libpthread.a"
++		PTHREAD_LDFLAGS="$LD_LIBRARY_PATH/../arm-brcm-linux-uclibcgnueabi/sysroot/usr/lib/libpthread.so"
+ 	     else
+ 		PTHREAD_LDFLAGS="-lpthread"
+ 	     fi
+@@ -107189,7 +107189,8 @@
+ if test -n "$CONFIG_FILES"; then
+ 
+ 
+-ac_cr=''
++ac_cr='
++'
+ ac_cs_awk_cr=`$AWK 'BEGIN { print "a\rb" }' </dev/null 2>/dev/null`
+ if test "$ac_cs_awk_cr" = "a${ac_cr}b"; then
+   ac_cs_awk_cr='\\r'

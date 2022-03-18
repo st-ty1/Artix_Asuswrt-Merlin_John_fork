@@ -1,0 +1,11 @@
+--- shutils.h.orig	2022-03-18 09:40:26.000000000 +0000
++++ shutils.h	2022-03-18 09:40:33.000000000 +0000
+@@ -147,7 +147,7 @@
+ 
+ /* Check for a blank character; that is, a space or a tab */
+ #ifndef isblank
+-#define isblank(c) ((c) == ' ' || (c) == '\t')
++#define isblank(c) (c == ' ' || c == '\t')
+ #endif
+ 
+ /* Strip trailing CR/NL from string <s> */

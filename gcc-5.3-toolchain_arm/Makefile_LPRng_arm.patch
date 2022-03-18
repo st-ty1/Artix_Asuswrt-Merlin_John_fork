@@ -1,0 +1,11 @@
+--- Makefile_LPRng_arm.orig	2022-03-14 15:09:48.000000000 +0000
++++ Makefile_LPRng_arm	2022-03-12 17:32:29.000000000 +0000
+@@ -95,7 +95,7 @@
+ 	 -g -W -Wall  -Wno-unused  -g -O2 -g -W -Wall  -Wno-unused  -DHAVE_CONFIG_H -DWINDOW_1 -DTEST_WRITE -DNODEBUG -DLPR_with_ASUS ${GLOBAL_OPTIONS} #-DRETURNOK -DUSBONLY
+ 
+ USER_OBJS := 
+-LDFLAGS   := -L$(TOP)/shared -lshared -L$(TOP)/nvram$(BCMEX) -lnvram
++LDFLAGS   := -L$(TOP)/shared -lshared -L$(TOP)/nvram$(BCMEX) -lnvram -L$(TOOLCHAIN)/arm-brcm-linux-uclibcgnueabi/sysroot/lib -lgcc_s
+ 
+ include ../../common.mak
+ ifeq ($(RTCONFIG_QTN),y)

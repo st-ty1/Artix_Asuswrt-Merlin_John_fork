@@ -1,0 +1,13 @@
+--- /home/stephan/freshtomato-mips/release/src-rt-6.x/linux/linux-2.6/include/asm-mips/cpu-features.h	2022-01-24 14:05:37.466249900 +0100
++++ /home/stephan/Dokumente/gcc-5.3-toolchain_mips/mm_2.6.26/cpu-features.h	2022-01-22 14:47:52.250548400 +0100
+@@ -14,6 +14,10 @@
+ #include <asm/cpu-info.h>
+ #include <cpu-feature-overrides.h>
+ 
++#ifndef current_cpu_type
++#define current_cpu_type()      current_cpu_data.cputype
++#endif
++
+ /*
+  * SMP assumption: Options of CPU 0 are a superset of all processors.
+  * This is true for all known MIPS systems.

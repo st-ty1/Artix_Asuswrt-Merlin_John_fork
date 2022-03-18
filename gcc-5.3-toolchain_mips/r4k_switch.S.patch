@@ -1,0 +1,55 @@
+--- r4k_switch.S_orig	2022-01-22 15:33:38.000000000 +0000
++++ r4k_switch.S	2022-02-03 10:37:40.000000000 +0000
+@@ -74,8 +74,11 @@
+ 	and	t0, t0, t1
+ 	LONG_S	t0, ST_OFF(t3)
+ 
++ 	.set	push
++	SET_HARDFLOAT
+ 	fpu_save_double a0 t0 t1		# c0_status passed in t0
+ 						# clobbers t1
++	.set pop
+ 1:
+ 
+ 	/*
+@@ -135,8 +138,11 @@
+ #ifdef CONFIG_64BIT
+ 	mfc0	t0, CP0_STATUS
+ #endif
++ 	.set	push
++	SET_HARDFLOAT
+ 	fpu_save_double a0 t0 t1		# clobbers t1
+ 	jr	ra
++	.set pop
+ 	END(_save_fp)
+ 
+ /*
+@@ -146,8 +152,11 @@
+ #ifdef CONFIG_64BIT
+ 	mfc0	t0, CP0_STATUS
+ #endif
++ 	.set	push
++	SET_HARDFLOAT
+ 	fpu_restore_double a0 t0 t1		# clobbers t1
+ 	jr	ra
++	.set pop
+ 	END(_restore_fp)
+ 
+ /*
+@@ -160,6 +169,9 @@
+ 
+ #define FPU_DEFAULT  0x00000000
+ 
++	.set push
++	SET_HARDFLOAT
++
+ LEAF(_init_fpu)
+ #ifdef CONFIG_MIPS_MT_SMTC
+ 	/* Rather than manipulate per-VPE Status, set per-TC bit in TCStatus */
+@@ -258,3 +270,5 @@
+ #endif
+ 	jr	ra
+ 	END(_init_fpu)
++
++	.set pop	/* SET_HARDFLOAT */
+\ No newline at end of file

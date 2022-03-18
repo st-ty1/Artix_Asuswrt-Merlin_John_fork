@@ -1,0 +1,139 @@
+--- bzip2_inflate.c_orig	2022-01-27 15:12:09.000000000 +0000
++++ bzip2_inflate.c	2022-01-03 19:14:54.000000000 +0000
+@@ -95,7 +95,7 @@
+ #endif
+ 
+ extern void bz_internal_error ( int errcode );
+-__inline__ Int32 BZ2_indexIntoF ( Int32 indx, Int32 *cftab );
++static inline Int32 BZ2_indexIntoF ( Int32 indx, Int32 *cftab );
+ void BZ2_hbCreateDecodeTables ( Int32 *limit,
+                                 Int32 *base,
+                                 Int32 *perm,
+@@ -386,6 +386,8 @@
+    }
+    DState;
+ 
++extern void unRLE_obuf_to_output_SMALL ( DState* s );
++
+ /*-- Macros for decompression. --*/
+ 
+ #define BZ_GET_FAST(cccc)                     \
+@@ -732,6 +734,7 @@
+          s->state_out_len = 1;
+          s->state_out_ch = s->k0;
+          BZ_GET_FAST(k1); BZ_RAND_UPD_MASK;
++         UChar k1;
+          k1 ^= BZ_RAND_MASK; s->nblock_used++;
+          if (s->nblock_used == s->save_nblock+1) continue;
+          if (k1 != s->k0) { s->k0 = k1; continue; };
+@@ -845,7 +848,7 @@
+ }
+ 
+ /*---------------------------------------------------*/
+-__inline__ Int32 BZ2_indexIntoF ( Int32 indx, Int32 *cftab )
++static inline Int32 BZ2_indexIntoF ( Int32 indx, Int32 *cftab )
+ {
+    Int32 nb, na, mid;
+    nb = 0;
+@@ -859,10 +862,8 @@
+ }
+ 
+ /*---------------------------------------------------*/
+-static
+ void unRLE_obuf_to_output_SMALL ( DState* s )
+ {
+-   UChar k1;
+ 
+    if (s->blockRandomised) {
+ 
+@@ -882,31 +883,42 @@
+ 
+          /* can a new run be started? */
+          if (s->nblock_used == s->save_nblock+1) return;
+-
+-
+          s->state_out_len = 1;
+          s->state_out_ch = s->k0;
+-         BZ_GET_SMALL(k1); BZ_RAND_UPD_MASK;
++		 UChar kl;
++         kl = BZ2_indexIntoF ( s->tPos, s->cftab );
++         s->tPos = GET_LL(s->tPos);
++         BZ_RAND_UPD_MASK;
++         UChar k1;
++         k1 = False;
+          k1 ^= BZ_RAND_MASK; s->nblock_used++;
+          if (s->nblock_used == s->save_nblock+1) continue;
+          if (k1 != s->k0) { s->k0 = k1; continue; };
+ 
+          s->state_out_len = 2;
+-         BZ_GET_SMALL(k1); BZ_RAND_UPD_MASK;
++         kl = BZ2_indexIntoF ( s->tPos, s->cftab );
++         s->tPos = GET_LL(s->tPos);
++		 BZ_RAND_UPD_MASK;
+          k1 ^= BZ_RAND_MASK; s->nblock_used++;
+          if (s->nblock_used == s->save_nblock+1) continue;
+          if (k1 != s->k0) { s->k0 = k1; continue; };
+ 
+          s->state_out_len = 3;
+-         BZ_GET_SMALL(k1); BZ_RAND_UPD_MASK;
++         kl = BZ2_indexIntoF ( s->tPos, s->cftab );
++         s->tPos = GET_LL(s->tPos); 
++		 BZ_RAND_UPD_MASK;
+          k1 ^= BZ_RAND_MASK; s->nblock_used++;
+          if (s->nblock_used == s->save_nblock+1) continue;
+          if (k1 != s->k0) { s->k0 = k1; continue; };
+ 
+-         BZ_GET_SMALL(k1); BZ_RAND_UPD_MASK;
++         kl = BZ2_indexIntoF ( s->tPos, s->cftab );
++         s->tPos = GET_LL(s->tPos);
++		 BZ_RAND_UPD_MASK;
+          k1 ^= BZ_RAND_MASK; s->nblock_used++;
+          s->state_out_len = ((Int32)k1) + 4;
+-         BZ_GET_SMALL(s->k0); BZ_RAND_UPD_MASK;
++         s->k0 = BZ2_indexIntoF ( s->tPos, s->cftab );
++         s->tPos = GET_LL(s->tPos);
++		 BZ_RAND_UPD_MASK;
+          s->k0 ^= BZ_RAND_MASK; s->nblock_used++;
+       }
+ 
+@@ -931,23 +943,35 @@
+ 
+          s->state_out_len = 1;
+          s->state_out_ch = s->k0;
+-         BZ_GET_SMALL(k1); s->nblock_used++;
++		 UChar kl;
++         kl = BZ2_indexIntoF ( s->tPos, s->cftab );
++         s->tPos = GET_LL(s->tPos);
++		 s->nblock_used++;
+          if (s->nblock_used == s->save_nblock+1) continue;
++         UChar k1;
+          if (k1 != s->k0) { s->k0 = k1; continue; };
+ 
+          s->state_out_len = 2;
+-         BZ_GET_SMALL(k1); s->nblock_used++;
++         kl = BZ2_indexIntoF ( s->tPos, s->cftab );
++         s->tPos = GET_LL(s->tPos);
++		 s->nblock_used++;
+          if (s->nblock_used == s->save_nblock+1) continue;
+          if (k1 != s->k0) { s->k0 = k1; continue; };
+ 
+          s->state_out_len = 3;
+-         BZ_GET_SMALL(k1); s->nblock_used++;
++         kl = BZ2_indexIntoF ( s->tPos, s->cftab );
++         s->tPos = GET_LL(s->tPos);
++		 s->nblock_used++;
+          if (s->nblock_used == s->save_nblock+1) continue;
+          if (k1 != s->k0) { s->k0 = k1; continue; };
+ 
+-         BZ_GET_SMALL(k1); s->nblock_used++;
++         kl = BZ2_indexIntoF ( s->tPos, s->cftab );
++         s->tPos = GET_LL(s->tPos);
++		 s->nblock_used++;
+          s->state_out_len = ((Int32)k1) + 4;
+-         BZ_GET_SMALL(s->k0); s->nblock_used++;
++         s->k0 = BZ2_indexIntoF ( s->tPos, s->cftab );
++         s->tPos = GET_LL(s->tPos);
++		 s->nblock_used++;
+       }
+ 
+    }

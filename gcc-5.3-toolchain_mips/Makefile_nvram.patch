@@ -1,0 +1,14 @@
+--- Makefile_nvram.orig	2022-03-18 15:52:04.000000000 +0000
++++ Makefile_nvram	2022-03-18 12:43:17.000000000 +0000
+@@ -23,9 +23,9 @@
+ nvram: nvram.o ../shared/defaults.o libnvram.so
+ 	@echo " [nvram] CC $@"
+ ifeq ($(STATIC),1)
+-	$(CC) $(CFLAGS) -static -o $@ nvram.o ../shared/defaults.o -L. -lnvram -L$(TOP)/shared -lshared
++	$(CC) $(CFLAGS) -static -o $@ nvram.o ../shared/defaults.o -L. -lnvram -L$(TOP)/shared -lshared -lgcc_s
+ else
+-	@$(CC) $(CFLAGS) -o $@ nvram.o ../shared/defaults.o -L. -lnvram -L$(TOP)/shared -lshared
++	@$(CC) $(CFLAGS) -o $@ nvram.o ../shared/defaults.o -L. -lnvram -L$(TOP)/shared -lshared -lgcc_s
+ endif
+ 	
+ 	$(SIZECHECK)

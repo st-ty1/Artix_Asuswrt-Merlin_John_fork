@@ -1,0 +1,11 @@
+--- Makefile.orig	2022-03-18 09:40:26.000000000 +0000
++++ Makefile	2022-03-18 09:40:33.000000000 +0000
+@@ -29,7 +29,7 @@
+ 		  -ffunction-sections -pipe -Wa,--trap \
+ 		  -mabi=32 -march=mips32 -Wa,-32 -Wa,-march=mips32 -Wa,-mips32
+ CFLAGS		+= -DLOADADDR=$(TEXT_START) -D_LZMA_IN_CB
+-CFLAGS		+= -I$(SRCBASE)/include -I$(SRCBASE)/lzma/C/Compress/Lzma
++CFLAGS		+= -I$(SRCBASE)/include -I$(SRCBASE)/lzma/C/Compress/Lzma -I$(TOOLCHAIN)/mipsel-brcm-linux-uclibc/sysroot/usr/include/sys
+ 
+ ASFLAGS		= $(CFLAGS) -D__ASSEMBLY__ -DBZ_TEXT_START=$(BZ_TEXT_START)
+ 

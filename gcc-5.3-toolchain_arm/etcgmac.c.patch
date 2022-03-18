@@ -1,0 +1,31 @@
+--- etcgmac.c.orig	2021-12-30 19:54:43.433929000 +0100
++++ etcgmac.c	2021-12-27 17:30:37.235567800 +0100
+@@ -187,7 +187,7 @@
+ 	uint i;
+ 	char name[16];
+ 	char *var;
+-	uint boardflags, boardtype, reset;
++	uint boardflags, reset;
+ 	uint32 flagbits = 0;
+ 
+ 	ET_TRACE(("et%d: chipattach: regsva 0x%lx\n", etc->unit, (ulong)regsva));
+@@ -238,7 +238,6 @@
+ 	etc->boardflags = getintvar(ch->vars, "boardflags");
+ 
+ 	boardflags = etc->boardflags;
+-	boardtype = ch->sih->boardtype;
+ 
+ #ifdef PKTC
+ 	etc->pktc = (getintvar(ch->vars, "pktc_disable") == 0) &&
+@@ -1319,11 +1318,9 @@
+ {
+ 	etc_info_t *etc;
+ 	gmacregs_t *regs;
+-	uint idx;
+ 	uint i;
+ 	regs = ch->regs;
+ 	etc = ch->etc;
+-	idx = 0;
+ 
+ 	ET_TRACE(("et%d: chipinit\n", etc->unit));
+ 

@@ -1,0 +1,10 @@
+--- genex.S_orig	2022-01-22 15:33:38.000000000 +0000
++++ genex.S	2022-01-15 15:04:57.000000000 +0000
+@@ -393,6 +393,7 @@
+ 	.endm
+ 
+ 	.macro	__build_clear_fpe
++	SET_HARDFLOAT
+ 	cfc1	a1, fcr31
+ 	li	a2, ~(0x3f << 12)
+ 	and	a2, a1

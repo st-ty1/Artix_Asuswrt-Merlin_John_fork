@@ -1,0 +1,11 @@
+--- ctype.h.orig	2022-02-04 11:00:27.000000000 +0000
++++ ctype.h	2022-02-04 11:03:45.000000000 +0000
+@@ -70,7 +70,7 @@
+ #ifdef	__USE_ISOC99
+ __BEGIN_NAMESPACE_C99
+ 
+-extern int isblank(int __c) __THROW;
++/* extern int isblank(int __c) __THROW; */
+ 
+ __END_NAMESPACE_C99
+ #endif

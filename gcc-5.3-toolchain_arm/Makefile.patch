@@ -1,0 +1,111 @@
+--- Makefile.orig	2022-03-18 15:52:04.000000000 +0000
++++ Makefile	2022-03-14 13:28:11.000000000 +0000
+@@ -33,11 +33,15 @@
+ export CFLAGS += $(EXTRACFLAGS)
+ endif
+ 
++export PLATFORM LIBDIR USRLIBDIR 
++#export LD_LIBRARY_PATH := $(TOOLCHAIN)/lib
++export LD_LIBRARY_PATH := $(HOME)/asuswrt-merlin/release/src-rt-6.x.4708/toolchains/hndtools-arm-uclibc-5.3/usr/lib
++
+ ifeq ($(RTCONFIG_BCMARM),y)
+ 
+ LINUX_VERSION=2_6_36
+ LINUX_KERNEL=2.6.36
+-export PLATFORM LIBDIR USRLIBDIR LINUX_VERSION
++export LINUX_VERSION
+ 
+ WLAN_ComponentsInUse := bcmwifi clm ppr olpc
+ include ../../src-rt-6.x.4708/makefiles/WLAN_Common.mk
+@@ -45,10 +49,9 @@
+ export EXTRALDFLAGS = -lgcc_s
+ export EXTRALDFLAGS2 = -L$(TOP)/nvram$(BCMEX) -lnvram -L$(TOP)/shared -lshared
+ 
+-export LD_LIBRARY_PATH := $(SRCBASE)/toolchains/hndtools-arm-linux-2.6.36-uclibc-4.5.3/lib
+ ifeq (2_6_36,$(LINUX_VERSION))
+ export  LINUXDIR := $(BASEDIR)/src-rt-6.x.4708/linux/linux-2.6.36
+-export  KBUILD_VERBOSE := 1
++export  KBUILD_VERBOSE := 0
+ export  BUILD_MFG := 0
+ endif
+ SUBMAKE_SETTINGS = SRCBASE=$(SRCBASE) BASEDIR=$(BASEDIR)
+@@ -1879,6 +1886,7 @@
+ 
+ libdaemon: libdaemon/stamp-h1
+ 	$(MAKE) -C $@ && $(MAKE) $@-stage
++	sed 's|/usr/lib|$(STAGEDIR)/usr/lib|g' -i $(STAGEDIR)/usr/lib/libdaemon.la
+ 
+ libdaemon-install: libdaemon
+ 	install -D libdaemon/libdaemon/.libs/libdaemon.so.0.5.0 $(INSTALLDIR)/libdaemon/usr/lib/libdaemon.so.0.5.0
+@@ -1989,7 +1997,7 @@
+ 	$(CONFIGURE) --prefix="" --disable-dependency-tracking
+ else
+ 	cd ndisc6 && CFLAGS="-Os -ffunction-sections -fdata-sections -I$(SRCBASE)/include -I$(TOP)/shared" \
+-	LDFLAGS="-ffunction-sections -fdata-sections -Wl,--gc-sections -L$(TOP)/nvram$(BCMEX) -L$(TOP)/shared" \
++	LDFLAGS="-ffunction-sections -fdata-sections -Wl,--gc-sections -L$(TOP)/nvram$(BCMEX) -L$(TOP)/shared -L$(TOOLCHAIN)/mipsel-brcm-linux-uclibc/sysroot/lib -lgcc_s" \
+ 	$(CONFIGURE) --prefix="" LIBS='-lnvram -lshared' --disable-dependency-tracking
+ endif
+ 	-@$(MAKE) -C ndisc6 clean
+@@ -2212,8 +2220,8 @@
+ phddns/stamp-h1:
+ 	cd phddns && $(CONFIGURE) --prefix="" \
+ 		CFLAGS="-Os -I$(SRCBASE)/include -I$(TOP)/shared $(EXTRACFLAGS)" \
+-		LDFLAGS="-L$(TOP)/nvram$(BCMEX) -L$(TOP)/shared $(if $(RTCONFIG_QTN),-L$(TOP)/libqcsapi_client) $(EXTRALDFLAGS)" \
+-		LIBS="-lnvram -lshared $(if $(RTCONFIG_QTN),-lqcsapi_client)"
++		LDFLAGS="-L$(TOP)/nvram$(BCMEX) -L$(TOP)/shared $(if $(RTCONFIG_QTN),-L$(TOP)/libqcsapi_client) $(EXTRALDFLAGS) -L$(TOOLCHAIN)/mipsel-brcm-linux-uclibc/sysroot/lib" \
++		LIBS="-lnvram -lshared $(if $(RTCONFIG_QTN),-lqcsapi_client) -lgcc_s"
+ 	@touch $@
+ 
+ phddns: phddns/stamp-h1
+@@ -2908,11 +2916,13 @@
+ 	cd $(INSTALLDIR)/lz4/usr/lib && ln -sf liblz4.so.1.9.2 liblz4.so
+ 
+ openpam: openpam/Makefile
+-	$(MAKE) -C $@ $(PARALLEL_BUILD) && $(MAKE) $@-stage
++	sed "s| need_relink=yes| need_relink=no|g" -i openpam/libtool
++	sed "s| need_relink=yes| need_relink=no|g" -i openpam/ltmain.sh
++	$(MAKE) -C $@ $(PARALLEL_BUILD) &&$(MAKE) $@-stage
+ 
+ openpam/Makefile:
+ 	( cd openpam && ./autogen.sh && \
+-		LDFLAGS=-ldl \
++		LDFLAGS="-ldl -lgcc_s  -L$(TOOLCHAIN)/arm-brcm-linux-uclibcgnueabi/sysroot/usr/lib" \
+ 		$(CONFIGURE) --prefix=/usr --bindir=/usr/sbin --libdir=/usr/lib \
+ 		--without-doc --with-pam-unix \
+ 	)
+@@ -2942,7 +2952,7 @@
+ 	LZO_LIBS="-L$(TOP)/lzo/src/.libs -llzo2" \
+ 	LZ4_CFLAGS="-I$(TOP)/lz4/lib" \
+ 	LZ4_LIBS="-L$(TOP)/lz4/lib -llz4" \
+-	LDFLAGS="$(EXTRALDFLAGS) -L$(TOP)/nvram$(BCMEX) -lnvram -L$(TOP)/shared -lshared -L$(TOP)/zlib -lz -lpthread -ldl -ffunction-sections -fdata-sections -Wl,--gc-sections" \
++	LDFLAGS="$(EXTRALDFLAGS) -L$(TOP)/nvram$(BCMEX) -lnvram -L$(TOP)/shared -lshared -L$(TOP)/zlib -lz -lpthread -ldl -ffunction-sections -fdata-sections -Wl,--gc-sections  -L$(TOOLCHAIN)/mipsel-brcm-linux-uclibc/sysroot/lib -lgcc_s" \
+ 	IPROUTE="/usr/sbin/ip" IFCONFIG="/sbin/ifconfig" ROUTE="/sbin/route" \
+ 	$(CONFIGURE) --prefix=/usr --bindir=/usr/sbin --libdir=/usr/lib  --enable-iproute2 \
+ 	--disable-debug --enable-management --disable-small --disable-selinux \
+@@ -3131,7 +3141,7 @@
+ 	@rm -f pcre-8.31/stamp-h1
+ 
+ libxml2/stamp-h1:
+-	cd libxml2 && \
++	cd libxml2 && autoreconf -fsi && \
+ 	CC=$(CC) AR=$(AR) RANLIB=$(RANLIB) LD=$(LD) CFLAGS="-Os -Wall $(EXTRACFLAGS)" \
+ 	./$(CONFIGURE) --prefix=/usr --without-python --disable-dependency-tracking
+ 	touch $@
+@@ -3354,7 +3364,7 @@
+ 	cd $(TOP)/netatalk-3.0.5 && \
+ 	$(CONFIGURE) CPPFLAGS="-I$(TOP)/db-4.8.30/build_unix -I$(TOP)/libgcrypt-1.5.1/src" \
+ 	LDFLAGS="-L$(TOP)/db-4.8.30/build_unix/.libs -L$(TOP)/libgcrypt-1.5.1/src/.libs" \
+-	LD_LIBRARY_PATH="$(SRCBASE)/toolchains/hndtools-arm-linux-2.6.36-uclibc-4.5.3/lib" \
++	LD_LIBRARY_PATH="$(SRCBASE)/toolchains/hndtools-arm-uclibc-5.3/usr/lib" \
+ 	LIBS="-L$(TOP)/libgpg-error-1.10/src/.libs -lgpg-error -L$(TOP)/libgcrypt-1.5.1/src/.libs -lgcrypt" \
+ 	LIBGCRYPT_CONFIG="$(TOP)/libgcrypt-1.5.1/src/libgcrypt-config" \
+ 	ac_cv_header_sys_xattr_h=yes ac_cv_search_getxattr='none required' \
+@@ -3660,6 +3671,8 @@
+ 
+ libmnl-1.0.4: libmnl-1.0.4/Makefile
+ 	$(MAKE) -C $@ && $(MAKE) $@-stage
++	sed 's|/usr/lib|$(STAGEDIR)/usr/lib|g' -i $(STAGEDIR)/usr/lib/libmnl.la
++
+ 
+ libmnl-1.0.4/Makefile:
+ 	(cd libmnl-1.0.4 && autoreconf -i -f)

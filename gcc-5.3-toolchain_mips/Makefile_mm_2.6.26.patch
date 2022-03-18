@@ -1,0 +1,19 @@
+--- a/release/src-rt-6.x/linux/linux-2.6/arch/mips/mm/Makefile	2022-01-24 14:05:37.466249900 +0100
++++ b/gcc-5.3-toolchain_mips/Makefile_mm_2.6.26_neu	2022-01-22 17:53:28.000000000 +0100
+@@ -3,13 +3,14 @@
+ #
+ 
+ obj-y				+= cache.o dma-default.o extable.o fault.o \
+-				   init.o pgtable.o tlbex.o tlbex-fault.o
++				   init.o page.o page-funcs.o \
++				   pgtable.o tlbex.o tlbex-fault.o uasm.o 
+ 
+ obj-$(CONFIG_32BIT)		+= ioremap.o pgtable-32.o
+ obj-$(CONFIG_64BIT)		+= pgtable-64.o
+ obj-$(CONFIG_HIGHMEM)		+= highmem.o
+ 
+-obj-$(CONFIG_CPU_MIPS32)	+= c-r4k.o cex-gen.o pg-r4k.o tlb-r4k.o
++obj-$(CONFIG_CPU_MIPS32)	+= c-r4k.o cex-gen.o tlb-r4k.o
+ obj-$(CONFIG_CPU_MIPS64)	+= c-r4k.o cex-gen.o pg-r4k.o tlb-r4k.o
+ obj-$(CONFIG_CPU_NEVADA)	+= c-r4k.o cex-gen.o pg-r4k.o tlb-r4k.o
+ obj-$(CONFIG_CPU_R10000)	+= c-r4k.o cex-gen.o pg-r4k.o tlb-r4k.o

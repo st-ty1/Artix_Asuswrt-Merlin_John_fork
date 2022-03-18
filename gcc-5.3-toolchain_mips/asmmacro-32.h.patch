@@ -1,0 +1,36 @@
+--- asmmacro-32.h_orig	2022-01-22 15:33:38.000000000 +0000
++++ asmmacro-32.h	2022-01-15 14:54:10.000000000 +0000
+@@ -34,6 +34,8 @@
+ 	.endm
+ 
+ 	.macro	fpu_save_single thread tmp=t0
++	.set push
++	SET_HARDFLOAT
+ 	cfc1	\tmp,  fcr31
+ 	swc1	$f0,  THREAD_FPR0(\thread)
+ 	swc1	$f1,  THREAD_FPR1(\thread)
+@@ -68,6 +70,7 @@
+ 	swc1	$f30, THREAD_FPR30(\thread)
+ 	swc1	$f31, THREAD_FPR31(\thread)
+ 	sw	\tmp, THREAD_FCR31(\thread)
++	.set pop
+ 	.endm
+ 
+ 	.macro	fpu_restore_double thread status tmp=t0
+@@ -92,6 +95,8 @@
+ 	.endm
+ 
+ 	.macro	fpu_restore_single thread tmp=t0
++	.set push
++	SET_HARDFLOAT
+ 	lw	\tmp, THREAD_FCR31(\thread)
+ 	lwc1	$f0,  THREAD_FPR0(\thread)
+ 	lwc1	$f1,  THREAD_FPR1(\thread)
+@@ -126,6 +131,7 @@
+ 	lwc1	$f30, THREAD_FPR30(\thread)
+ 	lwc1	$f31, THREAD_FPR31(\thread)
+ 	ctc1	\tmp, fcr31
++	.set pop
+ 	.endm
+ 
+ 	.macro	cpu_save_nonscratch thread

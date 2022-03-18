@@ -1,0 +1,13 @@
+--- Makefile_ntpclient.orig	2022-03-18 15:52:04.000000000 +0000
++++ Makefile_ntpclient	2022-03-18 12:43:17.000000000 +0000
+@@ -11,8 +11,8 @@
+ CFLAGS += -Wall -O
+ 
+ CFLAGS += -DASUS
+-CFLAGS += -I$(TOP)/shared -I$(SRCBASE)/include
+-LDFLAGS = -L$(TOP)/shared -lshared -L$(TOP)/nvram$(BCMEX) -lnvram
++CFLAGS += -I$(TOP)/shared -I$(SRCBASE)/include -I$(TOOLCHAIN)/mipsel-brcm-linux-uclibc/sysroot/usr/include
++LDFLAGS = -L$(TOP)/shared -lshared -L$(TOP)/nvram$(BCMEX) -lnvram -L$(TOOLCHAIN)/mipsel-brcm-linux-uclibc/sysroot/lib -lgcc_s
+ ifeq ($(RTCONFIG_BCMARM),y)
+ LDFLAGS += -lgcc_s
+ endif

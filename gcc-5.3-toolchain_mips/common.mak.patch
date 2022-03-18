@@ -1,0 +1,31 @@
+--- common.mak.orig	2022-03-18 15:52:04.000000000 +0000
++++ common.mak	2022-03-18 12:43:17.000000000 +0000
+@@ -60,8 +60,8 @@
+ 
+ include $(SRCBASE)/target.mak
+ 
+-export LIBDIR := $(TOOLCHAIN)/lib
+-export USRLIBDIR := $(TOOLCHAIN)/usr/lib
++export LIBDIR := $(TOOLCHAIN)/mipsel-brcm-linux-uclibc/sysroot/lib
++export USRLIBDIR := $(TOOLCHAIN)/$mipsel-brcm-linux-uclibc/sysroot/usr/lib
+ 
+ export PLATFORMDIR := $(TOP)/$(PLATFORM)
+ export INSTALLDIR := $(PLATFORMDIR)/install
+@@ -86,7 +86,7 @@
+ ifeq ($(RTCONFIG_BCMWL6),y)
+ ifneq ($(RTCONFIG_BCMARM),y)
+ # e.g. RT-AC66U
+-export KERNELCC := $(SRCBASE)/../../tools/brcm/K26/hndtools-mipsel-linux-uclibc-4.2.3/bin/mipsel-linux-uclibc-gcc
++export KERNELCC := $(TOOLCHAIN)/bin/mipsel-brcm-linux-uclibc-gcc
+ else # RTCONFIG_BCMARM = y
+ export KERNELCC := $(CC)
+ endif
+@@ -100,7 +100,7 @@
+ ifeq ($(RTCONFIG_BCMWL6),y)
+ ifneq ($(RTCONFIG_BCMARM),y)
+ # e.g. RT-AC66U
+-export KERNELLD := $(SRCBASE)/../../tools/K26/hndtools-mipsel-linux-uclibc-4.2.3/bin/mipsel-linux-uclibc-ld
++export KERNELLD := $(TOOLCHAIN)/bin/mipsel-brcm-linux-uclibc-ld
+ else # RTCONFIG_BCMARM = y
+ export KERNELLD := $(LD)
+ endif

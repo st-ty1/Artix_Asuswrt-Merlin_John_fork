@@ -1,0 +1,15 @@
+--- a/release/src-rt-6.x/linux/linux-2.6/arch/mips/kernel/mips_ksyms.c	2022-01-24 14:05:37.466249900 +0100
++++ b/gcc-5.3-toolchain_mips/mips_ksyms.c	2022-01-18 19:46:05.430314500 +0100
+@@ -34,6 +34,12 @@
+ EXPORT_SYMBOL(kernel_thread);
+ 
+ /*
++ * Functions that operate on entire pages.  Mostly used by memory management.
++ */
++EXPORT_SYMBOL(clear_page);
++EXPORT_SYMBOL(copy_page);
++
++/*
+  * Userspace access stuff.
+  */
+ EXPORT_SYMBOL(__copy_user);

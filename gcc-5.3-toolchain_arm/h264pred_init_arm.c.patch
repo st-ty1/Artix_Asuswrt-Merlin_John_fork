@@ -1,0 +1,30 @@
+--- h264pred_init_arm.c.orig	2021-12-30 19:54:43.443929000 +0100
++++ h264pred_init_arm.c	2021-12-28 12:49:46.438594900 +0100
+@@ -42,9 +42,9 @@
+ void ff_pred8x8_l00_dc_neon(uint8_t *src, int stride);
+ void ff_pred8x8_0l0_dc_neon(uint8_t *src, int stride);
+ 
+-#if HAVE_NEON
+-static void ff_h264_pred_init_neon(H264PredContext *h, int codec_id)
++void ff_h264_pred_init_arm(H264PredContext *h, int codec_id)
+ {
++#if HAVE_NEON
+     h->pred8x8[VERT_PRED8x8     ] = ff_pred8x8_vert_neon;
+     h->pred8x8[HOR_PRED8x8      ] = ff_pred8x8_hor_neon;
+     h->pred8x8[PLANE_PRED8x8    ] = ff_pred8x8_plane_neon;
+@@ -67,10 +67,12 @@
+     h->pred16x16[DC_128_PRED8x8 ] = ff_pred16x16_128_dc_neon;
+     if (codec_id != CODEC_ID_SVQ3 && codec_id != CODEC_ID_RV40)
+         h->pred16x16[PLANE_PRED8x8  ] = ff_pred16x16_plane_neon;
+-}
+ #endif
++}
+ 
+-void ff_h264_pred_init_arm(H264PredContext *h, int codec_id)
++
++/*void ff_h264_pred_init_arm(H264PredContext *h, int codec_id)
+ {
+     if (HAVE_NEON)    ff_h264_pred_init_neon(h, codec_id);
+ }
++*/
+\ No newline at end of file

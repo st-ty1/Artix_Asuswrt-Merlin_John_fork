@@ -1,0 +1,11 @@
+--- Makefile_libdisk_arm.orig	2022-03-14 15:09:48.000000000 +0000
++++ Makefile_libdisk_arm	2022-03-11 16:23:34.000000000 +0000
+@@ -16,7 +16,7 @@
+ endif
+ CFLAGS += -fPIC $(EXTRACFLAGS)
+ CFLAGS += -I. -I$(TOP)/shared -I$(SRCBASE)/include -I$(KERNEL_HEADER_DIR) -Wall
+-LDFLAGS_SO = -L$(TOP)/nvram${BCMEX} -lnvram -L$(TOP)/shared -lshared
++LDFLAGS_SO = -L$(TOP)/nvram${BCMEX} -lnvram -L$(TOP)/shared -lshared -L$(TOOLCHAIN)/arm-brcm-linux-uclibcgnueabi/sysroot/lib -lgcc_s  -L$(TOOLCHAIN)/lib/gcc/arm-brcm-linux-uclibcgnueabi/5.3.0
+ LDFLAGS += $(LDFLAGS_SO) -L. -ldisk
+ ifeq ($(RTCONFIG_BCMARM),y)
+ CFLAGS += -I$(SRCBASE)/common/include

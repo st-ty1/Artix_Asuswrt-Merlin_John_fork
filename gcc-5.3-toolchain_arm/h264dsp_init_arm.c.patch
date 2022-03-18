@@ -1,0 +1,31 @@
+--- h264dsp_init_arm.c.orig	2021-12-30 19:54:43.443929000 +0100
++++ h264dsp_init_arm.c	2021-12-28 12:53:05.778594900 +0100
+@@ -86,9 +86,9 @@
+                             DCTELEM *block, int stride,
+                             const uint8_t nnzc[6*8]);
+ 
+-#if HAVE_NEON
+-static void ff_h264dsp_init_neon(H264DSPContext *c)
++void ff_h264dsp_init_arm(H264DSPContext *c)
+ {
++ #if HAVE_NEON
+     c->h264_v_loop_filter_luma   = ff_h264_v_loop_filter_luma_neon;
+     c->h264_h_loop_filter_luma   = ff_h264_h_loop_filter_luma_neon;
+     c->h264_v_loop_filter_chroma = ff_h264_v_loop_filter_chroma_neon;
+@@ -117,10 +117,13 @@
+     c->h264_idct_add16      = ff_h264_idct_add16_neon;
+     c->h264_idct_add16intra = ff_h264_idct_add16intra_neon;
+     c->h264_idct_add8       = ff_h264_idct_add8_neon;
++ #endif
+ }
+-#endif
+ 
+-void ff_h264dsp_init_arm(H264DSPContext *c)
++
++/*void ff_h264dsp_init_arm(H264DSPContext *c)
+ {
++ #if HAVE_NEON
+     if (HAVE_NEON) ff_h264dsp_init_neon(c);
+-}
++ #endif
++} */
