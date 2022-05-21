@@ -4,7 +4,7 @@
 ASUSWRT_REPO_DIR=$HOME/asuswrt-merlin 
 
 ## path to your local copy of this repo
-ASUSWRT_PATCHES_DIR=$HOME/Dokumente/buildroot-2016.02/asuswrt_arm  
+ASUSWRT_PATCHES_DIR=$HOME/Artix_asuswrt/gcc-5.3-toolchain_arm
 
 ## path to mips-toolchain with gcc 5.3 and binutils 2.23.2
 ASUSWRT_TOOLCHAIN_DIR=$HOME/buildroot-2016.02_arm_asuswrt
