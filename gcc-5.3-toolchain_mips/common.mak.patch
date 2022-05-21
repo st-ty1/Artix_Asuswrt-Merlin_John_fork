@@ -7,7 +7,7 @@
 -export LIBDIR := $(TOOLCHAIN)/lib
 -export USRLIBDIR := $(TOOLCHAIN)/usr/lib
 +export LIBDIR := $(TOOLCHAIN)/mipsel-brcm-linux-uclibc/sysroot/lib
-+export USRLIBDIR := $(TOOLCHAIN)/$mipsel-brcm-linux-uclibc/sysroot/usr/lib
++export USRLIBDIR := $(TOOLCHAIN)/mipsel-brcm-linux-uclibc/sysroot/usr/lib
  
  export PLATFORMDIR := $(TOP)/$(PLATFORM)
  export INSTALLDIR := $(PLATFORMDIR)/install
