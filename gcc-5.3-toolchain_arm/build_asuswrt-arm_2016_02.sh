@@ -28,7 +28,6 @@ cp -rf $ASUSWRT_TOOLCHAIN_DIR/usr/* $ASUSWRT_REPO_DIR/release/src-rt-6.x.4708/to
 ####kernel
 ## kernel built-in
 patch -p1 -d$ASUSWRT_REPO_DIR/release/src-rt-6.x.4708/linux/linux-2.6.36 < $ASUSWRT_PATCHES_DIR/linux-2.6.32.60-gcc5.patch
-#cp -rf  $ASUSWRT_PATCHES_DIR/Makefile_linux_arm $ASUSWRT_REPO_DIR/release/src-rt-6.x.4708/linux/linux-2.6.36/Makefile
 patch -i $ASUSWRT_PATCHES_DIR/Makefile_linux_arm.patch $ASUSWRT_REPO_DIR/release/src-rt-6.x.4708/linux/linux-2.6.36/Makefile
 
 ## module: et-driver
@@ -41,11 +40,8 @@ patch -i $ASUSWRT_PATCHES_DIR/etc_fa.c.patch $ASUSWRT_REPO_DIR/release/src-rt-6.
 
 #### userland
 ## router/Makefiles
-#cp -vf $ASUSWRT_PATCHES_DIR/Makefile $ASUSWRT_REPO_DIR/release/src/router/Makefile
 patch -i $ASUSWRT_PATCHES_DIR/Makefile.patch $ASUSWRT_REPO_DIR/release/src/router/Makefile
-#cp -vf $ASUSWRT_PATCHES_DIR/platform.mak $ASUSWRT_REPO_DIR/release/src-rt/platform.mak
 patch -i $ASUSWRT_PATCHES_DIR/platform.mak.patch $ASUSWRT_REPO_DIR/release/src-rt/platform.mak
-#cp -vf $ASUSWRT_PATCHES_DIR/common.mak $ASUSWRT_REPO_DIR/release/src/router/common.mak
 patch -i $ASUSWRT_PATCHES_DIR/common.mak.patch $ASUSWRT_REPO_DIR/release/src/router/common.mak
 
 ## router/shared
@@ -55,23 +51,18 @@ patch -i $ASUSWRT_PATCHES_DIR/shutils.h.patch $ASUSWRT_REPO_DIR/release/src/rout
 patch -i $ASUSWRT_PATCHES_DIR/ctype.h.patch $ASUSWRT_REPO_DIR/release/src-rt-6.x.4708/toolchains/hndtools-arm-uclibc-5.3/usr/arm-brcm-linux-uclibcgnueabi/sysroot/usr/include/ctype.h
 
 ##router/libdisk
-#cp -vf $ASUSWRT_PATCHES_DIR/Makefile_libdisk_arm $ASUSWRT_REPO_DIR/release/src/router/libdisk/Makefile
 patch -i $ASUSWRT_PATCHES_DIR/Makefile_libdisk_arm.patch $ASUSWRT_REPO_DIR/release/src/router/libdisk/Makefile
 
 ##router/ntpclient
-#cp -vf $ASUSWRT_PATCHES_DIR/ntpclient.c $ASUSWRT_REPO_DIR/release/src/router/ntpclient/ntpclient.c
 patch -i $ASUSWRT_PATCHES_DIR/ntpclient.c.patch $ASUSWRT_REPO_DIR/release/src/router/ntpclient/ntpclient.c
 
 ##router/rstats
-#cp -vf $ASUSWRT_PATCHES_DIR/Makefile_rstats_arm $ASUSWRT_REPO_DIR/release/src/router/rstats/Makefile
 patch -i $ASUSWRT_PATCHES_DIR/Makefile_rstats_arm.patch $ASUSWRT_REPO_DIR/release/src/router/rstats/Makefile
 
 ##router/cstats
-#cp -vf $ASUSWRT_PATCHES_DIR/Makefile_cstats_arm $ASUSWRT_REPO_DIR/release/src/router/cstats/Makefile
 patch -i $ASUSWRT_PATCHES_DIR/Makefile_cstats_arm.patch $ASUSWRT_REPO_DIR/release/src/router/cstats/Makefile
 
 ##router/LPRng
-#cp -vf $ASUSWRT_PATCHES_DIR/Makefile_LPRng_arm $ASUSWRT_REPO_DIR/release/src/router/LPRng/src/Makefile
 patch -i $ASUSWRT_PATCHES_DIR/Makefile_LPRng_arm.patch $ASUSWRT_REPO_DIR/release/src/router/LPRng/src/Makefile
 
 ##router/hotplug2
@@ -87,7 +78,6 @@ patch -p1 -d$ASUSWRT_REPO_DIR/release/src/router/libgpg-error-1.10 < $ASUSWRT_PA
 patch -p1 -d$ASUSWRT_REPO_DIR/release/src/router/libgpg-error-1.10 < $ASUSWRT_PATCHES_DIR/001-gcc5_libgpg-error2.patch
 
 ##router/samba-3.5.8
-#cp -vf $ASUSWRT_PATCHES_DIR/configure_samba-3.5.8 $ASUSWRT_REPO_DIR/release/src/router/samba-3.5.8/source3/configure
 patch -i $ASUSWRT_PATCHES_DIR/configure_samba-3.5.8.patch $ASUSWRT_REPO_DIR/release/src/router/samba-3.5.8/source3/configure
 
 ## if Makefile.in exists, autotools insists on automake 1.15, without Makefile.in it uses existing host version of automake
