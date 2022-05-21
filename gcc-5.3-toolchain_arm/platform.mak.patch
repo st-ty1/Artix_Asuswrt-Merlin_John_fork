@@ -1,17 +1,16 @@
 --- platform.mak.orig	2022-03-14 15:09:48.000000000 +0000
 +++ platform.mak	2022-03-11 16:12:59.000000000 +0000
-@@ -14,8 +14,9 @@
+@@ -14,8 +14,8 @@
  export BCMEX := _arm
  export EXTRA_FLAG := -lgcc_s
  export ARCH := arm
-+export SUBARCH: = arm
  export HOST := arm-linux
 -export TOOLS := $(SRCBASE)/toolchains/hndtools-arm-linux-2.6.36-uclibc-4.5.3
 +export TOOLS := $(SRCBASE)/toolchains/hndtools-arm-uclibc-5.3/usr
  export RTVER := 0.9.32.1
  export BCMSUB := brcmarm
  else
-@@ -25,15 +26,16 @@
+@@ -25,15 +25,15 @@
  
  export KERNEL_BINARY=$(LINUXDIR)/arch/mips/brcm-boards/bcm947xx/compressed/zImage
  export PLATFORM := mipsel-uclibc
@@ -23,7 +22,6 @@
  export CONFIGURE := ./configure --host=mipsel-linux --build=$(BUILD)
  export HOSTCONFIG := linux-mips32
  export ARCH := mips
-+export SUBARCH: = mipsel
  export HOST := mipsel-linux
 -export TOOLS := $(SRCBASE)/../../tools/brcm/hndtools-mipsel-linux
 -export RTVER := 0.9.30.1
