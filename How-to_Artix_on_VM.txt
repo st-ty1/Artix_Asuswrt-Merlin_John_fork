@@ -28,7 +28,7 @@ After system has booted, start typing:
 	/bin/sh5 # rc-update add dhcpcd default
 	/bin/sh5 # pacman -S sudo nano make gcc which autoconf automake pkgconf patch bison flex cmake rpcsvc-proto gperf python intltool re2c diffutils
 	/bin/sh5 # nano /etc/pacman.conf
-Enable multilib and lib32 repositories by uncomment the [multilib] and [lib33] sections: 
+Enable multilib and lib32 repositories by uncomment the [multilib] and [lib32] sections: 
 					[lib32]
 					Include = /etc/pacman.d/mirrorlist
                                         ...	
