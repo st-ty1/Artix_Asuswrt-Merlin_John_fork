@@ -5,7 +5,7 @@ On Windows 10 open Command Prompt or PowerShell and type:
      $ curl -LJO https://github.com/hdk5/ArtixWSL/releases/download/latest/Artix-runit.zip
      $ tar -xf Artix-runit.zip
      $ wsl --import artix artix-rootfs.tar.gz
-     $ ./artix
+     $ Artix.exe
 
 (rem.: Of course, the creation of artix-rootfs.tar.gz by using rootfs.img of official Artix-iso is also possible. See at end of file.
 
@@ -16,18 +16,15 @@ An automatic switch to Linux OS follows.
  Go on typing: 
    
      [<PC_NAME> Artix]# pacman-key --init
-     [<PC_NAME> Artix]# pacman-key --populate archlinux artix
+     [<PC_NAME> Artix]# pacman-key --populate artix
      [<PC_NAME> Artix]# pacman -Syu
      [<PC_NAME> Artix]# pacman -S sudo nano make gcc which autoconf automake pkgconf patch bison flex cmake rpcsvc-proto gperf python intltool re2c diffutils
      [<PC_NAME> Artix]# nano /etc/pacman.conf  
 
-Enable multilib and lib32 repositories by uncomment the [multilib] and [lib32] sections:
+Enable lib32 repository by uncomment the [lib32] section:
  
      [lib32]
      Include = /etc/pacman.d/mirrorlist
-     ...
-     [multilib]
-     Include = /etc/pacman.d/mirrorlist-arch
 
 Save file and exit nano.
 
@@ -47,8 +44,8 @@ Save file and exit nano.
 Go on typing: 
 
      [<PC_NAME> Artix]# echo "%wheel ALL=(ALL)  ALL" > /etc/sudoers.d/01wheel
-     [<PC_NAME> Artix]# useradd -m -G wheel \<username>
-     [<PC_NAME> Artix]# passwd \<username>
+     [<PC_NAME> Artix]# useradd -m -G wheel <username>
+     [<PC_NAME> Artix]# passwd <username>
      [<PC_NAME> Artix]# ln -s /usr/lib/libmpc.so /usr/lib/libmpc.so.2
      [<PC_NAME> Artix]# ln -s /usr/lib/libmpfr.so /usr/lib/libmpfr.so.4
      [<PC_NAME> Artix]# exit
@@ -57,13 +54,18 @@ Rem.: An automatic switch to Windows 10 OS follows.
 
 Go on typing:
    
-     $ artix config --default-user \<username>
-     $ ./artix
+     $ Artix.exe config --default-user \<username>
+     $ Artix.exe
 
  Rem.: An automatic switch to Linux OS follows.
  
  Go on typing:
-
+ 
+     [<username>@<PC-NAME> Artix]$ cd $HOME
+     [<username>@<PC-NAME> Artix]$ nano .bashrc  (add the following with a new line at the end of the file:
+	  				                cd ~
+				                      Save changes with <Ctrl>-X, confirm saving the buffer with "y" and confirm file name with <Return>)[<username>@PC-NAME ~]$ git config --global core.eol lf
+     [<username>@<PC-NAME> ~]$ git config --global core.autocrlf false
      [<username>@<PC_NAME> ~]$ git clone https://github.com/john9527/asuswrt-merlin
      [<username>@<PC_NAME> ~]$ git clone https://github.com/st-ty1/Artix_Asuswrt-Merlin_John_fork Artix_asuswrt	
      [<username>@<PC_NAME> ~]$ cd Artix_asuswrt
