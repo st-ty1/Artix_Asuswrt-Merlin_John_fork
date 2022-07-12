@@ -32,10 +32,10 @@ Following steps are needed to make build process successful:
 
 6. Source code of libgpg-error-1.10 has to be patched, as Artix uses newer awk 5.0. Source code of version 1.10 is still for awk 4.x. (-> libgpg-error.patch; supplied in this repo).
     
-7. Due to change of gcc from version 9.4 to 10.1 on host-OS Artix/Arch linux some old source code in /release/src/router/config (-> config_gcc10.patch; supplied in this repo). 
+7. Due to change of gcc to versions >= 10 on host-OS Artix/Arch linux some old source code in /release/src/router/config has to be patched (-> config_gcc10.patch; supplied in this repo). 
 
-8. Host-OS has updated to autoconf-2.70. Source code of configure.in in /release/src/router/libxml2 has to be patched, as libxml2 is quite old and its input files for
-    autotools too old, a macro in configure.in has to be deactivated (-> libxml2_configure.in.patch; supplied in this repo).
+8. Host-OS has updated to autoconf version 2.70 and above. Source code of configure.in in /release/src/router/libxml2 has to be patched, as libxml2 is quite old and its input files for
+    autotools are too old, so a macro in configure.in has to be deactivated (-> libxml2_configure.in.patch; supplied in this repo).
 
 Enclosed you will find two shell scripts (for mips and arm) for setting path variables, resetting and cleaning your local asuswrt-Merlin (Johns fork) repo and removing the troublesome files (step 3.) and applying the needed patches (step 4.-8.) to your local asuswrt-Merlin (Johns fork) repo. 
 So, the easiest way is to just do step 0.-2. and then start the shell script for MIPS- or ARM-builds (Don't forget to make the script executable before!)
@@ -45,4 +45,4 @@ By cleaning sources with "make clean", you can either amend the shell scripts (b
 
 
 BR
-st-ty1/_st_ty/st_ty_
+st-ty1/\_st_ty/st_ty\_
