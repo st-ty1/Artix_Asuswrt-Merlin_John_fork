@@ -31,7 +31,7 @@ Save file and exit nano.
 Go on typing: 
 					 
      [<PC_NAME> Artix]# pacman -Syy
-     [<PC_NAME> Artix]# pacman -S sudo lib32-glibc lib32-gcc-libs lib32-zlib lib32-libelf git wget
+     [<PC_NAME> Artix]# pacman -S sudo lib32-glibc lib32-gcc-libs lib32-zlib git wget
      [<PC_NAME> Artix]# nano /etc/wsl.conf  
 
 Append following two lines at end of wsl.conf:
