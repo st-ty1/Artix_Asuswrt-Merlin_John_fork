@@ -26,16 +26,16 @@ After system has booted, start typing:
 	/bin/sh5 # ln -s /etc/init.d/net.lo /etc/init.d/net.<interface>
 	/bin/sh5 # rc-update add net.<interface> default
 	/bin/sh5 # rc-update add dhcpcd default
-	/bin/sh5 # pacman -S sudo nano make gcc which autoconf automake pkgconf patch bison flex cmake rpcsvc-proto gperf python intltool re2c diffutils
+	/bin/sh5 # pacman -S sudo nano make gcc which autoconf automake pkgconf patch bison flex cmake rpcsvc-proto gperf python intltool re2c diffutils git wget
 	/bin/sh5 # nano /etc/pacman.conf
-Enable lib32 repositories by uncomment the [lib32] sections: 
+Enable lib32 repositories by uncomment the two lines of the [lib32] section: 
 					[lib32]
 					Include = /etc/pacman.d/mirrorlist
-                                        )
+                                        
 Save file and exit nano.
 Go on typing:
 	/bin/sh5 # pacman -Syy
-	/bin/sh5 # pacman -S sudo lib32-glibc lib32-gcc-libs lib32-zlib git wget
+	/bin/sh5 # pacman -S sudo lib32-glibc lib32-gcc-libs lib32-zlib
 	/bin/sh5 # echo "%wheel ALL=(ALL)  ALL" > /etc/sudoers.d/01wheel
 	/bin/sh5 # useradd -m aG wheel <username>.         (choose a name for a new user with superuser rights.)
 	/bin/sh5 # passwd <username>.                    (set a password for the new user)
