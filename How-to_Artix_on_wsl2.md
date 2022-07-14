@@ -1,7 +1,7 @@
-On Windows 10 open Command Prompt or PowerShell and type:
+On Windows 10 open Command Prompt and type:
 
-     $ mkdir %USERPROFILE%\wsl\artix
-     $ cd %USERPROFILE%\wsl\artix
+     $ mkdir %homedrive%%homepath%\wsl\artix
+     $ cd %homedrive%%homepath%\wsl\artix
      $ curl -LJO https://github.com/hdk5/ArtixWSL/releases/download/latest/Artix-runit.zip
      $ tar -xf Artix-runit.zip
      $ wsl --import artix artix-rootfs.tar.gz
