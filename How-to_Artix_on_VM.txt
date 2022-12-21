@@ -10,8 +10,8 @@ After system has booted, start typing:
 	artix:[artix]# sudo mount /dev/sda /mnt
 	artix:[artix]# basestrap /mnt base base-devel linux-lts linux-firmware openrc elogind-openrc nano dhcpd sudo grub os-prober
 	artix:[artix]# su
-	root:[root]# genfstab /mnt >> /mnt/etc/fstab
-	root:[root]# artools-chroot /mnt
+	root:[root]# fstabgen /mnt >> /mnt/etc/fstab
+	root:[root]# artix-chroot /mnt
 	/bin/sh5 # nano /etc/locale.gen	 (Select language configuration "en_US.UTF-8 UTF-8","de_DE.UTF-8 UTF-8" by deleting the #)
 	/bin/sh5 # locale-gen
 	/bin/sh5 # nano /etc/locale.conf 	(Add your language to the system by adding this line: export "LANG=en_US.UTF-8" LANG=de_DE.UTF-8)
