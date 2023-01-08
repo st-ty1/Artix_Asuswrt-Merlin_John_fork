@@ -26,7 +26,7 @@ After system has booted, start typing:
 	/bin/sh5 # ln -s /etc/init.d/net.lo /etc/init.d/net.<interface>
 	/bin/sh5 # rc-update add net.<interface> default
 	/bin/sh5 # rc-update add dhcpcd default
-	/bin/sh5 # pacman -S sudo nano make gcc which autoconf automake pkgconf patch bison flex cmake rpcsvc-proto gperf python intltool re2c diffutils git wget
+	/bin/sh5 # pacman -S sudo nano make gcc which autoconf automake pkgconf patch bison flex cmake rpcsvc-proto gperf python intltool re2c diffutils git wget libtool
 	/bin/sh5 # nano /etc/pacman.conf
 Enable lib32 repositories by uncomment the two lines of the [lib32] section: 
 					[lib32]
