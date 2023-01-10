@@ -9,7 +9,7 @@ Following steps are needed to make build process successful:
 0. Install following packages which are needed for building Asuswrt-Merlin [John's fork] on Artix:
 	make, gcc, which, autoconf, automake, pkgconf, patch, bison, flex, cmake, rpcsvc-proto, gperf, python, intltool, re2c and libtool
 
-    Some of the precompiled host-tools and both toolchains of Asuswrt-Merlin [John's fork] are 32-bit, so they need following packages: lib32-glibc, lib32-gcc-libs and lib32-zlib. (Therefore, don't forget to uncomment the lines of the "lib32" section in /etc/pacman.conf).
+    Some of the precompiled host-tools and both toolchains of Asuswrt-Merlin [John's fork] are 32-bit, so they need following packages: lib32-glibc, lib32-gcc-libs, lib32-zlib and lib32-libelf (Therefore, don't forget to uncomment the lines of the "lib32" section in /etc/pacman.conf).
 	For generating/editing Artix-specific patches you can also install the diffutils and the nano package. If you are working with Artix/Arch Linux on wsl2/Windows the use of a smart editor on Windows (like Notepad++) is very helpful.
 
 1. Clone asuswrt-Merlin (Johns fork) repo (https://github.com/john9527/asuswrt-merlin) into your HOME directory. 
