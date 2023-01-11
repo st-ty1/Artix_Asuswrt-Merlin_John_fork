@@ -17,7 +17,7 @@ An automatic switch to Linux OS follows.
      [<PC_NAME> Artix]# pacman-key --init
      [<PC_NAME> Artix]# pacman-key --populate artix
      [<PC_NAME> Artix]# pacman -Syu
-     [<PC_NAME> Artix]# pacman -S sudo nano make gcc which autoconf automake pkgconf patch bison flex cmake rpcsvc-proto gperf python intltool re2c diffutils
+     [<PC_NAME> Artix]# pacman -S sudo nano make gcc which autoconf automake pkgconf patch bison flex cmake rpcsvc-proto gperf python intltool re2c diffutils git wget libtool
      [<PC_NAME> Artix]# nano /etc/pacman.conf  
 
 Enable lib32 repository by uncomment the two lines of the [lib32] section:
@@ -30,7 +30,7 @@ Save file and exit nano.
 Go on typing: 
 					 
      [<PC_NAME> Artix]# pacman -Syy
-     [<PC_NAME> Artix]# pacman -S sudo lib32-glibc lib32-gcc-libs lib32-zlib git wget
+     [<PC_NAME> Artix]# pacman -S sudo lib32-glibc lib32-gcc-libs lib32-zlib
      [<PC_NAME> Artix]# nano /etc/wsl.conf  
 
 Append following two lines at end of wsl.conf:
