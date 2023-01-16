@@ -1,0 +1,11 @@
+--- common.mak.orig	2022-04-10 16:34:50.000000000 +0000
++++ common.mak	2023-01-16 19:04:31.000000000 +0000
+@@ -23,7 +23,7 @@
+ export HOSTCC := gcc
+ 
+ export PLT := $(ARCH)
+-export TOOLCHAIN := $(shell cd $(dir $(shell which $(CROSS_COMPILE)gcc))/.. && pwd -P)
++export TOOLCHAIN := $(shell cd $(dir $(shell which $(CROSS_COMPILE)ar))/.. && pwd -P)
+ 
+ export CC := $(CROSS_COMPILE)gcc
+ export GCC := $(CROSS_COMPILE)gcc
