@@ -33,14 +33,6 @@
  
  #
  # standard packages
-@@ -555,6 +558,7 @@
- #
- 
- all: clean-build kernel_header libc version obj_prelibs kernel $(obj-y)
-+#all: clean-build kernel_header libc version obj_prelibs $(obj-y)
- 
- ifeq ($(RTCONFIG_BCMARM),y)
- 	+$(MAKE) $(MAKE_ARGS) post_preplibs
 @@ -1989,7 +1993,7 @@
  	$(CONFIGURE) --prefix="" --disable-dependency-tracking
  else
