@@ -69,7 +69,6 @@ Go on typing:
      [<username>@<PC_NAME> ~]$ git clone https://github.com/john9527/asuswrt-merlin
      [<username>@<PC_NAME> ~]$ git clone https://github.com/st-ty1/Artix_Asuswrt-Merlin_John_fork Artix_asuswrt	
      [<username>@<PC_NAME> ~]$ cd Artix_asuswrt
-     [<username>@<PC_NAME> Artix_asuswrt]$ chmod 744 *.sh
      [<username>@<PC_NAME> Artix_asuswrt]$ ./build_asuswrt-mips.sh (or ./build_asuswrt-mips.sh)
 
 The building process will start.
@@ -79,11 +78,11 @@ The building process will start.
 Rem.:
 
 If you want to create rootfs.tar.gz by your own using rootfs.img of official Artix-iso, than go on in Windows 10 as follows:
- - Download squashfs-tools-ng-1.0.3-mingw64.zip at https://infraroot.at/pub/squashfs/windows. Extract archive into a squashfs-tools-ng-1.0.3-mingw64 folder.
- - Download artix-base-openrc-YYYYMMDD-x86_64.iso at https://iso.artixlinux.org/weekly-isos.php .
+ - Download zip file of newest squashfs-tools-ng versiong at https://infraroot.at/pub/squashfs/windows. Extract archive into a folder.
+ - Download artix-base-lowmem-s6-YYYYMMDD-x86_64.iso at https://eu-mirror.artixlinux.org/testing-iso.
  - Mount the iso-file within Windows Explorer.
- - Copy /LiveOS/rootfs.img of mounted iso-file into the /bin-subfolder of squashfs-tools-ng-1.0.3-mingw64 directory.
- - Open Windows Command Prompt and change to bin-subfolder in the extracted squashfs-tools-ng-1.0.3-mingw64 directory. 
+ - Copy /LiveOS/rootfs.img of mounted iso-file into the /bin subfolder of squashfs-tools-ng directory.
+ - Open Windows Command Prompt and change to bin-subfolder in the extracted squashfs-tools-ng directory. 
  - Run in Windows Command Prompt: sqfs2tar rootfs.img artix-rootfs.tar
  - Compress artix-rootfs.tar to artix-rootfs.tar.gz by 7-zip.  
  - Copy generated rootfs.tar.gz to your start directory (%USERPROFILE%\wsl\artix). 
